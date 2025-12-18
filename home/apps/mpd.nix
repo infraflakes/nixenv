@@ -37,7 +37,7 @@
       [Desktop Entry]
       Type=Application
       Name=MPD
-      Exec=mpd ${config.xdg.configHome}/mpd/mpd.conf
+      Exec=bash -c "${pkgs.mpd}/bin/mpd ${config.xdg.configHome}/mpd/mpd.conf"
     '';
     "autostart/mpd-mpris.desktop".text = ''
       [Desktop Entry]
@@ -45,11 +45,11 @@
       Name=Mpris for MPD
       Exec=bash -c "until ${pkgs.mpc}/bin/mpc > /dev/null 2>&1; do sleep 1; done; exec mpd-mpris"
     '';
-    "autostart/mpris-discord-rpc.desktop".text = ''
+    "autostart/music-discord-rpc.desktop".text = ''
       [Desktop Entry]
       Type=Application
       Name=Mpris Discord
-      Exec=music-discord-rpc
+      Exec=bash -c "${pkgs.music-discord-rpc}/bin/music-discord-rpc"
     '';
   };
 }
