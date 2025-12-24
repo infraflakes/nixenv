@@ -11,7 +11,7 @@
     background = 1b1e25
     font-family = JetBrains Mono Nerd Font
     font-size = 13
-    theme = Catppuccin Frappe
+    theme = catppuccin-frappe
     keybind=clear
     keybind = performable:ctrl+c=copy_to_clipboard
     keybind = ctrl+v=paste_from_clipboard
