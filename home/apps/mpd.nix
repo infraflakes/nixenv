@@ -8,8 +8,6 @@
     rmpc
     mpc
     mpd
-    mpd-mpris
-    music-discord-rpc
   ];
   home.file.".config/rmpc" = {
     source = ./config/rmpc;
@@ -31,25 +29,4 @@
     port "6600"
     restore_paused "yes"
   '';
-  xdg.configFile = {
-    # Apps
-    "autostart/mpd.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Name=MPD
-      Exec=bash -c "${pkgs.mpd}/bin/mpd ${config.xdg.configHome}/mpd/mpd.conf"
-    '';
-    "autostart/mpd-mpris.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Name=Mpris for MPD
-      Exec=bash -c "until ${pkgs.mpc}/bin/mpc > /dev/null 2>&1; do sleep 1; done; exec mpd-mpris"
-    '';
-    "autostart/music-discord-rpc.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Name=Mpris Discord
-      Exec=bash -c "${pkgs.music-discord-rpc}/bin/music-discord-rpc"
-    '';
-  };
 }
