@@ -40,11 +40,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1766902085,
-        "narHash": "sha256-coBu0ONtFzlwwVBzmjacUQwj3G+lybcZ1oeNSQkgC0M=",
+        "lastModified": 1767116409,
+        "narHash": "sha256-5vKw92l1GyTnjoLzEagJy5V5mDFck72LiQWZSOnSicw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c0b0e0fddf73fd517c3471e546c0df87a42d53f4",
+        "rev": "cad22e7d996aea55ecab064e84834289143e44a0",
         "type": "github"
       },
       "original": {
@@ -69,16 +69,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1766932597,
-        "narHash": "sha256-5wD/wioUsudg95BE/zZFtkQ4E4HaCp/PaIpNEJpGbg0=",
+        "lastModified": 1767362165,
+        "narHash": "sha256-w9MJN1F4IFfmUZDLQzoxENZ2SBI9WW9dnz1ZieYRZNc=",
         "owner": "infraflakes",
         "repo": "srn-coreutils",
-        "rev": "e3dc243104a98502fbc8468b9f3af36c0922fc3b",
+        "rev": "b4978e382ed77a56e68b6212be8306dd970a46a0",
         "type": "github"
       },
       "original": {
         "owner": "infraflakes",
-        "ref": "dev",
         "repo": "srn-coreutils",
         "type": "github"
       }

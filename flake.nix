@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     srn-coreutils = {
-      url = "github:infraflakes/srn-coreutils/dev";
+      url = "github:infraflakes/srn-coreutils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
