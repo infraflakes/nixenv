@@ -10,12 +10,17 @@
       url = "github:infraflakes/srn-coreutils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    srn-cd = {
+      url = "github:infraflakes/srn-cd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
     nixpkgs,
     home-manager,
     srn-coreutils,
+    srn-cd,
     ...
   } @ inputs: let
     system = "x86_64-linux";

@@ -7,7 +7,7 @@ pkgs.mkShell {
   ];
   shellHook = ''
     go env -w GOPATH=$HOME/.local/share/go
-      echo "Go environment is ready!"
-      exec fish
+    echo "Go environment is ready!"
+    exec fish
   '';
 }

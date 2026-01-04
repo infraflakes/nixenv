@@ -24,6 +24,7 @@
       pkgs.bluetuith
       pkgs.lm_sensors
       inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
   imports = [
