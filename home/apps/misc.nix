@@ -5,5 +5,6 @@
 }: {
   home.packages = with pkgs; [
     ffmpeg-full
+    cloudflared
   ];
 }
