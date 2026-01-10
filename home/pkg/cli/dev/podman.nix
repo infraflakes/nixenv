@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: {
+  home.packages = with pkgs; [distrobox];
   services.podman = {
     enable = true;
     settings.registries.search = [

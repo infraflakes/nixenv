@@ -16,15 +16,17 @@ in {
     glib
     brightnessctl
   ];
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-hyprland
-    ];
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #     xdg-desktop-portal-hyprland
+  #   ];
+  # };
   services.cliphist.enable = true;
   wayland.windowManager.hyprland = {
+    portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    package = pkgs.hyprland;
     enable = true;
     xwayland.enable = true;
     plugins = with pkgs; [
@@ -34,12 +36,13 @@ in {
     ];
     settings = {
       monitor = [
-        "eDP-1, highrr, 0x0, 1"
+        "eDP-2, highrr, 0x0, 1"
         "Unknown-1, disable"
         "HDMI-A, highrr, -1920x0, 1"
       ];
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "hyprctl setcursor Bibata-Modern-Classic 24"
         # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprscrolling}/lib/libhyprscrolling.so"
       ];
 
@@ -90,7 +93,7 @@ in {
         "myBezier, 0.4, 0.0, 0.2, 1.0"
       ];
       animations = {
-        enabled = false;
+        enabled = true;
       };
 
       animation = [
@@ -129,35 +132,31 @@ in {
       ];
 
       bind = [
-        "SUPER, Return, exec, uwsm app -- kitty"
-        ",XF86AudioLowerVolume, exec, ${scriptsDir}/volume down"
-        ",XF86AudioRaiseVolume, exec, ${scriptsDir}/volume up"
-        ",XF86AudioMute, exec, ${scriptsDir}/volume mute"
-        ",F1, exec, ${scriptsDir}/volume mute"
-        #bright
-        ",XF86MonBrightnessDown,exec, ${scriptsDir}/bright down"
-        ",XF86MonBrightnessUp,exec, ${scriptsDir}/bright up"
-        #
-        "SUPER, Space, exec, pkill rofi || rofi -show drun"
-        "SUPER, N, exec, makoctl restore"
-        #
+        "SUPER, Return, exec, uwsm app -- ghostty"
+        ",XF86AudioLowerVolume, exec, dms ipc call audio decrement 2"
+        ",XF86AudioRaiseVolume, exec, dms ipc call audio increment 2"
+        ",XF86AudioMute, exec, dms ipc call audio mute"
+        ",XF86MonBrightnessDown,exec, dms ipc call brightness decrement 5 ''"
+        ",XF86MonBrightnessUp,exec, dms ipc call brightness increment 5 ''"
+
+        "SUPER, Space, exec, dms ipc spotlight toggle"
+        "SUPER, N, exec, dms ipc notifications toggle"
         "SUPER, Q, killactive,"
         "SUPER SHIFT, P, pin,"
-        "SUPER SHIFT, Q, exec, ${hyprScriptsDir}/killin"
         "SUPER, F, fullscreen"
-        "SUPER, L, exec, ${rofiScriptsDir}/powermenu"
-        "SUPER, P, exec, ${rofiScriptsDir}/power"
+        "SUPER, L, exec, dms ipc lock lock"
+        "SUPER, I, exec, dms ipc call control-center toggle"
         "SUPER, R, exec, sh -c 'pkill waybar || uwsm app -- waybar'"
         "SUPER, W, togglefloating"
-        "SUPER SHIFT, W, exec, ${rofiScriptsDir}/wallselect-hypr"
-        "SUPER, M, exec, ${rofiScriptsDir}/mpd-rofi"
+        "SUPER SHIFT, W, exec, dms ipc call dankdash wallpaper"
+        "SUPER, M, exec, dms ipc call dash open media"
+        "SUPER, V, exec, dms ipc clipboard toggle"
         "SUPER SHIFT, S, exec, ${scriptsDir}/scrshot --swappy"
         "SUPER ALT, S, exec, ${scriptsDir}/scrshot --now"
-        "SUPER, V, exec, ${rofiScriptsDir}/clip"
         "SUPER, Period, exec, ${rofiScriptsDir}/emoji"
         #Hidden workspace
-        "SUPER ALT, S, movetoworkspacesilent, special"
-        "SUPER, S, togglespecialworkspace,"
+        #"SUPER ALT, S, movetoworkspacesilent, special"
+        #"SUPER, S, togglespecialworkspace,"
         #Focus
         "SUPER, up, movefocus, l"
         "SUPER, down, movefocus, r"
@@ -194,6 +193,12 @@ in {
         "SUPER SHIFT, down, resizeactive, 0 50"
         "SUPER CTRL, left, movewindow, u"
         "SUPER CTRL, right, movewindow, d"
+      ];
+
+      env = [
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "GBM_BACKEND,nvidia-drm"
       ];
 
       windowrulev2 = [

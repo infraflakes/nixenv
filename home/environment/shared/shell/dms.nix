@@ -6,7 +6,7 @@
 }: {
   imports = [
     inputs.dms.homeModules.dankMaterialShell.default
-    inputs.dms.homeModules.niri
+    #inputs.dms.homeModules.niri
   ];
   programs.dank-material-shell = {
     enable = true;
@@ -15,6 +15,6 @@
     enableAudioWavelength = true; # Audio visualizer (cava)
     enableCalendarEvents = true; # Calendar integration (khal)
     systemd.enable = true; # Systemd service for auto-start
-    niri.enableSpawn = true; # Auto-start DMS with niri
+    #niri.enableSpawn = true; # Auto-start DMS with niri
   };
 }

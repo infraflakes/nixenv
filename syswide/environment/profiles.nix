@@ -17,37 +17,37 @@
   # };
   programs.uwsm = {
     enable = true;
-    waylandCompositors = {
-      # mango = {
-      #   prettyName = "MangoWC";
-      #   comment = "Mango compositor managed by UWSM";
-      #   binPath = "${inputs.mangowc.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mango";
-      # };
-      niri = {
-        prettyName = "Niri";
-        comment = "Niri compositor managed by UWSM";
-        binPath = "${pkgs.niri}/bin/niri-session";
-      };
-    };
+    # waylandCompositors = {
+    #   # mango = {
+    #   #   prettyName = "MangoWC";
+    #   #   comment = "Mango compositor managed by UWSM";
+    #   #   binPath = "${inputs.mangowc.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mango";
+    #   # };
+    #   niri = {
+    #     prettyName = "Niri";
+    #     comment = "Niri compositor managed by UWSM";
+    #     binPath = "${pkgs.niri}/bin/niri-session";
+    #   };
+    # };
   };
-  xdg.portal = {
-    enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
-    ];
-    config = {
-      common = {
-        default = ["gtk"];
-      };
-      niri = {
-        default = [
-          "gtk"
-          "gnome"
-        ];
-        "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
-        "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
-      };
-    };
-  };
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = with pkgs; [
+  #     xdg-desktop-portal-gtk
+  #     xdg-desktop-portal-gnome
+  #   ];
+  #   config = {
+  #     common = {
+  #       default = ["gtk"];
+  #     };
+  #     niri = {
+  #       default = [
+  #         "gtk"
+  #         "gnome"
+  #       ];
+  #       "org.freedesktop.impl.portal.ScreenCast" = ["gnome"];
+  #       "org.freedesktop.impl.portal.Screenshot" = ["gnome"];
+  #     };
+  #   };
+  # };
 }

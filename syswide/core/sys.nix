@@ -14,9 +14,9 @@ in {
   nixpkgs.config.allowUnfree = true;
   #Bootloader
   boot = {
+    kernelParams = ["acpi_backlight=native"];
     loader = {
       efi.canTouchEfiVariables = true;
-      #kernelParams = [ "acpi_backlight=native" ];
       grub = {
         enable = true;
         device = "nodev";
