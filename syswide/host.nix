@@ -18,6 +18,6 @@
     ./runtime/asus.nix
     ./runtime/mount.nix
     ./runtime/virt/virt-qemu.nix
-    ./runtime/flatpak.nix
+    ./runtime/gaming.nix
   ];
 }

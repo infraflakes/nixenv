@@ -7,7 +7,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     srn-coreutils = {
-      url = "github:infraflakes/srn-coreutils/dev";
+      url = "github:infraflakes/srn-coreutils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    srn-cd = {
+      url = "github:infraflakes/srn-cd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -23,7 +27,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dankMaterialShell = {
+    dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.dgop.follows = "dgop";
@@ -42,15 +46,16 @@
     nixpkgs,
     home-manager,
     srn-coreutils,
+    srn-cd,
     zen-browser,
-    dankMaterialShell,
+    dms,
     niri,
     mangowc,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
-    username = "infraflakes";
+    username = "nixuris";
     hostname = "serein";
   in {
     # NixOS configuration

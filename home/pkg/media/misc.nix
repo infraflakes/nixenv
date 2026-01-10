@@ -4,7 +4,6 @@
   ...
 }: {
   home.packages = with pkgs; [
-    onlyoffice-desktopeditors
     zoom-us
     #planify
   ];

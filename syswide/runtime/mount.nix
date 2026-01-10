@@ -12,12 +12,12 @@
     # nemo
     nautilus
     sushi
+    android-tools
   ];
   services.gvfs.enable = true;
   services.usbmuxd = {
     enable = true;
     package = pkgs.usbmuxd2;
   };
-  programs.adb.enable = true;
   users.users.${username}.extraGroups = ["adbusers"];
 }

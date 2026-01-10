@@ -13,38 +13,35 @@
     functions = {
       fish_greeting = '''';
       fish_prompt = ''
-        # echo
-        # set_color -o 4a4b52
-        # echo -n ""
-        # set_color normal
-        # set_color -o 8ab4f8
-        # set_color -b 4a4b52
-        # echo -n "  "
-        # set_color normal
-        # set_color -o 8ab4f8
-        # set_color -b 4a4b52
-        # echo -n (prompt_pwd)
-        # set_color normal
-        # set_color -o 4a4b52
-        # echo -n ""
-        # set_color normal
-        # echo -n (set_color -o 8ab4f8)" ❯ "
+        echo
+        set_color -o 4a4b52
+        echo -n ""
+        set_color normal
+        set_color -o 8ab4f8
+        set_color -b 4a4b52
+        echo -n "  "
+        set_color normal
+        set_color -o 8ab4f8
+        set_color -b 4a4b52
+        echo -n (prompt_pwd)
+        set_color normal
+        set_color -o 4a4b52
+        echo -n ""
+        set_color normal
+        echo -n (set_color -o 8ab4f8)" ❯ "
       '';
     };
     shellAliases = {
-      snix = "srn nix";
-      sgit = "srn git";
-      archive = "srn archive";
-      music = "serein music";
       tm = "tmux new-session -A";
-      cd = "z";
+      cd = "scd";
       cat = "bat";
-      rg = "grep";
+      grep = "rg";
       se = "sudo -E -s nvim";
       ls = "lsd -l";
       nvidia-gpu = "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
     };
     interactiveShellInit = ''
+      scd init fish | source
       fastfetch
       set username (whoami)
       echo "				Welcome back, $username!"

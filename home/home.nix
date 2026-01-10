@@ -19,6 +19,7 @@
     ];
     packages = [
       inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.lsd
     ];
   };
