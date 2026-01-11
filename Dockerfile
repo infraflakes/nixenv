@@ -39,4 +39,4 @@ RUN git clone -b $REPO_BRANCH $REPO_URL container
 WORKDIR /home/$USERNAME/container
 RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
 
-CMD ["/usr/bin/fish"]
+CMD ["/usr/bin/fish", "--login"]

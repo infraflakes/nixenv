@@ -13,23 +13,23 @@
     functions = {
       fish_greeting = '''';
       fish_prompt = ''
-        echo
-        set_color -o 4a4b52
-        echo -n ""
-        set_color normal
-        set_color -o 8ab4f8
-        set_color -b 4a4b52
-        echo -n "  "
-        set_color normal
-        set_color -o 8ab4f8
-        set_color -b 4a4b52
-        echo -n (prompt_pwd)
-        set_color normal
-        set_color -o 4a4b52
-        echo -n ""
-        set_color normal
-        echo -n (set_color -o 8ab4f8)" ❯ "
-      '';
+        #   echo
+        #   set_color -o 4a4b52
+        #   echo -n ""
+        #   set_color normal
+        #   set_color -o 8ab4f8
+        #   set_color -b 4a4b52
+        #   echo -n "  "
+        #   set_color normal
+        #   set_color -o 8ab4f8
+        #   set_color -b 4a4b52
+        #   echo -n (prompt_pwd)
+        #   set_color normal
+        #   set_color -o 4a4b52
+        #   echo -n ""
+        #   set_color normal
+        #   echo -n (set_color -o 8ab4f8)" ❯ "
+        # '';
     };
     shellAliases = {
       snix = "srn nix";
@@ -42,9 +42,9 @@
       rg = "grep";
       se = "sudo -E -s nvim";
       ls = "lsd -l";
-      xr = "doas xbps-remove -R";
     };
     interactiveShellInit = ''
+      starship init fish | source
       set username (whoami)
       echo "				Welcome back, $username!"
       export EDITOR=nvim

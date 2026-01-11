@@ -26,6 +26,7 @@
   imports = [
     ./apps/vcs.nix
     ./apps/fish.nix
+    ./apps/starship.nix
     ./apps/nvim.nix
     ./apps/yazi.nix
     ./apps/tmux.nix
