@@ -26,7 +26,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
     username = "nixdev";
-    hostname = "serein";
+    hostname = "container-env";
   in {
     # Home Manager
     homeConfigurations."${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {

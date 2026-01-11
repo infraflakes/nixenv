@@ -37,6 +37,6 @@ RUN mkdir -p ~/.config/nix && \
 # 5. Build/Activate via Flake
 RUN git clone -b $REPO_BRANCH $REPO_URL container
 WORKDIR /home/$USERNAME/container
-RUN nix run .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
+RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
 
 CMD ["/usr/bin/fish"]
