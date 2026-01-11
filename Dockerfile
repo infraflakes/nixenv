@@ -1,29 +1,42 @@
-# Use the official Nix image for the best compatibility and smallest footprint
-FROM nixos/nix:latest
-
-# Install prerequisites
-
-RUN apk add --no-cache fish git
-
-# Enable required experimental features for Flakes
-RUN echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
-
-# Create the 'nixdev' user
-RUN adduser -D -h /home/nixdev nixdev
-USER nixdev
-WORKDIR /home/nixdev
-
-# Clone the specific branch
-RUN git clone -b container https://gitlab.com/infraflakes/nix-flakes container
-
-WORKDIR /home/nixdev/container
-
-# Define the build argument for hostname (can be overridden at build time)
+# --- Global Args ---
+ARG USERNAME=nixdev
 ARG HOSTNAME=container-env
-ENV USERNAME=nixdev
+ARG REPO_URL="https://gitlab.com/infraflakes/nix-flakes"
+ARG REPO_BRANCH="container"
 
-# Build and run the Home Manager activation package
+FROM debian:bookworm-slim
+
+# Re-declare ARGs to bring them into this build stage's scope
+ARG USERNAME
+ARG HOSTNAME
+ARG REPO_URL
+ARG REPO_BRANCH
+
+# 1. Install prerequisites
+RUN apt-get update && apt-get install -y \
+    curl xz-utils git fish sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# 2. Setup User & Nix Path
+RUN useradd -m -s /usr/bin/fish $USERNAME && \
+    echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
+    mkdir -m 0755 /nix && chown $USERNAME /nix
+
+USER $USERNAME
+WORKDIR /home/$USERNAME
+ENV USER=$USERNAME
+
+# 3. Install Nix (Single-user mode)
+RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+
+# 4. Configure Environment
+ENV PATH="/home/$USERNAME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:${PATH}"
+RUN mkdir -p ~/.config/nix && \
+    echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
+
+# 5. Build/Activate via Flake
+RUN git clone -b $REPO_BRANCH $REPO_URL container
+WORKDIR /home/$USERNAME/container
 RUN nix run .#homeConfigurations.${USERNAME}@${HOSTNAME}.activationPackage
 
-# Set the entrypoint to a shell or your nix run command
 CMD ["/usr/bin/fish"]
