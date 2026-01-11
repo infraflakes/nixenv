@@ -25,7 +25,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
-    username = "nixuris";
+    username = "nixdev";
     hostname = "serein";
   in {
     # Home Manager
