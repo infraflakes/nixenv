@@ -14,7 +14,7 @@ in {
     glib
     brightnessctl
   ];
-  services.cliphist.enable = true;
+  # services.cliphist.enable = true;
   wayland.windowManager.hyprland = {
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     package = pkgs.hyprland;
@@ -135,8 +135,10 @@ in {
         "SUPER, Q, killactive,"
         "SUPER SHIFT, P, pin,"
         "SUPER, F, fullscreen"
+        "SUPER, Tab, exec, dms ipc call dash open overview"
         "SUPER, L, exec, dms ipc lock lock"
-        "SUPER, I, exec, dms ipc call control-center toggle"
+        "SUPER, S, exec, dms ipc call control-center toggle"
+        "SUPER, I, exec, dms ipc settings toggle"
         "SUPER, R, exec, sh -c 'pkill waybar || uwsm app -- waybar'"
         "SUPER, W, togglefloating"
         "SUPER SHIFT, W, exec, dms ipc call dankdash wallpaper"

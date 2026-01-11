@@ -26,18 +26,8 @@
       url = "github:AvengeMedia/dgop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.dgop.follows = "dgop";
-    };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mangowc = {
-      url = "github:DreamMaoMao/mangowc";
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -49,8 +39,6 @@
     srn-cd,
     zen-browser,
     dms,
-    niri,
-    mangowc,
     ...
   } @ inputs: let
     system = "x86_64-linux";
