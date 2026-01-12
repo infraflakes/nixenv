@@ -10,9 +10,10 @@
     ./cli/file-manager.nix
     ./cli/fastfetch.nix
     ./cli/fish.nix
-    ./cli/podman.nix
+    ./cli/container.nix
     ./cli/tmux.nix
     ./cli/vcs.nix
+    ./cli/ide.nix
 
     # Media
     ./media/media.nix

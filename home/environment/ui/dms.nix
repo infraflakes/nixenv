@@ -13,6 +13,5 @@
     enableDynamicTheming = true; # Wallpaper-based theming (matugen)
     enableAudioWavelength = true; # Audio visualizer (cava)
     enableCalendarEvents = true; # Calendar integration (khal)
-    systemd.enable = true; # Systemd service for auto-start
   };
 }

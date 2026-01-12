@@ -34,6 +34,7 @@ in {
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprctl setcursor Bibata-Modern-Classic 24"
+        "dms run"
         # "hyprctl plugin load ${pkgs.hyprlandPlugins.hyprscrolling}/lib/libhyprscrolling.so"
       ];
 
@@ -139,7 +140,6 @@ in {
         "SUPER, L, exec, dms ipc lock lock"
         "SUPER, S, exec, dms ipc call control-center toggle"
         "SUPER, I, exec, dms ipc settings toggle"
-        "SUPER, R, exec, sh -c 'pkill waybar || uwsm app -- waybar'"
         "SUPER, W, togglefloating"
         "SUPER SHIFT, W, exec, dms ipc call dankdash wallpaper"
         "SUPER, M, exec, dms ipc call dash open media"
