@@ -36,6 +36,7 @@ ENV PATH="/home/$USERNAME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:${P
 RUN mkdir -p ~/.config/nix && \
     echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf && \
     echo "cores = 0" >> ~/.config/nix/nix.conf && \
+    echo "auto-optimise-store = true" >> ~/.config/nix/nix.conf && \
     echo "max-jobs = auto" >> ~/.config/nix/nix.conf
 
 # 5. Build/Activate via Flake
@@ -43,4 +44,4 @@ RUN git clone -b $REPO_BRANCH $REPO_URL container
 WORKDIR /home/$USERNAME/container
 RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
 
-CMD /usr/bin/$SHELL --login
+CMD ["/usr/bin/fish", "--login"]
