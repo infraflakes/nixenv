@@ -3,10 +3,8 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [zoxide];
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
+  home.sessionVariables = {
+    SHELL = "${pkgs.fish}/bin/fish";
   };
   programs.fish = {
     enable = true;

@@ -34,7 +34,7 @@
   networking = {
     hostName = "serein";
     networkmanager.enable = true;
-    nameservers = ["1.1.1.1"];
+    nameservers = ["8.8.8.8" "1.1.1.1"];
   };
   security.pam.services.swaylock = {};
   systemd.sleep.extraConfig = ''
