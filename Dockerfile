@@ -1,7 +1,7 @@
+
 # --- Global Args ---
 ARG USERNAME=nixdev
 ARG HOSTNAME=container-env
-ARG SHELL=fish
 ARG REPO_URL="https://gitlab.com/infraflakes/nix-flakes"
 ARG REPO_BRANCH="container"
 
@@ -15,18 +15,17 @@ ARG REPO_BRANCH
 
 # 1. Install prerequisites
 RUN apt-get update && apt-get install -y \
-    curl xz-utils git $SHELL sudo \
+    curl xz-utils git fish sudo \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Setup User & Nix Path
-RUN useradd -m -s /usr/bin/$SHELL $USERNAME && \
+RUN useradd -m $USERNAME && \
     echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -m 0755 /nix && chown $USERNAME /nix
 
 USER $USERNAME
 WORKDIR /home/$USERNAME
 ENV USER=$USERNAME
-ENV SHELL=/usr/bin/$SHELL
 
 # 3. Install Nix (Single-user mode)
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
@@ -44,4 +43,5 @@ RUN git clone -b $REPO_BRANCH $REPO_URL container
 WORKDIR /home/$USERNAME/container
 RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
 
-CMD ["/usr/bin/fish", "--login"]
+CMD ["/usr/bin/fish"]
+
