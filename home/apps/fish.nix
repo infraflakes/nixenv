@@ -3,10 +3,8 @@
   pkgs,
   ...
 }: {
-  home.packages = with pkgs; [zoxide];
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
+  home.sessionVariables = {
+    SHELL = "${pkgs.fish}/bin/fish";
   };
   programs.fish = {
     enable = true;
@@ -32,10 +30,6 @@
         # '';
     };
     shellAliases = {
-      snix = "srn nix";
-      sgit = "srn git";
-      archive = "srn archive";
-      music = "srn music";
       tm = "tmux new-session -A";
       cd = "scd";
       cat = "bat";
