@@ -7,7 +7,7 @@
     # System core
     /etc/nixos/hardware-configuration.nix
     ./core/sys.nix
-    ./core/graphics.nix
+    ./core/graphics-prime.nix
     ./core/misc.nix
 
     # User environment
@@ -15,7 +15,8 @@
     ./environment/profiles.nix
 
     # Programs that needs privileges
-    ./runtime/asus.nix
+    # ./runtime/asus.nix
+    ./runtime/ppd.nix
     ./runtime/mount.nix
     ./runtime/virt/virt-qemu.nix
     ./runtime/gaming.nix

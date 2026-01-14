@@ -5,31 +5,13 @@
   inputs,
   ...
 }: {
-  environment.loginShellInit = ''
-    tmux new-session -d -s default 2>/dev/null || true
-    if uwsm check may-start && uwsm select; then
-      exec uwsm start default
-    fi
-  '';
-  # services.displayManager.gdm = {
-  #   enable = true;
-  #   wayland = true;
-  # };
-  programs.uwsm = {
+  services.displayManager.ly = {
     enable = true;
-    # waylandCompositors = {
-    #   # mango = {
-    #   #   prettyName = "MangoWC";
-    #   #   comment = "Mango compositor managed by UWSM";
-    #   #   binPath = "${inputs.mangowc.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/mango";
-    #   # };
-    #   niri = {
-    #     prettyName = "Niri";
-    #     comment = "Niri compositor managed by UWSM";
-    #     binPath = "${pkgs.niri}/bin/niri-session";
-    #   };
-    # };
+    x11Support = true;
   };
+
+  programs.hyprland.enable = true;
+
   # xdg.portal = {
   #   enable = true;
   #   extraPortals = with pkgs; [

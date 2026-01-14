@@ -19,7 +19,7 @@ in {
   nixpkgs.config.allowUnfree = true;
   #Bootloader
   boot = {
-    kernelParams = ["acpi_backlight=native"];
+    # kernelParams = ["acpi_backlight=native"];
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {

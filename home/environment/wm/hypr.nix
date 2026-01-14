@@ -27,6 +27,7 @@ in {
     ];
     settings = {
       monitor = [
+        "eDP-1, highrr, 0x0, 1"
         "eDP-2, highrr, 0x0, 1"
         "Unknown-1, disable"
         "HDMI-A, highrr, -1920x0, 1"
@@ -124,7 +125,7 @@ in {
       ];
 
       bind = [
-        "SUPER, Return, exec, uwsm app -- ghostty"
+        "SUPER, Return, exec, ghostty"
         ",XF86AudioLowerVolume, exec, dms ipc call audio decrement 2"
         ",XF86AudioRaiseVolume, exec, dms ipc call audio increment 2"
         ",XF86AudioMute, exec, dms ipc call audio mute"
@@ -189,7 +190,7 @@ in {
       ];
 
       env = [
-        #"AQ_DRM_DEVICES,/dev/dri/card2:/dev/dri/card1"
+        "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0"
 
         "QT_SCALE_FACTOR,1"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
@@ -199,10 +200,10 @@ in {
         "MOZ_ENABLE_WAYLAND,1"
         "EGL_PLATFORM,wayland"
 
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "GBM_BACKEND,nvidia-drm"
-        "NVD_BACKEND,direct"
+        # "LIBVA_DRIVER_NAME,nvidia"
+        # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        # "GBM_BACKEND,nvidia-drm"
+        # "NVD_BACKEND,direct"
       ];
 
       windowrulev2 = [
