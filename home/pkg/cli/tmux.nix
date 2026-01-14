@@ -27,6 +27,7 @@
       set -g renumber-windows on
       set-option -g allow-rename off
       set -g detach-on-destroy off
+      set -s set-clipboard on
 
       # ----- begin custom no-prefix binds -----
 

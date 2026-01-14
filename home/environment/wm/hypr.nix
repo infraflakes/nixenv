@@ -14,7 +14,7 @@ in {
     glib
     brightnessctl
   ];
-  # services.cliphist.enable = true;
+  services.cliphist.enable = true;
   wayland.windowManager.hyprland = {
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     package = pkgs.hyprland;
