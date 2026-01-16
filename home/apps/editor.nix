@@ -18,6 +18,7 @@
       VISUAL = "nvim";
     };
   };
+  programs.opencode.enable = true;
   programs.neovim = {
     enable = true;
     viAlias = true;
