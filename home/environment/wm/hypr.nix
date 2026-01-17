@@ -11,6 +11,21 @@ in {
     glib
     brightnessctl
   ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+    config = {
+      common = {
+        # Use xdg-desktop-portal-gtk for the settings interface
+        "org.freedesktop.portal.Settings" = ["gtk"];
+        # Use hyprland for everything else, or specify others
+        default = ["hyprland"];
+      };
+    };
+  };
   wayland.windowManager.hyprland = {
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     package = pkgs.hyprland;

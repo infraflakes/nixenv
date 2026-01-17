@@ -33,7 +33,4 @@
       NetworkManager-dispatcher.enable = false;
     };
   };
-  #Nix-LD
-  programs.nix-ld.enable = true;
-  #services.flatpak.enable = true;
 }

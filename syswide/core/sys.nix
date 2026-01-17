@@ -62,4 +62,7 @@ in {
     pulse.enable = true;
     jack.enable = true;
   };
+
+  #Nix-LD
+  programs.nix-ld.enable = true;
 }
