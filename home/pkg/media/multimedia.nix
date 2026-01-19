@@ -6,6 +6,7 @@
 }: {
   imports = [inputs.spicetify-nix.homeManagerModules.default];
   home.packages = with pkgs; [
+    krita
     papers
     imv
     mpv
