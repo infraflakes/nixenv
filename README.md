@@ -11,14 +11,15 @@
 Clone the repo:
 
 ```
-git clone https://github.com/infraflakes/sereinos.git
+git clone nixos https://gitlab.com/infraflakes/nix-flakes.git nixos
 ```
 
 Apply changes system wide:
 
 ```
-cd serein-nix
+cd nixos
 sudo nixos-rebuild switch --impure --flake .#<hostname>
+# or doas nixos-rebuild switch --impure --flake path:.#<hostname>
 ```
 
 Then set up home manager:

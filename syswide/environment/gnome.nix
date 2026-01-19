@@ -5,7 +5,6 @@
   ...
 }: {
   services.desktopManager.gnome.enable = true;
-  services.power-profiles-daemon.enable = false;
   services.udev.packages = [pkgs.gnome-settings-daemon];
   services.gnome.rygel.enable = false;
 
