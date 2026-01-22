@@ -30,6 +30,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -39,6 +43,7 @@
     srn-cd,
     zen-browser,
     dms,
+    niri,
     ...
   } @ inputs: let
     system = "x86_64-linux";

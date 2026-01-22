@@ -4,8 +4,9 @@
   ...
 }: {
   imports = [
-    ./wm/hypr.nix
-    ./wm/swappy.nix
+    ./wm/niri/niri.nix
+    ./wm/niri/xwayland.nix
+    ./wm/niri/autostart.nix
     ./wm/dms.nix
 
     ./ui/fonts.nix

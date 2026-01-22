@@ -10,7 +10,8 @@
   ];
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=0"];
   environment.variables = {
-    LIBVA_DRIVER_NAME = "iHD";
+    #LIBVA_DRIVER_NAME = "iHD";
+    LIBVA_DRIVER_NAME = "i965";
   };
   hardware = {
     graphics = {
