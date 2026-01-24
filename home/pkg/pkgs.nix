@@ -12,7 +12,7 @@
     ./cli/fish.nix
     ./cli/tmux.nix
     ./cli/vcs.nix
-    ./cli/ai.nix
+    # ./cli/ai.nix
 
     # Media
     ./media/multimedia.nix

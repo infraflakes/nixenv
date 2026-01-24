@@ -12,8 +12,6 @@ in {
       OLLAMA_FLASH_ATTENTION = "1";
     };
     packages = [
-      pkgs.antigravity
-
       (pkgs.ollama.override {
         acceleration = nvidia;
       })

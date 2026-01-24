@@ -12,6 +12,7 @@
       gnumake
       stylua
       alejandra
+      antigravity
     ];
     sessionVariables = {
       EDITOR = "nvim";
