@@ -32,6 +32,7 @@ in {
     };
     #blacklistedKernelModules = ["kvm" "kvm-intel" "bridge" "macvlan" "tap" "tun"];
   };
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Enable trim
   services.fstrim = {
