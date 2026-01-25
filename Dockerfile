@@ -22,7 +22,8 @@ RUN apk add --no-cache \
     doas \
     shadow \
     bash \
-    ca-certificates
+    ca-certificates \
+    coreutils
 
 # 2. Setup User & Nix Path
 RUN useradd -m -s /usr/bin/fish $USERNAME && \
@@ -35,7 +36,7 @@ WORKDIR /home/$USERNAME
 ENV USER=$USERNAME
 
 # 3. Install Nix (Single-user mode)
-RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+RUN curl -L https://nixos.org/nix/install | bash -s -- --no-daemon
 
 # 4. Configure Environment
 ENV PATH="/home/$USERNAME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:${PATH}"

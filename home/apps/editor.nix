@@ -18,15 +18,15 @@
       VISUAL = "nvim";
     };
   };
-  programs.opencode = {
-    enable = true;
-    settings = {
-      "$schema" = "https://opencode.ai/config.json";
-      plugin = [
-        "opencode-antigravity-auth@latest"
-      ];
-    };
-  };
+  # programs.opencode = {
+  #   enable = true;
+  #   settings = {
+  #     "$schema" = "https://opencode.ai/config.json";
+  #     plugin = [
+  #       "opencode-antigravity-auth@latest"
+  #     ];
+  #   };
+  # };
   programs.neovim = {
     enable = true;
     viAlias = true;
