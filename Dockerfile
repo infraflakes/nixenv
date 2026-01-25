@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 RUN useradd -m $USERNAME && \
     mkdir -m 0755 /nix && chown $USERNAME /nix && \
     # Configure doas: permit the user to run commands as root without a password
-    echo "permit nopass $USERNAME as root" > /etc/doas.d/doas.conf
+    echo "permit nopass $USERNAME as root" > /etc/doas.conf
 
 USER $USERNAME
 WORKDIR /home/$USERNAME
