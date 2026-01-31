@@ -9,7 +9,6 @@
   services.gnome.rygel.enable = false;
 
   environment.gnome.excludePackages = with pkgs; [
-    nautilus
     papers
     loupe
     file-roller

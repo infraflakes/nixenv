@@ -14,7 +14,7 @@
     ./environment/user.nix
     ./environment/profiles.nix
     ./environment/gnome.nix
-    ./environment/cosmic.nix
+    # ./environment/cosmic.nix
 
     # Programs that needs privileges
     # ./runtime/asus.nix

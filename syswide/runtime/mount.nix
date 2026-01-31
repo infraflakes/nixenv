@@ -10,7 +10,6 @@
     libimobiledevice
     ifuse
     # nemo
-    # nautilus
     sushi
     android-tools
   ];
