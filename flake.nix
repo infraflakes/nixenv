@@ -22,6 +22,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mangowc = {
+      url = "github:DreamMaoMao/mangowc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -30,6 +34,7 @@
     srn-coreutils,
     srn-cd,
     dms,
+    mangowc,
     ...
   } @ inputs: let
     system = "x86_64-linux";

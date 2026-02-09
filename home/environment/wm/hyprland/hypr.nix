@@ -4,13 +4,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  scriptsDir = builtins.toString ./scripts;
-in {
-  home.packages = with pkgs; [
-    glib
-    brightnessctl
-  ];
+}: {
   wayland.windowManager.hyprland = {
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     package = pkgs.hyprland;
@@ -29,7 +23,6 @@ in {
         "HDMI-A, highrr, -1920x0, 1"
       ];
       exec-once = [
-        "ghostty --gtk-single-instance=true --quit-after-last-window-closed=false --initial-window=false"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "hyprctl setcursor Bibata-Modern-Classic 24"
         "dms run"
@@ -145,8 +138,8 @@ in {
         "SUPER SHIFT, W, exec, dms ipc call dankdash wallpaper"
         "SUPER, M, exec, dms ipc call dash open media"
         "SUPER, V, exec, dms ipc clipboard toggle"
-        "SUPER SHIFT, S, exec, ${scriptsDir}/scrshot --swappy"
-        "SUPER ALT, S, exec, ${scriptsDir}/scrshot --now"
+        "SUPER SHIFT, S, exec, ${./scrshot}/scrshot --swappy"
+        "SUPER ALT, S, exec, ${./scrshot}/scrshot --now"
         #"SUPER, Period, exec, ${rofiScriptsDir}/emoji"
         #Hidden workspace
         #"SUPER ALT, S, movetoworkspacesilent, special"
