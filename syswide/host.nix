@@ -10,6 +10,7 @@
     ./core/graphics.nix
     ./core/misc.nix
     ./core/user.nix
+    ./core/networking.nix
     ./core/fs.nix
 
     ./runtime/podman.nix

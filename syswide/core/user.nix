@@ -29,10 +29,4 @@
   #Time zone
   time.timeZone = "Asia/Ho_Chi_Minh";
   services.timesyncd.enable = true;
-  #Network
-  networking = {
-    hostName = "serein";
-    networkmanager.enable = true;
-    nameservers = ["8.8.8.8" "1.1.1.1"];
-  };
 }

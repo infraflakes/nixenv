@@ -20,24 +20,14 @@
     inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-  i18n = {
-    consoleFont = "ter-i32b";
-    consolePackages = with pkgs; [terminus_font];
+  console = {
+    font = "ter-i32b";
+    packages = with pkgs; [terminus_font];
   };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
   };
-
-  # SSH
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "prohibit-password";
-      PasswordAuthentication = true;
-    };
-  };
-  networking.firewall.allowedTCPPorts = [22];
   #Disabled systemd services
   systemd = {
     services = {
@@ -45,7 +35,6 @@
       NetworkManager-dispatcher.enable = false;
     };
   };
-
   # Doas
   security = {
     sudo.enable = false;
