@@ -4,10 +4,12 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [ocis];
   environment = {
-    # Disable the internal proxy if use Cloudflare Tunnel or Nginx
-    PROXY_TLS = "false";
+    systemPackages = with pkgs; [ocis];
+    variables = {
+      # Disable the internal proxy if use Cloudflare Tunnel or Nginx
+      PROXY_TLS = "false";
+    };
   };
   systemd.services.ocis = {
     description = "oCIS Server";
