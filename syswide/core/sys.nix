@@ -27,7 +27,6 @@
       };
     };
   };
-  boot.kernelPackages = pkgs.linuxPackages_lts;
   # Enable trim
   services.fstrim = {
     enable = true;

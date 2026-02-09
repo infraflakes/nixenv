@@ -12,7 +12,7 @@
     ./core/user.nix
     ./core/fs.nix
 
-    # Programs that needs privileges
     ./runtime/podman.nix
+    ./runtime/ocis.nix
   ];
 }
