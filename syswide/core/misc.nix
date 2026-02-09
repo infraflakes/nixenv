@@ -20,6 +20,10 @@
     inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+  i18n = {
+    consoleFont = "ter-i32b";
+    consolePackages = with pkgs; [terminus_font];
+  };
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -42,6 +46,7 @@
     };
   };
 
+  # Doas
   security = {
     sudo.enable = false;
     doas = {
