@@ -18,7 +18,6 @@
     wantedBy = ["multi-user.target"];
 
     environment = {
-      OCIS_URL = "https://placeholder.trycloudflare.com";
       PROXY_HTTP_ADDR = "192.168.1.20:9200";
       PROXY_TLS = "false"; # Disable the internal proxy if use Cloudflare Tunnel or Nginx
       OCIS_INSECURE = "true";
