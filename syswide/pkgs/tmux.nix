@@ -4,7 +4,10 @@
   lib,
   ...
 }: {
-  environment.variables.TMUX_TMPDIR = lib.mkForce "/tmp";
+  environment.variables = {
+    TMUX_TMPDIR = lib.mkForce "/tmp";
+    TERM = "xterm-256color";
+  };
   programs.tmux = {
     enable = true;
     historyLimit = 50000;

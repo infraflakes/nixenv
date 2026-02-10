@@ -5,6 +5,14 @@
   username,
   ...
 }: {
+  #doas zfs create -o mountpoint=legacy iris_pool/ocis
+  #doas zfs set com.sun:auto-snapshot=true iris_pool/ocis
+  fileSystems."/data/ocis" = {
+    device = "iris_pool/ocis";
+    fsType = "zfs";
+    options = ["nofail"];
+    depends = ["/data"]; # Ensures the parent mount is ready first
+  };
   environment = {
     systemPackages = with pkgs; [ocis];
     variables = {
