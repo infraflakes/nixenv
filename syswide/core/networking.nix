@@ -7,7 +7,7 @@
   environment.systemPackages = with pkgs; [cloudflared];
   networking.interfaces.wlp3s0.ipv4.addresses = [
     {
-      address = "192.168.1.20";
+      address = "192.168.1.19";
       prefixLength = 24;
     }
   ];
