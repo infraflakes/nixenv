@@ -91,7 +91,4 @@
       setw -g window-status-current-format ' #I #W #F '
     '';
   };
-  home.packages = with pkgs; [
-    wl-clipboard
-  ];
 }
