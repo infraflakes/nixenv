@@ -14,7 +14,7 @@
   };
   systemd.services.ocis = {
     description = "ownCloud Infinite Scale";
-    after = ["network.target" "local-fs.target"];
+    after = ["network.target" "data-ocis.mount"];
     wantedBy = ["multi-user.target"];
 
     environment = {
