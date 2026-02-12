@@ -28,6 +28,7 @@
     environment = {
       OCIS_CONFIG_DIR = "/data/ocis/config";
       OCIS_BASE_DATA_PATH = "/data/ocis/data";
+      OCIS_STORAGE_FRONTEND_UPLOAD_MAX_CHUNK_SIZE = "99614720"; # 95MB
       # STORAGE_USERS_DRIVER = "posix";
       PROXY_HTTP_ADDR = "192.168.1.19:9200";
       PROXY_TLS = "false"; # Disable the internal proxy if use Cloudflare Tunnel or Nginx
