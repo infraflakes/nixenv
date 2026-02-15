@@ -12,7 +12,8 @@
       size = 13;
     };
     settings = {
-      shell = "${config.home.homeDirectory}/.nix-profile/bin/fish";
+      # shell = "${pkgs.fish}/bin/fish";
+      shell = "${pkgs.zsh}/bin/zsh";
       hide_window_decorations = "yes";
       confirm_os_window_close = 0;
       window_padding_width = 15;

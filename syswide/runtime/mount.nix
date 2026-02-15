@@ -9,7 +9,7 @@
     usbutils
     libimobiledevice
     ifuse
-    # nemo
+    nemo
     sushi
     android-tools
   ];

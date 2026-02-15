@@ -9,8 +9,8 @@
   };
   programs.tmux = {
     enable = true;
-    shell = "${pkgs.fish}/bin/fish";
-    # shell = "${pkgs.zsh}/bin/zsh";
+    # shell = "${pkgs.fish}/bin/fish";
+    shell = "${pkgs.zsh}/bin/zsh";
     historyLimit = 50000;
     baseIndex = 1;
     mouse = true;

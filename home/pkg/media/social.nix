@@ -5,7 +5,7 @@
   ...
 }: {
   home.packages = with pkgs; [
-    zoom-us
+    # zoom-us
     vesktop
     firefox
   ];

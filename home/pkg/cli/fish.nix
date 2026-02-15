@@ -7,7 +7,7 @@
   programs.fish = {
     enable = true;
     shellAliases = {
-      tm = "tmux new-session -A";
+      tm = "tmux new-session -A -s default";
       cd = "scd";
       smd = "srn music download";
       cat = "bat";

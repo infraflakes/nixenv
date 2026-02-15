@@ -11,7 +11,8 @@
       font-size = 13;
       theme = "Kanagawa Wave";
       confirm-close-surface = false;
-      command = "${pkgs.fish}/bin/fish --login --interactive";
+      # command = "${pkgs.fish}/bin/fish --login --interactive";
+      command = "${pkgs.zsh}/bin/zsh -l -i";
       keybind = [
         "clear"
         # "alt+n=new_tab"

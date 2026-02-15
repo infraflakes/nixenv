@@ -101,7 +101,7 @@
           }
               struts {}
           }
-          //prefer-no-csd
+          prefer-no-csd
 
       window-rule {
           match app-id=r#"firefox$"# title="^Picture-in-Picture$"

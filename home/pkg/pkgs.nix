@@ -9,7 +9,8 @@
     ./cli/ghostty.nix
     ./cli/file-manager.nix
     ./cli/fastfetch.nix
-    ./cli/fish.nix
+    ./cli/zsh.nix
+    ./cli/starship.nix
     ./cli/tmux.nix
     ./cli/vcs.nix
     # ./cli/ai.nix
