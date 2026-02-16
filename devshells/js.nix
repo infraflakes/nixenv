@@ -1,15 +1,15 @@
 {pkgs ? import <nixpkgs> {}}:
 pkgs.mkShell {
   buildInputs = with pkgs; [
-    nodejs_24
+    nodejs_25
+    bun
     pnpm
-    nodePackages.eslint
-    nodePackages.prettier
   ];
 
   shellHook = ''
     export NPM_CONFIG_PREFIX="$HOME/.local"
     export PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/.bun/bin:$PATH"
 
     echo "JS environment is ready!"
     exec fish
