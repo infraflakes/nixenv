@@ -65,24 +65,6 @@
 
       # 3.  any other key (or Escape) just cancels the mode
       bind -T move Escape switch-client -T root
-
-      # ------ theming -------
-      # set -g status-right-style 'fg=blue bg=default'
-      # set -g status-right '%Y-%m-%d %H:%M '
-      # set -g status-right-length 50
-      #
-      # set -g status-left '[#S] '
-      # set -g status-left-length 0        # 40 plenty of room, or 0 for unlimited
-      #
-      # set -g status-position bottom
-      # set -g status-justify left
-      # set -g status-style 'bg=default'
-      #
-      # setw -g window-status-style 'fg=green bg=black'
-      # setw -g window-status-format ' #I #[fg=white]#W #[fg=blue]#F '
-      #
-      # setw -g window-status-current-style 'fg=black bg=blue'
-      # setw -g window-status-current-format ' #I #W #F '
     '';
   };
 }
