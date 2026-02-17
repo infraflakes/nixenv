@@ -12,7 +12,8 @@
       smd = "srn music download";
       cat = "bat";
       grep = "rg";
-      se = "sudo -E -s nvim";
+      se = "doas -E -s nvim";
+      e = "nvim";
       ls = "lsd -l";
       nvidia-gpu = "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
     };
