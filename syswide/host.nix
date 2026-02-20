@@ -18,6 +18,5 @@
     ./pkgs/tools.nix
     ./pkgs/vcs.nix
     ./pkgs/ocis.nix
-    ./pkgs/memos.nix
   ];
 }
