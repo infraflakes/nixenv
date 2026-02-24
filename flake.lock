@@ -208,11 +208,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1767550211,
-        "narHash": "sha256-uOZDXoplmNMtEbKhuiy4lm4slj4/SZM5r+Cc/XuL7+4=",
+        "lastModified": 1771946214,
+        "narHash": "sha256-VPqSHK21HAfNvPX1qGbQA4fnPzvgkfhk/WuS4o8ilA0=",
         "owner": "infraflakes",
         "repo": "srn-cd",
-        "rev": "befbda32ec4d407751b80b503a7acaae00c228c3",
+        "rev": "3ac189d4595571c7504ceac8bf7e5249acaa64a7",
         "type": "github"
       },
       "original": {

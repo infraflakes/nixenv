@@ -157,7 +157,7 @@ static const Key keys[] = {
     {MODKEY|ShiftMask, XK_s, spawn, SHCMD("maim --select | tee ~/Pictures/Screenshots/$(date +%Y-%m-%d_%H-%M-%S).png | xclip -selection clipboard -t image/png")},
 
     { MODKEY,                           XK_space,       spawn,          SHCMD("rofi -show drun") },
-    { MODKEY,                           XK_Return,  spawn,          SHCMD("ghostty")},
+    { MODKEY,                           XK_Return,  spawn,          SHCMD("alacritty")},
     { MODKEY,                           XK_l,  spawn,          SHCMD("slock")},
     { MODKEY,                           XK_v,  spawn,          SHCMD("copyq menu")},
     { MODKEY,                       XK_BackSpace,          spawn,           {.v = quit_swm } },        // quit swm MOD+backspace
