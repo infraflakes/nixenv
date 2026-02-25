@@ -8,7 +8,7 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export SDL_IM_MODULE=fcitx
 export GLFW_IM_MODULE=fcitx
-unset SSH_ASKPASS
+# unset SSH_ASKPASS
 # export __GLX_VENDOR_LIBRARY_NAME=nvidia
 # export __NV_PRIME_RENDER_OFFLOAD=1 
 feh --bg-scale ~/.config/wallpapers/wave.png &

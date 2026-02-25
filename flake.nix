@@ -14,18 +14,18 @@
       url = "github:infraflakes/srn-cd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # dms = {
+    #   url = "github:AvengeMedia/DankMaterialShell/stable";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # mangowc = {
     #   url = "github:DreamMaoMao/mangowc";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # niri = {
+    #   url = "github:sodiboo/niri-flake";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
   outputs = {
     self,
@@ -33,8 +33,8 @@
     home-manager,
     srn-coreutils,
     srn-cd,
-    dms,
-    niri,
+    # dms,
+    # niri,
     ...
   } @ inputs: let
     system = "x86_64-linux";
