@@ -26,16 +26,12 @@
       };
     };
     extraPortals = with pkgs; [
-      pkgs.xdg-desktop-portal-hyprland
-      xdg-desktop-portal-gtk
+      # xdg-desktop-portal-hyprland
+      # xdg-desktop-portal-gtk
       # xdg-desktop-portal-wlr
-      xdg-desktop-portal-gnome
+      # xdg-desktop-portal-gnome
     ];
     config = {
-      common = {
-        default = ["gtk"];
-        "org.freedesktop.portal.Settings" = ["gtk"];
-      };
       gnome = {
         default = ["gnome"];
       };
@@ -47,6 +43,7 @@
         "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
         "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
         "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+        "org.freedesktop.portal.Settings" = ["gtk"];
       };
 
       niri = {
