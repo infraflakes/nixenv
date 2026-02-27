@@ -30,7 +30,7 @@ static const int vertpadtab         = 35;
 static const int horizpadtabi       = 15;
 static const int horizpadtabo       = 15;
 static const int scalepreview       = 4;
-static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
+static const int tag_preview        = 1;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 static const char *upvol[]   = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "2%+",     NULL };
 static const char *downvol[]   = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "2%-",     NULL };
@@ -105,17 +105,6 @@ static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[M]",      monocle },
     { "[]=",      tile },    /* first entry is default */
-    { "TTT",      bstack },
-    { "[@]",      spiral },
-    { "[\\]",     dwindle },
-    { "H[]",      deck },
-    { "===",      bstackhoriz },
-    { "HHH",      grid },
-    { "###",      nrowgrid },
-    { "---",      horizgrid },
-    { ":::",      gaplessgrid },
-    { "|M|",      centeredmaster },
-    { ">M>",      centeredfloatingmaster },
     { "><>",      NULL },    /* no layout function means floating behavior */
     { NULL,       NULL },
 };
@@ -193,15 +182,9 @@ static const Key keys[] = {
     //{ MODKEY|ControlMask,               XK_d,       incrgaps,       {.i = -10 } },
 
     // layout
-    { MODKEY|ALTKEY,                XK_1,                  setlayout,      {.v = &layouts[0]} },                              // change layout to tile MOD+ALT+1
-	{ MODKEY|ALTKEY,                XK_2,                  setlayout,      {.v = &layouts[1]} },                             // change layout to float MOD+ALT+2
-	{ MODKEY|ALTKEY,                XK_3,                  setlayout,      {.v = &layouts[2]} },                              // change layout to monocle MOD+ALT+3
-	{ MODKEY|ALTKEY,                XK_4,                  setlayout,      {.v = &layouts[3]} },                             // change layout to centeredmaster MOD+ALT+4
-	{ MODKEY|ALTKEY,                XK_5,                  setlayout,      {.v = &layouts[4]} },                              // change layout to bstac MOD+ALT+5
-	{ MODKEY|ALTKEY,                XK_6,                  setlayout,      {.v = &layouts[5]} },                              // change layout to grid MOD+ALT+6
-	{ MODKEY|ALTKEY,                XK_7,                  setlayout,      {.v = &layouts[6]} },                              // change layout to spiral MOD+ALT+7
-	{ MODKEY|ALTKEY,                XK_8,                  setlayout,      {.v = &layouts[7]} },                              // change layout to spiral MOD+ALT+7
-	{ MODKEY|ALTKEY,                XK_9,                  setlayout,      {.v = &layouts[8]} },                              // change layout to spiral MOD+ALT+7
+    { MODKEY|ALTKEY,                XK_1,                  setlayout,      {.v = &layouts[0]} },                              // change layout to monocle MOD+ALT+1
+	{ MODKEY|ALTKEY,                XK_2,                  setlayout,      {.v = &layouts[1]} },                             // change layout to tile MOD+ALT+2
+	{ MODKEY|ALTKEY,                XK_3,                  setlayout,      {.v = &layouts[2]} },                              // change layout to floating MOD+ALT+3
     // { MODKEY|ControlMask,               XK_comma,   cyclelayout,    {.i = -1 } },
     // { MODKEY|ControlMask,               XK_period,  cyclelayout,    {.i = +1 } },
     // { MODKEY,                           XK_0,       view,           {.ui = ~0 } },

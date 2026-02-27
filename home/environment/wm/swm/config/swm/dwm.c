@@ -1294,75 +1294,15 @@ void dragmfact(const Arg *arg) {
 
   if (!n)
     return;
-#if FLEXTILE_DELUXE_LAYOUT
-  else if (m->lt[m->sellt]->arrange == &flextile) {
-    int layout = m->ltaxis[LAYOUT];
-    if (layout < 0) {
-      mirror = 1;
-      layout *= -1;
-    }
-    if (layout > FLOATING_MASTER) {
-      layout -= FLOATING_MASTER;
-      fixed = 1;
-    }
 
-    if (layout == SPLIT_HORIZONTAL || layout == SPLIT_HORIZONTAL_DUAL_STACK)
-      horizontal = 1;
-    else if (layout == SPLIT_CENTERED_VERTICAL && (fixed || n - m->nmaster > 1))
-      center = 1;
-    else if (layout == FLOATING_MASTER) {
-      center = 1;
-      if (aw < ah)
-        horizontal = 1;
-    } else if (layout == SPLIT_CENTERED_HORIZONTAL) {
-      if (fixed || n - m->nmaster > 1)
-        center = 1;
-      horizontal = 1;
-    }
-  }
-#endif // FLEXTILE_DELUXE_LAYOUT
-#if CENTEREDMASTER_LAYOUT
-  else if (m->lt[m->sellt]->arrange == &centeredmaster &&
-           (fixed || n - m->nmaster > 1))
-    center = 1;
-#endif // CENTEREDMASTER_LAYOUT
-#if CENTEREDFLOATINGMASTER_LAYOUT
-  else if (m->lt[m->sellt]->arrange == &centeredfloatingmaster)
-    center = 1;
-#endif // CENTEREDFLOATINGMASTER_LAYOUT
-#if BSTACK_LAYOUT
-  else if (m->lt[m->sellt]->arrange == &bstack)
-    horizontal = 1;
-#endif // BSTACK_LAYOUT
-#if BSTACKHORIZ_LAYOUT
-  else if (m->lt[m->sellt]->arrange == &bstackhoriz)
-    horizontal = 1;
-#endif // BSTACKHORIZ_LAYOUT
-
-  /* do not allow mfact to be modified under certain conditions */
-  if (!m->lt[m->sellt]->arrange                    // floating layout
-      || (!fixed && m->nmaster && n <= m->nmaster) // no master
-#if MONOCLE_LAYOUT
-      || m->lt[m->sellt]->arrange == &monocle
-#endif // MONOCLE_LAYOUT
-#if GRIDMODE_LAYOUT
-      || m->lt[m->sellt]->arrange == &grid
-#endif // GRIDMODE_LAYOUT
-#if HORIZGRID_LAYOUT
-      || m->lt[m->sellt]->arrange == &horizgrid
-#endif // HORIZGRID_LAYOUT
-#if GAPPLESSGRID_LAYOUT
-      || m->lt[m->sellt]->arrange == &gaplessgrid
-#endif // GAPPLESSGRID_LAYOUT
-#if NROWGRID_LAYOUT
-      || m->lt[m->sellt]->arrange == &nrowgrid
-#endif // NROWGRID_LAYOUT
-#if FLEXTILE_DELUXE_LAYOUT
-      ||
-      (m->lt[m->sellt]->arrange == &flextile && m->ltaxis[LAYOUT] == NO_SPLIT)
-#endif // FLEXTILE_DELUXE_LAYOUT
-  )
+  /* do not allow mfact to be modified in monocle layout */
+  if (m->lt[m->sellt]->arrange == &monocle)
     return;
+
+  ax = m->wx;
+  ay = m->wy;
+  ah = m->wh;
+  aw = m->ww;
 
 #if VANITYGAPS_PATCH
   ay += oh;
