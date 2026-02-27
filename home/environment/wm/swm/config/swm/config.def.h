@@ -103,10 +103,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[M]",      monocle },
-    { "[]=",      tile },    /* first entry is default */
-    { "><>",      NULL },    /* no layout function means floating behavior */
-    { NULL,       NULL },
+    { "IRIS",      monocle },
 };
 
 /* function declarations */
@@ -154,23 +151,15 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,                 XK_r,       restart,           {0} },
 
     // toggle stuff
-    { MODKEY,                           XK_b,       togglebar,      {0} },
     { MODKEY,                 XK_w,   togglefloating, {0} },
     { MODKEY,                           XK_f,       togglefullscr,  {0} },
 
-    { MODKEY|ControlMask,               XK_w,       tabmode,        { -1 } },
     { MODKEY,                           XK_Up,      focusstack,     {.i = +1 } },
     { MODKEY,                           XK_Down,    focusstack,     {.i = -1 } },
-    { MODKEY,                           XK_i,       incnmaster,     {.i = +1 } },
-    { MODKEY,                           XK_d,       incnmaster,     {.i = -1 } },
 
     // shift view
     { MODKEY,                           XK_Left,    shiftview,      {.i = -1 } },
     { MODKEY,                           XK_Right,   shiftview,      {.i = +1 } },
-
-    // change m,cfact sizes 
-    { MODKEY|ShiftMask,                 XK_Left,   setmfact,       {.f = -0.05} },
-    { MODKEY|ShiftMask,                 XK_Right,    setmfact,       {.f = +0.05} },
 
     { MODKEY|ControlMask,           XK_Left,  tagtoprev,      {0} },
     { MODKEY|ControlMask,           XK_Right, tagtonext,      {0} },
@@ -181,27 +170,8 @@ static const Key keys[] = {
     //{ MODKEY|ControlMask,               XK_i,       incrgaps,       {.i = +10 } },
     //{ MODKEY|ControlMask,               XK_d,       incrgaps,       {.i = -10 } },
 
-    // layout
-    { MODKEY|ALTKEY,                XK_1,                  setlayout,      {.v = &layouts[0]} },                              // change layout to monocle MOD+ALT+1
-	{ MODKEY|ALTKEY,                XK_2,                  setlayout,      {.v = &layouts[1]} },                             // change layout to tile MOD+ALT+2
-	{ MODKEY|ALTKEY,                XK_3,                  setlayout,      {.v = &layouts[2]} },                              // change layout to floating MOD+ALT+3
-    // { MODKEY|ControlMask,               XK_comma,   cyclelayout,    {.i = -1 } },
-    // { MODKEY|ControlMask,               XK_period,  cyclelayout,    {.i = +1 } },
-    // { MODKEY,                           XK_0,       view,           {.ui = ~0 } },
-    // { MODKEY|ShiftMask,                 XK_0,       tag,            {.ui = ~0 } },
-    // { MODKEY,                           XK_comma,   focusmon,       {.i = -1 } },
-    // { MODKEY,                           XK_period,  focusmon,       {.i = +1 } },
-    // { MODKEY|ShiftMask,                 XK_comma,   tagmon,         {.i = -1 } },
-    // { MODKEY|ShiftMask,                 XK_period,  tagmon,         {.i = +1 } },
-
-    // kill dwm
-
     // kill window
     { MODKEY,                           XK_q,       killclient,     {0} },
-
-    // hide & restore windows
-    //{ MODKEY,                           XK_e,       hidewin,        {0} },
-    //{ MODKEY|ShiftMask,                 XK_e,       restorewin,     {0} },
 
     TAGKEYS(                            XK_1,                       0)
     TAGKEYS(                            XK_2,                       1)
@@ -218,8 +188,6 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
     /* click                event mask      button          function        argument */
-    { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-    { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
     { ClkStatusText,        0,              Button2,        spawn,          SHCMD("ghostty") },
 
