@@ -1578,7 +1578,7 @@ void
 drawtab(Monitor *m) {
 	Client *c;
 	int i;
-        char *btn_prev = "";
+  char *btn_prev = "";
 	char *btn_next = "";
 	char *btn_close = " ";
 	int buttons_w = 0;
