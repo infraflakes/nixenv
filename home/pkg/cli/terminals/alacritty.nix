@@ -6,18 +6,18 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      keyboard.bindings = [
-        {
-          key = "C";
-          mods = "Control";
-          action = "Copy";
-        }
-        {
-          key = "V";
-          mods = "Control";
-          action = "Paste";
-        }
-      ];
+      # keyboard.bindings = [
+      #   {
+      #     key = "C";
+      #     mods = "Control";
+      #     action = "Copy";
+      #   }
+      #   {
+      #     key = "V";
+      #     mods = "Control";
+      #     action = "Paste";
+      #   }
+      # ];
       font = {
         normal = {
           family = "JetBrains Mono Nerd Font";
