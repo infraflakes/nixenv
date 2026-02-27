@@ -44,28 +44,28 @@ static const int scalepreview = 4;
 static const int tag_preview = 0; /* 1 means enable, 0 is off */
 static const int colorfultag =
     1; /* 0 means use SchemeSel for selected non vacant tag */
-static const char *upvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
+static const char* upvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
                               "2%+", NULL};
-static const char *downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
+static const char* downvol[] = {"wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@",
                                 "2%-", NULL};
-static const char *mutevol[] = {"wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@",
+static const char* mutevol[] = {"wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@",
                                 "toggle", NULL};
-static const char *light_up[] = {"brightnessctl", "set", "5%+", NULL};
-static const char *light_down[] = {"brightnessctl", "set", "5%-", NULL};
-static const char *quit_swm[] = {"swm_end", NULL};
+static const char* light_up[] = {"brightnessctl", "set", "5%+", NULL};
+static const char* light_down[] = {"brightnessctl", "set", "5%-", NULL};
+static const char* quit_swm[] = {"swm_end", NULL};
 static const int new_window_attach_on_end =
     1; /*  1 means the new window will attach on the end; 0 means the new window
           will attach on the front,default is front */
 #define ICONSIZE 10   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
 
-static const char *fonts[] = {"JetBrainsMonoNerdFont:size=13"};
+static const char* fonts[] = {"JetBrainsMonoNerdFont:size=13"};
 
-static const char *colors[][3] = {
+static const char* colors[][3] = {
     /*                     fg       bg      border */
     [SchemeNorm] = {gray3, black, gray2},
     [SchemeSel] = {gray3, blue, blue},
-    [SchemeTitle] = {white, black, black}, // active window title
+    [SchemeTitle] = {white, black, black},  // active window title
     [TabSel] = {red, black, black},
     [TabNorm] = {gray3, black, black},
     [SchemeTag] = {gray2, black, black},
@@ -79,18 +79,13 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+static char* tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const int tagschemes[] = {SchemeTag1, SchemeTag2, SchemeTag3,
                                  SchemeTag2, SchemeTag1, SchemeTag2,
                                  SchemeTag3, SchemeTag1, SchemeTag2};
 
-static const char *rofi[] = {"rofi", "-show", "drun", NULL};
-
-static const Launcher launchers[] = {
-    /* command     name to display */
-    {rofi, ""},
-};
+static const char* rofi[] = {"rofi", "-show", "drun", NULL};
 
 static const unsigned int ulinepad =
     5; /* horizontal padding between the underline and tag */
@@ -119,7 +114,7 @@ static const int resizehints =
 static const int lockfullscreen =
     1; /* 1 will force focus on the fullscreen window */
 
-#define FORCE_VSPLIT                                                           \
+#define FORCE_VSPLIT \
   1 /* nrowgrid layout: force two clients to always split vertically */
 #include "functions.h"
 
@@ -129,26 +124,26 @@ static const Layout layouts[] = {
 };
 
 /* function declarations */
-static void tagtonext(const Arg *arg);
-static void tagtoprev(const Arg *arg);
-static void viewnext(const Arg *arg);
-static void viewprev(const Arg *arg);
+static void tagtonext(const Arg* arg);
+static void tagtoprev(const Arg* arg);
+static void viewnext(const Arg* arg);
+static void viewprev(const Arg* arg);
 static unsigned int nexttag(void);
 static unsigned int prevtag(void);
 
 /* key definitions */
 #define MODKEY Mod4Mask
 #define ALTKEY Mod1Mask
-#define TAGKEYS(KEY, TAG)                                                      \
-  {MODKEY, KEY, view, {.ui = 1 << TAG}},                                       \
-      {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},               \
-      {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                        \
+#define TAGKEYS(KEY, TAG)                                        \
+  {MODKEY, KEY, view, {.ui = 1 << TAG}},                         \
+      {MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}}, \
+      {MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},          \
       {MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd)                                                             \
-  {                                                                            \
-    .v = (const char *[]) { "sh", "-c", cmd, NULL }                            \
+#define SHCMD(cmd)                                 \
+  {                                                \
+    .v = (const char*[]) { "sh", "-c", cmd, NULL } \
   }
 
 /* commands */
@@ -176,7 +171,7 @@ static const Key keys[] = {
     {MODKEY, XK_Return, spawn, SHCMD("alacritty")},
     {MODKEY, XK_l, spawn, SHCMD("slock")},
     {MODKEY, XK_v, spawn, SHCMD("copyq menu")},
-    {MODKEY, XK_BackSpace, spawn, {.v = quit_swm}}, // quit swm MOD+backspace
+    {MODKEY, XK_BackSpace, spawn, {.v = quit_swm}},  // quit swm MOD+backspace
     // restart
     {MODKEY | ShiftMask, XK_r, restart, {0}},
 

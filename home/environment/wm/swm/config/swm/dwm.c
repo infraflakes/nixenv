@@ -224,11 +224,6 @@ struct Systray {
   Client *icons;
 };
 
-typedef struct {
-	const char** command;
-	const char* name;
-} Launcher;
-
 /* function declarations */
 static void applyrules(Client *c);
 static int applysizehints(Client *c, int *x, int *y, int *w, int *h,
@@ -634,17 +629,6 @@ void buttonpress(XEvent *e) {
       }
 
 		x += TEXTW(selmon->ltsymbol);
-
-		for(i = 0; i < LENGTH(launchers); i++) {
-			x += TEXTW(launchers[i].name);
-
-			if (ev->x < x) {
-				Arg a;
-				a.v = launchers[i].command;
-				spawn(&a);
-				return;
-			}
-	}
 
   if (ev->x > selmon->ww - (int)TEXTW(stext))
          click = ClkStatusText;
@@ -1460,12 +1444,6 @@ void drawbar(Monitor *m) {
   drw_setscheme(drw, scheme[SchemeLayout]);
   x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
-  	for (i = 0; i < LENGTH(launchers); i++)
-	{
-		w = TEXTW(launchers[i].name);
-		drw_text(drw, x, 0, w, bh, lrpad / 2, launchers[i].name, urg & 1 << i);
-		x += w;
-	}
   // CHANGE TITLE LENGTH
   w = 850;
   if (w > bh_n) {
