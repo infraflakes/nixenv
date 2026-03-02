@@ -5,7 +5,7 @@
   username,
   ...
 }: {
-  environment.systemPackages = with pkgs; [distrobox];
+  environment.systemPackages = with pkgs; [distrobox podman-compose];
   virtualisation = {
     containers.enable = true;
     podman = {
