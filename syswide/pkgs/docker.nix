@@ -23,4 +23,5 @@
       };
     };
   };
+  users.users.${username}.extraGroups = ["docker"];
 }
