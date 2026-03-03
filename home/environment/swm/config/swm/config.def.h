@@ -38,7 +38,7 @@ static const char *volmute[]    = { "swmctl", "volume",     "mute",             
 static const char *brightup[]   = { "swmctl", "brightness", "up",   "5",   NULL };
 static const char *brightdown[] = { "swmctl", "brightness", "down", "5",   NULL };
 
-static const char* quit_swm[] = {"swm_end", NULL};
+static const char* quit_swm[] = {"swmctl", "quit", NULL};
 static const int new_window_attach_on_end = 1; /*  1 means the new window will attach on the end; 0 means the new window will attach on the front,default is front */
 #define ICONSIZE 10   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
@@ -50,7 +50,7 @@ static const char* colors[][3] = {
     [SchemeNorm] = {gray3, black, gray2},
     [SchemeSel] = {gray3, blue, blue},
     [SchemeTitle] = {white, black, black},  // active window title
-    [TabSel] = {red, black, black},
+    [TabSel] = {black, purple, black},
     [TabNorm] = {gray3, black, black},
     [SchemeTag] = {gray2, black, black},
     [SchemeTag1] = {blue, black, black},

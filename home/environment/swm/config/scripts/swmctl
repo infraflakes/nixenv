@@ -21,6 +21,12 @@ case "$subcommand" in
             down) brightnessctl set "$value%-" ;;
         esac
         ;;
+    quit)
+        rm -f /tmp/swm.lock
+        pkill -9 -f "$BAR_NAME"
+        pkill -TERM swm
+        exit 0
+        ;;
 esac
 
 # Signal the bar to update the UI immediately
