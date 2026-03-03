@@ -63,9 +63,19 @@ gap() {
 	printf "^c$black^ ^b$black^"
 }
 
+# refresh function
+refresh() {
+    # Update the root window name immediately
+    xsetroot -name "$(brightness)$(gap)$(volume)$(gap)$(wlan)$(gap)$(clock)$(gap)$(battery)"
+}
+
+# Trap the ALRM signal to run the refresh
+# When the script receives SIGALRM, it runs 'refresh'
+trap refresh ALRM
+
 while true; do
-
-  interval=$((interval + 1))
-
-  sleep 1 && xsetroot -name "$(brightness)$(gap)$(volume)$(gap)$(wlan)$(gap)$(clock)$(gap)$(battery)"
+  refresh
+  # Sleep in the background and wait for it to finish OR be killed
+  sleep 1 & 
+  wait $!
 done
