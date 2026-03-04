@@ -208,11 +208,6 @@ typedef struct {
 } Key;
 
 typedef struct {
-  const char* symbol;
-  void (*arrange)(Monitor*);
-} Layout;
-
-typedef struct {
   const char* class;
   const char* instance;
   const char* title;
@@ -307,7 +302,6 @@ static void setcurrentdesktop(void);
 static void setdesktopnames(void);
 static void setfocus(Client* c);
 static void setfullscreen(Client* c, int fullscreen);
-static void setlayout(const Arg* arg);
 static void setcfact(const Arg* arg);
 static void setmfact(const Arg* arg);
 static void setnumdesktops(void);
@@ -416,7 +410,6 @@ struct Monitor {
   int gappov;         /* vertical outer gaps */
   unsigned int borderpx;
   unsigned int seltags;
-  unsigned int sellt;
   unsigned int tagset[2];
   unsigned int colorfultag;
   int showbar, showtab;
@@ -433,7 +426,6 @@ struct Monitor {
   int ntabs;
   int tab_widths[MAXTABS];
   int tab_btn_w[3];
-  const Layout* lt[2];
   Pertag* pertag;
 };
 
@@ -442,12 +434,9 @@ struct Monitor {
 #include "vanitygaps.c"
 
 struct Pertag {
-  unsigned int curtag, prevtag;          /* current and previous tag */
-  int nmasters[LENGTH(tags) + 1];        /* number of windows in master area */
-  float mfacts[LENGTH(tags) + 1];        /* mfacts per tag */
-  unsigned int sellts[LENGTH(tags) + 1]; /* selected layouts */
-  const Layout* ltidxs[LENGTH(tags) + 1]
-                      [2];        /* matrix of tags and layouts indexes  */
+  unsigned int curtag, prevtag;   /* current and previous tag */
+  int nmasters[LENGTH(tags) + 1]; /* number of windows in master area */
+  float mfacts[LENGTH(tags) + 1]; /* mfacts per tag */
   int showbars[LENGTH(tags) + 1]; /* display bar for the current tag */
 };
 
@@ -510,7 +499,7 @@ int applysizehints(Client* c, int* x, int* y, int* w, int* h, int interact) {
   }
   if (*h < bh) *h = bh;
   if (*w < bh) *w = bh;
-  if (resizehints || c->isfloating || !c->mon->lt[c->mon->sellt]->arrange) {
+  if (resizehints || c->isfloating) {
     if (!c->hintsvalid) updatesizehints(c);
     /* see last two sentences in ICCCM 4.1.2.3 */
     baseismin = c->basew == c->minw && c->baseh == c->minh;
@@ -557,8 +546,8 @@ void arrangemon(Monitor* m) {
   updatebarpos(m);
   updatesystray();
   XMoveWindow(dpy, m->tagwin, m->wx + m->gappov, m->by);
-  strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
-  if (m->lt[m->sellt]->arrange) m->lt[m->sellt]->arrange(m);
+  strncpy(m->ltsymbol, "[M]", sizeof m->ltsymbol);
+  monocle(m);
 }
 
 void attach(Client* c) {
@@ -670,12 +659,10 @@ void checkotherwm(void) {
 
 void cleanup(void) {
   Arg a = {.ui = ~0};
-  Layout foo = {"", NULL};
   Monitor* m;
   size_t i;
 
   view(&a);
-  selmon->lt[selmon->sellt] = &foo;
   for (m = mons; m; m = m->next)
     while (m->stack) unmanage(m->stack, 0);
   XUngrabKey(dpy, AnyKey, AnyModifier, root);
@@ -843,7 +830,7 @@ void configurerequest(XEvent* e) {
   if ((c = wintoclient(ev->window))) {
     if (ev->value_mask & CWBorderWidth)
       c->bw = ev->border_width;
-    else if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
+    else if (c->isfloating) {
       m = c->mon;
       if (ev->value_mask & CWX) {
         c->oldx = c->x;
@@ -903,21 +890,15 @@ Monitor* createmon(void) {
   m->gappoh = gappoh;
   m->gappov = gappov;
   m->borderpx = borderpx;
-  m->lt[0] = &layouts[0];
-  m->lt[1] = &layouts[1 % LENGTH(layouts)];
   for (i = 0; i < LENGTH(tags); i++) m->tagmap[i] = 0;
   m->previewshow = 0;
-  strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
+  strncpy(m->ltsymbol, "[M]", sizeof m->ltsymbol);
   m->pertag = ecalloc(1, sizeof(Pertag));
   m->pertag->curtag = m->pertag->prevtag = 1;
 
   for (i = 0; i <= LENGTH(tags); i++) {
     m->pertag->nmasters[i] = m->nmaster;
     m->pertag->mfacts[i] = m->mfact;
-
-    m->pertag->ltidxs[i][0] = m->lt[0];
-    m->pertag->ltidxs[i][1] = m->lt[1];
-    m->pertag->sellts[i] = m->sellt;
 
     m->pertag->showbars[i] = m->showbar;
   }
@@ -1197,8 +1178,8 @@ void dragmfact(const Arg* arg) {
 
   if (!n) return;
 
-  /* do not allow mfact to be modified in monocle layout */
-  if (m->lt[m->sellt]->arrange == &monocle) return;
+  /* mfact doesn't apply in monocle (which is now the only layout) */
+  return;
 
   ax = m->wx;
   ay = m->wy;
@@ -1507,18 +1488,15 @@ void drawtab(Monitor* m) {
   Client* c;
   int i;
   int nvis = 0;
-  int hasfullscreen = 0;
-  for (c = m->clients; c; c = c->next) {
-    if (ISVISIBLE(c)) {
-      ++nvis;
-      if (c->isfullscreen) hasfullscreen = 1;
-    }
-  }
-  if (nvis == 0 || hasfullscreen) {
+  for (c = m->clients; c; c = c->next)
+    if (ISVISIBLE(c)) ++nvis;
+
+  /* Hide tab bar when no windows, show when there are windows */
+  if (nvis == 0) {
     XUnmapWindow(dpy, m->tabwin);
     return;
   }
-  XMapRaised(dpy, m->tabwin);
+  XMapWindow(dpy, m->tabwin);
 
   char* btn_prev = "";
   char* btn_next = "";
@@ -2005,10 +1983,8 @@ void monocle(Monitor* m) {
     m->wh = m->mh - bh - th - m->gappoh;
     XMoveResizeWindow(dpy, m->tabwin, m->wx + m->gappov, m->ty,
                       m->ww - 2 * m->gappov, th);
-    XMapRaised(dpy, m->tabwin);
   } else {
     m->ty = -th - m->gappoh;
-    XUnmapWindow(dpy, m->tabwin);
   }
 
   int newx, newy, neww, newh;
@@ -2072,8 +2048,7 @@ void updateicon(Client* c) {
 }
 
 void moveorplace(const Arg* arg) {
-  if ((!selmon->lt[selmon->sellt]->arrange ||
-       (selmon->sel && selmon->sel->isfloating)))
+  if (selmon->sel && selmon->sel->isfloating)
     movemouse(arg);
   else
     placemouse(arg);
@@ -2118,11 +2093,9 @@ void movemouse(const Arg* arg) {
           ny = selmon->wy;
         else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
           ny = selmon->wy + selmon->wh - HEIGHT(c);
-        if (!c->isfloating && selmon->lt[selmon->sellt]->arrange &&
-            (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+        if (!c->isfloating && (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
           togglefloating(NULL);
-        if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-          resize(c, nx, ny, c->w, c->h, 1);
+        if (c->isfloating) resize(c, nx, ny, c->w, c->h, 1);
         break;
     }
   } while (ev.type != ButtonRelease);
@@ -2149,10 +2122,7 @@ void placemouse(const Arg* arg) {
   int attachmode, prevattachmode;
   attachmode = prevattachmode = -1;
 
-  if (!(c = selmon->sel) ||
-      !c->mon->lt[c->mon->sellt]->arrange) /* no support for placemouse when
-                                              floating layout is used */
-    return;
+  if (!(c = selmon->sel)) return;
   if (c->isfullscreen) /* no support placing fullscreen windows by mouse */
     return;
   restack(selmon);
@@ -2429,12 +2399,11 @@ void resizemouse(const Arg* arg) {
             c->mon->wx + nw <= selmon->wx + selmon->ww &&
             c->mon->wy + nh >= selmon->wy &&
             c->mon->wy + nh <= selmon->wy + selmon->wh) {
-          if (!c->isfloating && selmon->lt[selmon->sellt]->arrange &&
+          if (!c->isfloating &&
               (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
             togglefloating(NULL);
         }
-        if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
-          resize(c, c->x, c->y, nw, nh, 1);
+        if (c->isfloating) resize(c, c->x, c->y, nw, nh, 1);
         break;
     }
   } while (ev.type != ButtonRelease);
@@ -2468,17 +2437,14 @@ void restack(Monitor* m) {
   drawbar(m);
   drawtab(m);
   if (!m->sel) return;
-  if (m->sel->isfloating || !m->lt[m->sellt]->arrange)
-    XRaiseWindow(dpy, m->sel->win);
-  if (m->lt[m->sellt]->arrange) {
-    wc.stack_mode = Below;
-    wc.sibling = m->barwin;
-    for (c = m->stack; c; c = c->snext)
-      if (!c->isfloating && ISVISIBLE(c)) {
-        XConfigureWindow(dpy, c->win, CWSibling | CWStackMode, &wc);
-        wc.sibling = c->win;
-      }
-  }
+  if (m->sel->isfloating) XRaiseWindow(dpy, m->sel->win);
+  wc.stack_mode = Below;
+  wc.sibling = m->barwin;
+  for (c = m->stack; c; c = c->snext)
+    if (!c->isfloating && ISVISIBLE(c)) {
+      XConfigureWindow(dpy, c->win, CWSibling | CWStackMode, &wc);
+      wc.sibling = c->win;
+    }
   XSync(dpy, False);
   while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 }
@@ -2544,7 +2510,7 @@ void setborderpx(const Arg* arg) {
       c->bw = selmon->borderpx = 0;
     else
       c->bw = selmon->borderpx;
-    if (c->isfloating || !selmon->lt[selmon->sellt]->arrange) {
+    if (c->isfloating) {
       if (arg->i != 0 && prev_borderpx + arg->i >= 0)
         resize(c, c->x, c->y, c->w - (arg->i * 2), c->h - (arg->i * 2), 0);
       else if (arg->i != 0)
@@ -2653,28 +2619,13 @@ void setfullscreen(Client* c, int fullscreen) {
   }
 }
 
-void setlayout(const Arg* arg) {
-  if (!arg || !arg->v || arg->v != selmon->lt[selmon->sellt])
-    selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag] ^= 1;
-  if (arg && arg->v)
-    selmon->lt[selmon->sellt] =
-        selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt] =
-            (Layout*)arg->v;
-  strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol,
-          sizeof selmon->ltsymbol);
-  if (selmon->sel)
-    arrange(selmon);
-  else
-    drawbar(selmon);
-}
-
 void setcfact(const Arg* arg) {
   float f;
   Client* c;
 
   c = selmon->sel;
 
-  if (!arg || !c || !selmon->lt[selmon->sellt]->arrange) return;
+  if (!arg || !c) return;
   if (!arg->f)
     f = 1.0;
   else if (arg->f > 4.0)  // set fact absolutely
@@ -2691,13 +2642,8 @@ void setcfact(const Arg* arg) {
 
 /* arg > 1.0 will set mfact absolutely */
 void setmfact(const Arg* arg) {
-  float f;
-
-  if (!arg || !selmon->lt[selmon->sellt]->arrange) return;
-  f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
-  if (f < 0.05 || f > 0.95) return;
-  selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag] = f;
-  arrange(selmon);
+  /* mfact is not used in monocle layout (now the only layout) */
+  return;
 }
 
 void setup(void) {
@@ -2836,9 +2782,7 @@ void showhide(Client* c) {
   if (ISVISIBLE(c)) {
     /* show clients top down */
     XMoveWindow(dpy, c->win, c->x, c->y);
-    if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) &&
-        !c->isfullscreen)
-      resize(c, c->x, c->y, c->w, c->h, 0);
+    if (c->isfloating && !c->isfullscreen) resize(c, c->x, c->y, c->w, c->h, 0);
     showhide(c->snext);
   } else {
     /* hide clients bottom up */
@@ -2999,11 +2943,6 @@ void toggleview(const Arg* arg) {
     /* apply settings for this view */
     selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag];
     selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
-    selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
-    selmon->lt[selmon->sellt] =
-        selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
-    selmon->lt[selmon->sellt ^ 1] =
-        selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt ^ 1];
 
     if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
       togglebar(NULL);
@@ -3117,7 +3056,7 @@ void updatebars(void) {
         DefaultDepth(dpy, screen), CopyFromParent, DefaultVisual(dpy, screen),
         CWOverrideRedirect | CWBackPixmap | CWEventMask, &wa);
     XDefineCursor(dpy, m->tabwin, cursor[CurNormal]->cursor);
-    XMapRaised(dpy, m->tabwin);
+    XMapWindow(dpy, m->tabwin);
     XSetClassHint(dpy, m->barwin, &ch);
   }
 }
@@ -3483,11 +3422,6 @@ void view(const Arg* arg) {
 
   selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag];
   selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
-  selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
-  selmon->lt[selmon->sellt] =
-      selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
-  selmon->lt[selmon->sellt ^ 1] =
-      selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt ^ 1];
 
   if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
     togglebar(NULL);
@@ -3571,7 +3505,7 @@ Monitor* systraytomon(Monitor* m) {
 void zoom(const Arg* arg) {
   Client* c = selmon->sel;
 
-  if (!selmon->lt[selmon->sellt]->arrange || !c || c->isfloating) return;
+  if (!c || c->isfloating) return;
   if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next))) return;
   pop(c);
 }
