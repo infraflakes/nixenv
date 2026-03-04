@@ -1603,6 +1603,7 @@ void expose(XEvent* e) {
 
   if (ev->count == 0 && (m = wintomon(ev->window))) {
     drawbar(m);
+    drawtab(m);
     if (m == selmon) updatesystray();
   }
 }
