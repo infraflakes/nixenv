@@ -8,13 +8,14 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export SDL_IM_MODULE=fcitx
 export GLFW_IM_MODULE=fcitx
-# unset SSH_ASKPASS
+unset SSH_ASKPASS
 # export __GLX_VENDOR_LIBRARY_NAME=nvidia
 # export __NV_PRIME_RENDER_OFFLOAD=1 
 feh --bg-scale ~/.config/wallpapers/wave.png &
 fcitx5 &
 swm_bar &
 copyq &
+flameshot &
 # xrandr --output DP-2 --mode 1920x1080 --rate 144.00
 # 1. Initialize the lockfile
 touch /tmp/swm.lock

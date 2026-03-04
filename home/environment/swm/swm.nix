@@ -21,7 +21,7 @@ in {
     pkgs.sx
     pkgs.dash
     pkgs.iw
-    pkgs.maim
+    pkgs.flameshot
     pkgs.xclip
     pkgs.bc
   ];
