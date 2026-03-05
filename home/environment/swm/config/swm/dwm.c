@@ -87,14 +87,7 @@
 #define XEMBED_EMBEDDED_VERSION (VERSION_MAJOR << 16) | VERSION_MINOR
 
 /* enums */
-enum {
-  CurNormal,
-  CurResize,
-  CurMove,
-  CurResizeHorzArrow,
-  CurResizeVertArrow,
-  CurLast
-}; /* cursor */
+enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
 enum {
   SchemeNorm,
   SchemeSel,
@@ -183,7 +176,6 @@ typedef struct Client Client;
 struct Client {
   char name[256];
   float mina, maxa;
-  float cfact;
   int x, y, w, h;
   int oldx, oldy, oldw, oldh;
   int basew, baseh, incw, inch, maxw, maxh, minw, minh, hintsvalid;
@@ -245,7 +237,6 @@ static void detach(Client* c);
 static void detachstack(Client* c);
 static Monitor* dirtomon(int dir);
 static void dragmfact(const Arg* arg);
-static void dragcfact(const Arg* arg);
 static void drawbar(Monitor* m);
 static void drawbars(void);
 static int drawstatusbar(Monitor* m, int bh, char* text);
@@ -266,7 +257,6 @@ static int gettextprop(Window w, Atom atom, char* text, unsigned int size);
 static void grabbuttons(Client* c, int focused);
 static void grabkeys(void);
 static void hide(Client* c);
-static void incnmaster(const Arg* arg);
 static void keypress(XEvent* e);
 static void killclient(const Arg* arg);
 static void manage(Window w, XWindowAttributes* wa);
@@ -302,8 +292,6 @@ static void setcurrentdesktop(void);
 static void setdesktopnames(void);
 static void setfocus(Client* c);
 static void setfullscreen(Client* c, int fullscreen);
-static void setcfact(const Arg* arg);
-static void setmfact(const Arg* arg);
 static void setnumdesktops(void);
 static void setup(void);
 static void setviewport(void);
@@ -349,7 +337,6 @@ static Client* wintosystrayicon(Window w);
 static int xerror(Display* dpy, XErrorEvent* ee);
 static int xerrordummy(Display* dpy, XErrorEvent* ee);
 static int xerrorstart(Display* dpy, XErrorEvent* ee);
-static void zoom(const Arg* arg);
 
 /* variables */
 static Systray* systray = NULL;
@@ -397,8 +384,6 @@ static Client* hiddenWinStack[hiddenWinStackMax];
 typedef struct Pertag Pertag;
 struct Monitor {
   char ltsymbol[16];
-  float mfact;
-  int nmaster;
   int num;
   int by;             /* bar geometry */
   int ty;             /* tab bar geometry */
@@ -435,8 +420,6 @@ struct Monitor {
 
 struct Pertag {
   unsigned int curtag, prevtag;   /* current and previous tag */
-  int nmasters[LENGTH(tags) + 1]; /* number of windows in master area */
-  float mfacts[LENGTH(tags) + 1]; /* mfacts per tag */
   int showbars[LENGTH(tags) + 1]; /* display bar for the current tag */
 };
 
@@ -877,8 +860,6 @@ Monitor* createmon(void) {
 
   m = ecalloc(1, sizeof(Monitor));
   m->tagset[0] = m->tagset[1] = 1;
-  m->mfact = mfact;
-  m->nmaster = nmaster;
   m->showbar = showbar;
   m->showtab = showtab;
   m->topbar = topbar;
@@ -897,9 +878,6 @@ Monitor* createmon(void) {
   m->pertag->curtag = m->pertag->prevtag = 1;
 
   for (i = 0; i <= LENGTH(tags); i++) {
-    m->pertag->nmasters[i] = m->nmaster;
-    m->pertag->mfacts[i] = m->mfact;
-
     m->pertag->showbars[i] = m->showbar;
   }
 
@@ -1088,226 +1066,9 @@ void tagtoprev(const Arg* arg) {
   view(&(const Arg){.ui = tmp});
 }
 
-void dragcfact(const Arg* arg) {
-  int prev_x, prev_y, dist_x, dist_y;
-  float fact;
-  Client* c;
-  XEvent ev;
-  Time lasttime = 0;
-
-  if (!(c = selmon->sel)) return;
-  if (c->isfloating) {
-    resizemouse(arg);
-    return;
-  }
-  if (c->isfullscreen) /* no support resizing fullscreen windows by mouse */
-    return;
-  restack(selmon);
-
-  if (XGrabPointer(dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync,
-                   None, cursor[CurResize]->cursor, CurrentTime) != GrabSuccess)
-    return;
-  XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w / 2, c->h / 2);
-
-  prev_x = prev_y = -999999;
-
-  do {
-    XMaskEvent(dpy, MOUSEMASK | ExposureMask | SubstructureRedirectMask, &ev);
-    switch (ev.type) {
-      case ConfigureRequest:
-      case Expose:
-      case MapRequest:
-        handler[ev.type](&ev);
-        break;
-      case MotionNotify:
-        if ((ev.xmotion.time - lasttime) <= (1000 / 120)) continue;
-        lasttime = ev.xmotion.time;
-        if (prev_x == -999999) {
-          prev_x = ev.xmotion.x_root;
-          prev_y = ev.xmotion.y_root;
-        }
-
-        dist_x = ev.xmotion.x - prev_x;
-        dist_y = ev.xmotion.y - prev_y;
-
-        if (abs(dist_x) > abs(dist_y)) {
-          fact = (float)4.0 * dist_x / c->mon->ww;
-        } else {
-          fact = (float)-4.0 * dist_y / c->mon->wh;
-        }
-
-        if (fact) setcfact(&((Arg){.f = fact}));
-
-        prev_x = ev.xmotion.x;
-        prev_y = ev.xmotion.y;
-        break;
-    }
-  } while (ev.type != ButtonRelease);
-
-  XWarpPointer(dpy, None, c->win, 0, 0, 0, 0, c->w / 2, c->h / 2);
-
-  XUngrabPointer(dpy, CurrentTime);
-  while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
-}
-
 void dragmfact(const Arg* arg) {
-  unsigned int n;
-  int py, px;          // pointer coordinates
-  int ax, ay, aw, ah;  // area position, width and height
-  int center = 0, horizontal = 0, mirror = 0,
-      fixed = 0;  // layout configuration
-  double fact;
-  Monitor* m;
-  XEvent ev;
-  Time lasttime = 0;
-
-  m = selmon;
-
-#if VANITYGAPS_PATCH
-  int oh, ov, ih, iv;
-  getgaps(m, &oh, &ov, &ih, &iv, &n);
-#else
-  Client* c;
-  for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-#endif  // VANITYGAPS_PATCH
-
-  ax = m->wx;
-  ay = m->wy;
-  ah = m->wh;
-  aw = m->ww;
-
-  if (!n) return;
-
   /* mfact doesn't apply in monocle (which is now the only layout) */
   return;
-
-  ax = m->wx;
-  ay = m->wy;
-  ah = m->wh;
-  aw = m->ww;
-
-#if VANITYGAPS_PATCH
-  ay += oh;
-  ax += ov;
-  aw -= 2 * ov;
-  ah -= 2 * oh;
-#endif  // VANITYGAPS_PATCH
-
-  if (center) {
-    if (horizontal) {
-      px = ax + aw / 2;
-#if VANITYGAPS_PATCH
-      py = ay + ah / 2 + (ah - 2 * ih) * (m->mfact / 2.0) + ih / 2;
-#else
-      py = ay + ah / 2 + ah * m->mfact / 2.0;
-#endif        // VANITYGAPS_PATCH
-    } else {  // vertical split
-#if VANITYGAPS_PATCH
-      px = ax + aw / 2 + (aw - 2 * iv) * m->mfact / 2.0 + iv / 2;
-#else
-      px = ax + aw / 2 + aw * m->mfact / 2.0;
-#endif  // VANITYGAPS_PATCH
-      py = ay + ah / 2;
-    }
-  } else if (horizontal) {
-    px = ax + aw / 2;
-    if (mirror)
-#if VANITYGAPS_PATCH
-      py = ay + (ah - ih) * (1.0 - m->mfact) + ih / 2;
-#else
-      py = ay + (ah * (1.0 - m->mfact));
-#endif  // VANITYGAPS_PATCH
-    else
-#if VANITYGAPS_PATCH
-      py = ay + ((ah - ih) * m->mfact) + ih / 2;
-#else
-      py = ay + (ah * m->mfact);
-#endif      // VANITYGAPS_PATCH
-  } else {  // vertical split
-    if (mirror)
-#if VANITYGAPS_PATCH
-      px = ax + (aw - iv) * (1.0 - m->mfact) + iv / 2;
-#else
-      px = ax + (aw * m->mfact);
-#endif  // VANITYGAPS_PATCH
-    else
-#if VANITYGAPS_PATCH
-      px = ax + ((aw - iv) * m->mfact) + iv / 2;
-#else
-      px = ax + (aw * m->mfact);
-#endif  // VANITYGAPS_PATCH
-    py = ay + ah / 2;
-  }
-
-  if (XGrabPointer(
-          dpy, root, False, MOUSEMASK, GrabModeAsync, GrabModeAsync, None,
-          cursor[horizontal ? CurResizeVertArrow : CurResizeHorzArrow]->cursor,
-          CurrentTime) != GrabSuccess)
-    return;
-  XWarpPointer(dpy, None, root, 0, 0, 0, 0, px, py);
-
-  do {
-    XMaskEvent(dpy, MOUSEMASK | ExposureMask | SubstructureRedirectMask, &ev);
-    switch (ev.type) {
-      case ConfigureRequest:
-      case Expose:
-      case MapRequest:
-        handler[ev.type](&ev);
-        break;
-      case MotionNotify:
-        if ((ev.xmotion.time - lasttime) <= (1000 / 40)) continue;
-        if (lasttime != 0) {
-          px = ev.xmotion.x;
-          py = ev.xmotion.y;
-        }
-        lasttime = ev.xmotion.time;
-
-#if VANITYGAPS_PATCH
-        if (center)
-          if (horizontal)
-            if (py - ay > ah / 2)
-              fact = (double)1.0 -
-                     (ay + ah - py - ih / 2) * 2 / (double)(ah - 2 * ih);
-            else
-              fact =
-                  (double)1.0 - (py - ay - ih / 2) * 2 / (double)(ah - 2 * ih);
-          else if (px - ax > aw / 2)
-            fact = (double)1.0 -
-                   (ax + aw - px - iv / 2) * 2 / (double)(aw - 2 * iv);
-          else
-            fact = (double)1.0 - (px - ax - iv / 2) * 2 / (double)(aw - 2 * iv);
-        else if (horizontal)
-          fact = (double)(py - ay - ih / 2) / (double)(ah - ih);
-        else
-          fact = (double)(px - ax - iv / 2) / (double)(aw - iv);
-#else
-        if (center)
-          if (horizontal)
-            if (py - ay > ah / 2)
-              fact = (double)1.0 - (ay + ah - py) * 2 / (double)ah;
-            else
-              fact = (double)1.0 - (py - ay) * 2 / (double)ah;
-          else if (px - ax > aw / 2)
-            fact = (double)1.0 - (ax + aw - px) * 2 / (double)aw;
-          else
-            fact = (double)1.0 - (px - ax) * 2 / (double)aw;
-        else if (horizontal)
-          fact = (double)(py - ay) / (double)ah;
-        else
-          fact = (double)(px - ax) / (double)aw;
-#endif  // VANITYGAPS_PATCH
-
-        if (!center && mirror) fact = 1.0 - fact;
-
-        setmfact(&((Arg){.f = 1.0 + fact}));
-        px = ev.xmotion.x;
-        py = ev.xmotion.y;
-        break;
-    }
-  } while (ev.type != ButtonRelease);
-
-  XUngrabPointer(dpy, CurrentTime);
-  while (XCheckMaskEvent(dpy, EnterWindowMask, &ev));
 }
 
 void drawbar(Monitor* m) {
@@ -1813,12 +1574,6 @@ void hide(Client* c) {
   arrange(c->mon);
 }
 
-void incnmaster(const Arg* arg) {
-  selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag] =
-      MAX(selmon->nmaster + arg->i, 0);
-  arrange(selmon);
-}
-
 #ifdef XINERAMA
 static int isuniquegeom(XineramaScreenInfo* unique, size_t n,
                         XineramaScreenInfo* info) {
@@ -1870,7 +1625,6 @@ void manage(Window w, XWindowAttributes* wa) {
   c->w = c->oldw = wa->width;
   c->h = c->oldh = wa->height;
   c->oldbw = wa->border_width;
-  c->cfact = 1.0;
 
   updateicon(c);
   updatetitle(c);
@@ -2620,27 +2374,6 @@ void setfullscreen(Client* c, int fullscreen) {
   }
 }
 
-void setcfact(const Arg* arg) {
-  float f;
-  Client* c;
-
-  c = selmon->sel;
-
-  if (!arg || !c) return;
-  if (!arg->f)
-    f = 1.0;
-  else if (arg->f > 4.0)  // set fact absolutely
-    f = arg->f - 4.0;
-  else
-    f = arg->f + c->cfact;
-  if (f < 0.25)
-    f = 0.25;
-  else if (f > 4.0)
-    f = 4.0;
-  c->cfact = f;
-  arrange(selmon);
-}
-
 /* arg > 1.0 will set mfact absolutely */
 void setmfact(const Arg* arg) {
   /* mfact is not used in monocle layout (now the only layout) */
@@ -2712,8 +2445,6 @@ void setup(void) {
   cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
   cursor[CurResize] = drw_cur_create(drw, XC_sizing);
   cursor[CurMove] = drw_cur_create(drw, XC_fleur);
-  cursor[CurResizeHorzArrow] = drw_cur_create(drw, XC_sb_h_double_arrow);
-  cursor[CurResizeVertArrow] = drw_cur_create(drw, XC_sb_v_double_arrow);
   /* init appearance */
   scheme = ecalloc(LENGTH(colors) + 1, sizeof(Clr*));
   scheme[LENGTH(colors)] = drw_scm_create(drw, colors[0], 3);
@@ -2942,9 +2673,6 @@ void toggleview(const Arg* arg) {
     }
 
     /* apply settings for this view */
-    selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag];
-    selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
-
     if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
       togglebar(NULL);
 
@@ -3421,9 +3149,6 @@ void view(const Arg* arg) {
     selmon->pertag->curtag = tmptag;
   }
 
-  selmon->nmaster = selmon->pertag->nmasters[selmon->pertag->curtag];
-  selmon->mfact = selmon->pertag->mfacts[selmon->pertag->curtag];
-
   if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
     togglebar(NULL);
   focus(NULL);
@@ -3501,14 +3226,6 @@ Monitor* systraytomon(Monitor* m) {
   for (i = 1, t = mons; t && t->next && i < systraypinning; i++, t = t->next);
   if (systraypinningfailfirst && n < systraypinning) return mons;
   return t;
-}
-
-void zoom(const Arg* arg) {
-  Client* c = selmon->sel;
-
-  if (!c || c->isfloating) return;
-  if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next))) return;
-  pop(c);
 }
 
 int main(int argc, char* argv[]) {

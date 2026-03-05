@@ -84,8 +84,6 @@ static const int tagschemes[] = {SchemeTag1, SchemeTag2, SchemeTag3,
                                  SchemeTag2, SchemeTag1, SchemeTag2,
                                  SchemeTag3, SchemeTag1, SchemeTag2};
 
-static const char* rofi[] = {"rofi", "-show", "drun", NULL};
-
 static const unsigned int ulinepad =
     5; /* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke =
@@ -106,8 +104,6 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact = 0.50; /* factor of master area size [0.05..0.95] */
-static const int nmaster = 1;    /* number of clients in master area */
 static const int resizehints =
     0; /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen =
@@ -174,7 +170,6 @@ static const Key keys[] = {
 
     {MODKEY | ControlMask, XK_Left, tagtoprev, {0}},
     {MODKEY | ControlMask, XK_Right, tagtonext, {0}},
-    {MODKEY | ShiftMask, XK_Return, zoom, {0}},
     {MODKEY, XK_Tab, view, {0}},
 
     // overall gaps
@@ -194,7 +189,6 @@ static const Key keys[] = {
  * ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
     /* click event mask button function argument */
-    {ClkWinTitle, 0, Button2, zoom, {0}},
     {ClkStatusText, 0, Button2, spawn, SHCMD("ghostty")},
 
     /* Keep movemouse? */
@@ -214,8 +208,6 @@ static const Button buttons[] = {
     {ClkClientWin, MODKEY, Button1, moveorplace, {.i = 0}},
     {ClkClientWin, MODKEY, Button2, togglefloating, {0}},
     {ClkClientWin, MODKEY, Button3, resizemouse, {0}},
-    {ClkClientWin, ControlMask, Button1, dragmfact, {0}},
-    {ClkClientWin, ControlMask, Button3, dragcfact, {0}},
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
     {ClkTagBar, MODKEY, Button1, tag, {0}},
