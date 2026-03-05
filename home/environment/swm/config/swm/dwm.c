@@ -236,7 +236,6 @@ static void destroynotify(XEvent* e);
 static void detach(Client* c);
 static void detachstack(Client* c);
 static Monitor* dirtomon(int dir);
-static void dragmfact(const Arg* arg);
 static void drawbar(Monitor* m);
 static void drawbars(void);
 static int drawstatusbar(Monitor* m, int bh, char* text);
@@ -1095,11 +1094,6 @@ void tagtoprev(const Arg* arg) {
   tmp = prevtag();
   tag(&(const Arg){.ui = tmp});
   view(&(const Arg){.ui = tmp});
-}
-
-void dragmfact(const Arg* arg) {
-  /* mfact doesn't apply (only one layout) */
-  return;
 }
 
 void drawbar(Monitor* m) {
@@ -2362,12 +2356,6 @@ void setfullscreen(Client* c, int fullscreen) {
     resizeclient(c, c->x, c->y, c->w, c->h);
     arrange(c->mon);
   }
-}
-
-/* arg > 1.0 will set mfact absolutely */
-void setmfact(const Arg* arg) {
-  /* mfact is not used (only one layout) */
-  return;
 }
 
 void setup(void) {
