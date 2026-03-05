@@ -9,8 +9,8 @@
     usbutils
     libimobiledevice
     ifuse
-    # nemo
-    kdePackages.dolphin
+    nemo
+    # kdePackages.dolphin
     sushi
     android-tools
   ];

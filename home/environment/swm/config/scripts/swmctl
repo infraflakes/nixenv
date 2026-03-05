@@ -27,6 +27,9 @@ case "$subcommand" in
         pkill -TERM swm
         exit 0
         ;;
+    launcher)
+        rofi -show drun -theme $HOME/.config/rofi/launcher.rasi
+        ;;
 esac
 
 # Signal the bar to update the UI immediately

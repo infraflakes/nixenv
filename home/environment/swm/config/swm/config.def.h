@@ -150,7 +150,7 @@ static const Key keys[] = {
     // screenshot fullscreen and cropped
     {MODKEY | ALTKEY, XK_s, spawn, SHCMD("flameshot full")},
     {MODKEY | ShiftMask, XK_s, spawn, SHCMD("flameshot gui")},
-    {MODKEY, XK_space, spawn, SHCMD("rofi -show drun")},
+    {MODKEY, XK_space, spawn, SHCMD("swmctl launcher")},
     {MODKEY, XK_Return, spawn, SHCMD("alacritty")},
     {MODKEY, XK_l, spawn, SHCMD("slock")},
     {MODKEY, XK_v, spawn, SHCMD("copyq menu")},
