@@ -262,7 +262,6 @@ static void killclient(const Arg* arg);
 static void manage(Window w, XWindowAttributes* wa);
 static void mappingnotify(XEvent* e);
 static void maprequest(XEvent* e);
-static void monocle(Monitor* m);
 static void motionnotify(XEvent* e);
 static void movemouse(const Arg* arg);
 static void moveorplace(const Arg* arg);
@@ -526,11 +525,43 @@ void arrange(Monitor* m) {
 }
 
 void arrangemon(Monitor* m) {
+  Client* c;
+  unsigned int n = 0;
+  int newx, newy, neww, newh;
+
   updatebarpos(m);
   updatesystray();
   XMoveWindow(dpy, m->tagwin, m->wx + m->gappov, m->by);
-  strncpy(m->ltsymbol, "[M]", sizeof m->ltsymbol);
-  monocle(m);
+
+  /* Count visible windows for the layout symbol */
+  for (c = m->clients; c; c = c->next)
+    if (ISVISIBLE(c)) n++;
+  if (n > 0)
+    snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
+  else
+    strncpy(m->ltsymbol, "[M]", sizeof m->ltsymbol);
+
+  /* Position tab bar - always below status bar */
+  m->ty = m->my + bh;
+  m->wy = m->my + bh + th + m->gappoh;
+  m->wh = m->mh - bh - th - m->gappoh;
+  XMoveResizeWindow(dpy, m->tabwin, m->wx + m->gappov, m->ty,
+                    m->ww - 2 * m->gappov, th);
+
+  /* Arrange all tiled windows in fullscreen style */
+  for (c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
+    newx = m->wx + m->gappov - c->bw;
+    newy = m->wy + m->gappoh - c->bw;
+    neww = m->ww - 2 * (m->gappov + c->bw);
+    newh = m->wh - 2 * (m->gappoh + c->bw);
+
+    applysizehints(c, &newx, &newy, &neww, &newh, 0);
+
+    if (neww < m->ww) newx = m->wx + (m->ww - (neww + 2 * c->bw)) / 2;
+    if (newh < m->wh) newy = m->wy + (m->wh - (newh + 2 * c->bw)) / 2;
+
+    resize(c, newx, newy, neww, newh, 0);
+  }
 }
 
 void attach(Client* c) {
@@ -1067,7 +1098,7 @@ void tagtoprev(const Arg* arg) {
 }
 
 void dragmfact(const Arg* arg) {
-  /* mfact doesn't apply in monocle (which is now the only layout) */
+  /* mfact doesn't apply (only one layout) */
   return;
 }
 
@@ -1719,47 +1750,6 @@ void maprequest(XEvent* e) {
   if (!wintoclient(ev->window)) manage(ev->window, &wa);
 }
 
-void monocle(Monitor* m) {
-  unsigned int n = 0;
-
-  Client* c;
-
-  for (c = m->clients; c; c = c->next)
-    if (ISVISIBLE(c)) n++;
-
-  if (n > 0) /* override layout symbol */
-    snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
-
-  /* Handle tab bar - reserve space at top when windows exist */
-  if (n > 0 && m->showtab != showtab_never) {
-    /* Tab bar at y=bh (below status bar), windows start at y=bh+th+gappoh */
-    m->ty = m->my + bh;
-    m->wy = m->my + bh + th + m->gappoh;
-    m->wh = m->mh - bh - th - m->gappoh;
-    XMoveResizeWindow(dpy, m->tabwin, m->wx + m->gappov, m->ty,
-                      m->ww - 2 * m->gappov, th);
-  } else {
-    m->ty = -th - m->gappoh;
-  }
-
-  int newx, newy, neww, newh;
-
-  for (c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
-    newx = m->wx + m->gappov - c->bw;
-    newy = m->wy + m->gappoh - c->bw;
-    neww = m->ww - 2 * (m->gappov + c->bw);
-    newh = m->wh - 2 * (m->gappoh + c->bw);
-
-    applysizehints(c, &newx, &newy, &neww, &newh, 0);
-
-    if (neww < m->ww) newx = m->wx + (m->ww - (neww + 2 * c->bw)) / 2;
-
-    if (newh < m->wh) newy = m->wy + (m->wh - (newh + 2 * c->bw)) / 2;
-
-    resize(c, newx, newy, neww, newh, 0);
-  }
-}
-
 void motionnotify(XEvent* e) {
   unsigned int i, x;
   static Monitor* mon = NULL;
@@ -2376,7 +2366,7 @@ void setfullscreen(Client* c, int fullscreen) {
 
 /* arg > 1.0 will set mfact absolutely */
 void setmfact(const Arg* arg) {
-  /* mfact is not used in monocle layout (now the only layout) */
+  /* mfact is not used (only one layout) */
   return;
 }
 
