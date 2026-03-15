@@ -31,12 +31,11 @@
     # Home Manager
     homeConfigurations."${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      extraSpecialArgs = {inherit username inputs system;};
+      extraSpecialArgs = {inherit inputs username;};
       modules = [./home/home.nix];
     };
-    # Dev Shell
+    # DevShells
     devShells.${system} = {
-      rs = import ./devshells/rs.nix {inherit pkgs;};
       go = import ./devshells/go.nix {inherit pkgs;};
       js = import ./devshells/js.nix {inherit pkgs;};
       py = import ./devshells/py.nix {inherit pkgs;};

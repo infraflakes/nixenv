@@ -7,38 +7,24 @@
 }: {
   nixpkgs.config.allowUnfree = true;
   home = {
-    username = username;
+    username = "${username}";
     homeDirectory = "/home/${username}";
     stateVersion = "26.05";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
+    sessionPath = [
+      "$HOME/.local/bin"
+      "$HOME/.cargo/bin"
+    ];
     packages = [
-      pkgs.htop
-      pkgs.home-manager
-      pkgs.ncdu
-      pkgs.bottom
-      pkgs.nmap
-      pkgs.lsd
-      pkgs.ripgrep
-      pkgs.bat
-      pkgs.jq
-      pkgs.pulsemixer
-      pkgs.bluetuith
-      pkgs.lm_sensors
       inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
+      pkgs.lsd
     ];
   };
   imports = [
-    ./apps/vcs.nix
-    ./apps/fish.nix
-    ./apps/fastfetch.nix
-    ./apps/nvim.nix
-    ./apps/ghostty.nix
-    ./apps/yazi.nix
-    ./apps/tmux.nix
-    ./apps/container.nix
-    ./apps/fonts.nix
-    ./apps/mpd.nix
-    #./apps/ollama.nix
-    ./apps/misc.nix
+    ./pkg/pkgs.nix
+    ./environment/environment.nix
   ];
 }
