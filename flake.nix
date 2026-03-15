@@ -14,7 +14,7 @@
       url = "github:infraflakes/srn-cd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # xlibre-overlay.url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-for-26.05";
+    srwm.url = "github:infraflakes/srwm";
   };
   outputs = {
     self,

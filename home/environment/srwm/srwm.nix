@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   home.packages = [
@@ -11,5 +12,6 @@
     pkgs.flameshot
     pkgs.xclip
     pkgs.bc
+    inputs.srwm.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
