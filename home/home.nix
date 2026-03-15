@@ -6,6 +6,9 @@
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
+  home.file.".config/nix/nix.conf".text = ''
+    experimental-features = nix-command flakes
+  '';
   home = {
     username = "${username}";
     homeDirectory = "/home/${username}";
@@ -21,6 +24,7 @@
       inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.lsd
+      pkgs.home-manager
     ];
   };
   imports = [
