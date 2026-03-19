@@ -49,5 +49,8 @@
 
     [window]
     decorations = "full"
+    opacity = 0.8
+    # Set to true for macOS or specific KDE Wayland setups
+    blur = true
   '';
 }

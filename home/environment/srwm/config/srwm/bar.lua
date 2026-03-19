@@ -15,7 +15,7 @@ srwm.bar.tab_tile_outer_padding_horizontal(15)
 -- Looks
 srwm.bar.show(true)
 srwm.bar.top(false)
-srwm.bar.tab_top(true)
+srwm.bar.tab_top(false)
 
 -- Set fonts
 srwm.bar.fonts("Terminess Nerd Font:size=16")
