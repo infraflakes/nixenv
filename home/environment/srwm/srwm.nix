@@ -13,5 +13,5 @@
     pkgs.brightnessctl
     #inputs.srwm.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
-  home.file.".config/srwm".source = ./config/srwm;
+  # home.file.".config/srwm".source = ./config/srwm;
 }

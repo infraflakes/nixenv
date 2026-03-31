@@ -9,6 +9,7 @@
     noto-fonts-color-emoji
     nerd-fonts.jetbrains-mono
     nerd-fonts.terminess-ttf
+    nerd-fonts.iosevka
   ];
   fonts.fontconfig.enable = true;
 }

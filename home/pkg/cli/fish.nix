@@ -22,6 +22,7 @@
           source ~/.nix-profile/etc/profile.d/nix.fish
       end
       scd init fish | source
+      source "$HOME/.cargo/env.fish"
       fastfetch
       set username (whoami)
       echo "				Welcome back, $username!"
