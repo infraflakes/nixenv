@@ -15,7 +15,7 @@ include("customs")
 -- srwm.spawn_once("feh --bg-scale ~/wallpaper.jpg")
 -- srwm.spawn_once("nm-applet &")
 
-srwm.workspaces.set_label("1,2,3,4,5,6") -- set workspaces name
+srwm.workspaces.set_label("I,II") -- set workspaces name
 srwm.canvas.edge_autopan(true) -- move the canvas when hovering cursor over border
 -- Appearance
 srwm.cfg.borderpx(0)

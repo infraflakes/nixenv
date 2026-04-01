@@ -14,7 +14,6 @@
       url = "github:infraflakes/srn-cd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    srwm.url = "github:infraflakes/srwm";
   };
   outputs = {
     self,
