@@ -26,6 +26,7 @@
       set-option -g allow-rename off
       set -g detach-on-destroy off
       set -s set-clipboard on
+      set -s escape-time 0
 
       # ----- begin custom no-prefix binds -----
 
