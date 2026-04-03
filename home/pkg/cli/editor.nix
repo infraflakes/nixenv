@@ -9,7 +9,6 @@
       fd
       fzf
       ripgrep
-      gcc
       gnumake
       stylua
       alejandra

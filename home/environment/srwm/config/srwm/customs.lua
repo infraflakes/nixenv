@@ -18,7 +18,7 @@ end)
 
 srwm.key.bind("Mod4", "l", function()
 	srwm.spawn("slock")
-	srwm.spawn("systemctl suspend")
+	-- srwm.spawn("systemctl suspend")
 end)
 
 srwm.key.bind("Mod4", "v", function()

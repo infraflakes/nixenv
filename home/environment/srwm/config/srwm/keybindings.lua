@@ -101,5 +101,5 @@ srwm.key.bind("Mod4", "l", function()
 end)
 
 srwm.key.bind("Mod4", "Return", function()
-	srwm.spawn("alacritty")
+	srwm.spawn("ghostty")
 end)

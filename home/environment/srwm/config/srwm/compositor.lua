@@ -7,7 +7,7 @@ comp.enable()
 comp.vsync(true)
 
 comp.border_blur({
-	enable = true,
+	enable = false,
 	dim = 0.3,
 })
 
