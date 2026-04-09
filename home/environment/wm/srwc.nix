@@ -4,6 +4,7 @@
   lib,
   ...
 }: {
+  home.packages = with pkgs; [xwayland-satellite];
   home.file.".config/srwc/config.toml".text = ''
     # Sloppy focus: keyboard focus follows the pointer to windows.
     # Moving to empty canvas keeps focus; click empty canvas to unfocus.
@@ -11,7 +12,8 @@
 
     autostart = [
          "xwayland-satellite",
-         "fcitx5"
+         "fcitx5",
+         "dms run"
     ]
 
     [env]
@@ -43,7 +45,7 @@
     # natural_scroll = false      # reverse scroll direction
 
     [cursor]
-    theme = "elementary"          # sets XCURSOR_THEME
+    theme = "Bibata-Modern-Ice" # sets XCURSOR_THEME
     size = 24                     # sets XCURSOR_SIZE
     # inactive_opacity = 0.5      # cursor opacity on non-active outputs (0.0–1.0)
 
@@ -93,39 +95,11 @@
     # tile_path = "~/.config/srwc/tile.png"     # tiled image (mutually exclusive with shader)
     shader_path = "~/.config/srwc/wallpapers/pink_cloud.glsl"
 
-    # Keyboard bindings: "Modifier+...+Keysym" = "action [arg]"
-    # Merges with defaults. Use "none" to unbind a default binding.
-    # "mod" expands to mod_key. Literal modifiers: alt, super, ctrl, shift.
-    # Keysyms are XKB names (case-insensitive): return, tab, up, a, equal, etc.
-    #
-    # Actions:
-    #   exec <cmd>              — launch an app (shows loading cursor until window appears, exits fullscreen)
-    #   spawn <cmd>             — run a command without loading cursor and exiting fullscreen (toggles, OSD, screenshots)
-    #   close-window            — close the focused window
-    #   nudge-window <dir>      — move focused window by nudge_step px
-    #   pan-viewport <dir>      — pan camera by pan_step px
-    #   center-window           — center viewport on focused window + reset zoom
-
-    #   center-nearest <dir>    — navigate to nearest window in direction
-    #   cycle-windows forward   — Alt-Tab style window cycling
-    #   cycle-windows backward  — reverse cycle
-    #   home-toggle             — toggle between current position and origin
-    #   zoom-in / zoom-out      — step zoom
-    #   zoom-reset              — zoom to 1.0
-    #   go-to <x> <y>           — jump camera to canvas position (bookmarks, Y-up)
-    #   zoom-to-fit             — fit all windows in viewport
-    #   toggle-fullscreen       — toggle focused window fullscreen
-    #   fit-window              — toggle maximize: centers + resets zoom + fills viewport; restore only resizes back
-    #   reload-config           — hot-reload config file
-    #   quit                    — exit the compositor
-    #   send-to-output <dir>    — move focused window to adjacent output
-    #   none                    — unbind this key combo
-    #
-    # Directions: up, down, left, right, up-left, up-right, down-left, down-right
-
     [keybindings]
-    "mod+return" = "exec ghostty"
-    "mod+space" = "exec rofi -show drun"
+    "mod+shift+r" = "reload-config"
+    "mod+return" = "exec alacritty"
+    "mod+space" = "exec dms ipc call spotlight toggle"
+    "mod+v" = "exec dms ipc call clipboard toggle"
     "mod+escape" = "quit"
     "mod+q" = "close-window"
     "mod+f" = "toggle-fullscreen"
@@ -150,10 +124,6 @@
     "mod+minus" = "zoom-out"
     "mod+r" = "zoom-reset"
     "mod+w" = "zoom-to-fit"
-    # "mod+1" = "go-to -1750 1750"     # top-left bookmark
-    # "mod+2" = "go-to 1750 1750"      # top-right bookmark
-    # "mod+3" = "go-to 1750 -1750"     # bottom-right bookmark
-    # "mod+4" = "go-to -1750 -1750"    # bottom-left bookmark
     # "mod+alt+up" = "send-to-output up"        # move window to output above
     # "mod+alt+down" = "send-to-output down"
     # "mod+alt+left" = "send-to-output left"
@@ -167,130 +137,5 @@
     "XF86MonBrightnessDown" = "spawn brightnessctl set 5%-"
     "mod+shift+s" = "screenshot" # screenshot: open interactive screenshot UI (drag to select, Space/Enter to save, Ctrl+C clipboard only, Escape to cancel, P to hide/show cursor)
     "mod+alt+s" = "screenshot-screen" # screenshot-screen: instant full-screen screenshot to clipboard + disk
-    # Mouse bindings: "Modifier+...+Trigger" = "action"
-    # Context-aware: on-window, on-canvas, anywhere.
-    # Specific context checked first, then "anywhere" as fallback.
-    # Click-to-focus and SSD decoration clicks are always hardcoded.
-    # Triggers: left, right, middle (buttons), trackpad-scroll, wheel-scroll
-    # Merges with defaults. Use "none" to unbind.
-    #
-    # Mouse actions: move-window, resize-window, pan-viewport, zoom, center-nearest
-    # Any keyboard action also works for button triggers: exec, close-window, toggle-fullscreen, etc.
-
-    [mouse.on-window]
-    # "alt+left" = "move-window"
-    # "alt+right" = "resize-window"
-    # "alt+middle" = "fit-window"
-    # "mod+middle" = "toggle-fullscreen"
-
-    [mouse.on-canvas]
-    # "left" = "pan-viewport"            # unmodified left-click on empty canvas → pan
-    # "trackpad-scroll" = "pan-viewport" # trackpad scroll on empty canvas → pan
-    # "wheel-scroll" = "zoom"            # mouse wheel on empty canvas → zoom
-
-    [mouse.anywhere]
-    # "mod+left" = "pan-viewport"
-    # "mod+ctrl+left" = "center-nearest" # direction from drag delta
-    # "mod+trackpad-scroll" = "pan-viewport"
-    # "mod+wheel-scroll" = "zoom"
-
-    # Gesture bindings: "Modifier+N-finger-<type>" = "action"
-    # Context-aware: on-window, on-canvas, anywhere.
-    # Unbound gestures are forwarded to the focused app.
-    # "none" unbinds (prevents anywhere fallback, still forwards).
-    #
-    # Gesture types:
-    #   N-finger-swipe            — continuous OR threshold (action determines behavior)
-    #   N-finger-swipe-up/down/left/right — threshold only, checked before swipe fallback
-    #   3-finger-doubletap-swipe  — continuous OR threshold (3-finger tap then swipe)
-    #   N-finger-pinch            — continuous only (use pinch-in/out for discrete)
-    #   N-finger-pinch-in/out     — threshold only
-    #   N-finger-hold             — threshold only (fires on release)
-    #
-    # Continuous actions: pan-viewport, zoom, move-window, resize-window
-    # Threshold actions: center-nearest, center-window, home-toggle, zoom-to-fit, fit-window, exec <cmd>, etc.
-
-    # Gesture thresholds — tune for your touchpad size.
-    [gestures]
-    # swipe_threshold = 12.0        # px cumulative distance before directional swipe fires
-    # pinch_in_threshold = 0.85     # scale below which pinch-in fires (1.0 = no pinch)
-    # pinch_out_threshold = 1.15    # scale above which pinch-out fires (1.0 = no pinch)
-
-    [gestures.on-window]
-    # "alt+3-finger-swipe" = "resize-window"
-    # "3-finger-doubletap-swipe" = "move-window"
-    # "alt+2-finger-pinch-in" = "fit-window"
-    # "alt+2-finger-pinch-out" = "fit-window"
-    # "alt+3-finger-pinch-in" = "toggle-fullscreen"
-    # "alt+3-finger-pinch-out" = "toggle-fullscreen"
-
-    [gestures.on-canvas]
-    # "2-finger-pinch" = "zoom"
-
-    [gestures.anywhere]
-    # "3-finger-swipe" = "pan-viewport"         # continuous (per-frame dx/dy)
-    # "4-finger-swipe" = "center-nearest"       # threshold (accumulate, detect direction, fire once)
-    # "mod+3-finger-swipe" = "center-nearest"   # mod makes 3-finger swipe navigate too
-    # Per-direction overrides examples (threshold only, checked before swipe fallback):
-    # # "4-finger-swipe-up" = "exec brightnessctl set +5%"
-    # # "4-finger-swipe-down" = "exec brightnessctl set 5%-"
-    # "mod+2-finger-pinch" = "zoom"             # mod overrides app forwarding
-    # "3-finger-pinch" = "zoom"                 # continuous
-    # "4-finger-pinch-in" = "zoom-to-fit"       # threshold
-    # "4-finger-pinch-out" = "home-toggle"      # threshold
-    # "mod+3-finger-pinch-in" = "zoom-to-fit"
-    # "mod+3-finger-pinch-out" = "home-toggle"
-    # "4-finger-hold" = "center-window"         # fires on release
-    # "mod+3-finger-hold" = "center-window"
-
-    # Per-output configuration. Each [[outputs]] entry matches by connector name.
-    # Find connector names with wlr-randr or check srwc logs at startup.
-    # Outputs without a matching entry default to scale 1.0.
-    # Winit backend ignores [[outputs]] entries.
-    #
-    # Examples:
-    # # [[outputs]]
-    name = "eDP-1"           # connector name (required)
-    # # scale = 1.5              # fractional scale (default: 1.0)
-    transform = "normal"     # normal, 90, 180, 270, flipped, flipped-90, flipped-180, flipped-270
-    # # position = "auto"        # "auto" (left-to-right) or [x, y] in layout coords
-    mode = "preferred"       # "preferred", "1920x1080", or "2560x1440@144"
-    # #
-    # # [[outputs]]
-    # # name = "HDMI-A-1"
-    # # scale = 1.0
-    # # mode = "1920x1080@60"
-
-    # Window rules: match windows by app_id and/or title and apply overrides.
-    # At least one of app_id or title is required. Both support * glob.
-    # To find an app's app_id: cat $XDG_RUNTIME_DIR/srwc/state (see "windows=" line)
-    #
-    # Fields:
-    #   app_id     — app_id to match (optional, supports * glob)
-    #   title      — window title to match (optional, supports * glob)
-    #   position   — [x, y] canvas coordinates to place the window
-    #   size       — [width, height] to force window dimensions
-    #   widget      — true: pinned (immovable), below normal windows, excluded from navigation (default: false)
-    #   decoration  — "client" (default), "server", or "none" (borderless)
-    #   blur        — true: blur background behind this window (default: false)
-    #   opacity     — 0.0–1.0: window transparency (default: 1.0, fully opaque)
-    #
-    # Examples:
-    # # [[window_rules]]
-    # # app_id = "my-widget"
-    # # position = [0, 0]
-    # # widget = true
-    # # decoration = "none"
-    #
-    # # Blurred terminal
-    # # [[window_rules]]
-    # # app_id = "Alacritty"
-    # # opacity = 0.85
-    # # blur = true
-    #
-    # # Hide iced/libcosmic utility windows (same app_id as main window)
-    # # [[window_rules]]
-    # # title = "winit window"
-    # # widget = true
   '';
 }

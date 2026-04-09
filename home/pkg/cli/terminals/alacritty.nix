@@ -20,10 +20,10 @@
       # ];
       font = {
         normal = {
-          family = "Terminess Nerd Font";
+          family = "JetBrains Mono Nerd Font";
           style = "Regular";
         };
-        size = 11.3;
+        size = 13;
       };
       terminal.shell = {
         program = "bash";
@@ -43,36 +43,36 @@
 
       colors = {
         primary = {
-          background = "#141415";
-          foreground = "#cdcdcd";
+          background = "#303446";
+          foreground = "#c6d0f5";
         };
         cursor = {
-          text = "#24283b";
-          cursor = "#cdcdcd";
+          text = "#1e1e2e";
+          cursor = "#f5e0dc";
         };
         selection = {
-          text = "#cdcdcd";
-          background = "#283457";
+          text = "#cdd6f4";
+          background = "#45475a";
         };
         normal = {
-          black = "#252530";
-          red = "#d8647e";
-          green = "#7fa563";
-          yellow = "#f3be7c";
-          blue = "#6e94b2";
-          magenta = "#bb9dbd";
-          cyan = "#aeaed1";
-          white = "#cdcdcd";
+          black = "#45475a";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#bac2de";
         };
         bright = {
-          black = "#606079";
-          red = "#e08398";
-          green = "#99b782";
-          yellow = "#f5cb96";
-          blue = "#8ba9c1";
-          magenta = "#c9b1ca";
-          cyan = "#bebeda";
-          white = "#d7d7d7";
+          black = "#585b70";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#a6adc8";
         };
       };
     };

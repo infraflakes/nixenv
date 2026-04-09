@@ -38,7 +38,7 @@
   pkgtheme = whitesur-pkg;
 
   # Cursor
-  cursorname = bibata-classic;
+  cursorname = bibata-ice;
   pkgcursor = bibata-pkg;
 
   # Font

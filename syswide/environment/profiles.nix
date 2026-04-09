@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly.enable = true;
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
@@ -12,6 +12,7 @@
       xdg-desktop-portal-gnome
     ];
     config = {
+      common.default = ["gtk"];
       srwc = {
         default = [
           "gtk"
