@@ -15,6 +15,7 @@
       alejandra
       antigravity
       clang-tools
+      tree-sitter
     ];
     sessionVariables = {
       EDITOR = "nvim";
