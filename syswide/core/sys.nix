@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  grubTheme = builtins.toString ../../home/assets/hollow-grub;
-in {
+{pkgs, ...}: {
   nix.settings = {
     cores = 0;
     max-jobs = "auto";

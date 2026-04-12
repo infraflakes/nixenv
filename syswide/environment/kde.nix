@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   services.power-profiles-daemon.enable = false;
   services.desktopManager.plasma6.enable = true;
   services.orca.enable = false;

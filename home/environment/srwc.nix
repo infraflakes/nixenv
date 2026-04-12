@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  home.packages = with pkgs; [xwayland-satellite];
+{...}: {
   home.file.".config/srwc/config.toml".text = ''
     # Sloppy focus: keyboard focus follows the pointer to windows.
     # Moving to empty canvas keeps focus; click empty canvas to unfocus.
@@ -17,8 +11,6 @@
     ]
 
     [env]
-    # Examples:
-    # # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1"
     MOZ_ENABLE_WAYLAND = "1"
     DISPLAY = ":0"
 
@@ -56,11 +48,6 @@
     # animation_speed = 0.3       # camera lerp factor (higher = faster)
     # nudge_step = 20             # px per nudge-window action (mod-shift-arrow by default)
     # pan_step = 100.0            # px per pan-viewport action (mod-ctrl-arrow by default)
-    # Anchors: canvas points discoverable by center-nearest (4-finger swipe / Mod+Arrow)
-    # even when no window is there. Uses Y-up coordinate system.
-    # anchors = [[0, 0]]
-    # Example with 4 corners:
-    # # anchors = [[0, 0], [-1750, 1750], [1750, 1750], [1750, -1750], [-1750, -1750]]
 
     [navigation.edge_pan]
     # zone = 100.0                # activation zone width (px from viewport edge)
@@ -91,9 +78,8 @@
 
     [background]
     # Examples:
-    # shader_path = "~/.config/srwc/bg.glsl"   # custom GLSL fragment shader
     # tile_path = "~/.config/srwc/tile.png"     # tiled image (mutually exclusive with shader)
-    shader_path = "~/.config/srwc/wallpapers/pink_cloud.glsl"
+    shader_path = "/etc/srwc/wallpapers/dark_sea.glsl"
 
     [keybindings]
     "mod+shift+r" = "reload-config"
@@ -105,7 +91,6 @@
     "mod+f" = "toggle-fullscreen"
     "mod+m" = "fit-window"
     "mod+g" = "center-window"
-    # "mod+a" = "home-toggle"
     "mod+up" = "center-nearest up"
     "mod+down" = "center-nearest down"
     "mod+left" = "center-nearest left"

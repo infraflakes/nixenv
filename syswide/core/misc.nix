@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   #Sys pkgs
   environment.systemPackages = with pkgs; [
     htop

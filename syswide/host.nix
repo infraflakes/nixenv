@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     # System core
     /etc/nixos/hardware-configuration.nix
@@ -14,9 +10,7 @@
     ./environment/user.nix
     ./environment/profiles.nix
     ./environment/srwc.nix
-    # ./environment/xserver.nix
-    # ./environment/gnome.nix
-    # ./environment/cosmic.nix
+    ./environment/dms.nix
 
     # Programs that needs privileges
     # ./runtime/asus.nix

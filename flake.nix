@@ -14,10 +14,6 @@
       url = "github:infraflakes/srn-cd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     srwc = {
       url = "github:infraflakes/srwc";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,7 +25,6 @@
     home-manager,
     srn-coreutils,
     srn-cd,
-    dms,
     srwc,
     ...
   } @ inputs: let

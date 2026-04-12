@@ -1,13 +1,5 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: {
-  imports = [
-    inputs.dms.homeModules.dank-material-shell
-  ];
-  programs.dank-material-shell = {
+{...}: {
+  programs.dms-shell = {
     enable = true;
     systemd = {
       # enable = true; # Systemd service for auto-start
@@ -16,13 +8,6 @@
     enableSystemMonitoring = true; # System monitoring widgets (dgop)
     enableDynamicTheming = true; # Wallpaper-based theming (matugen)
     enableAudioWavelength = true; # Audio visualizer (cava)
-  };
-  #Ikhal
-  xdg.desktopEntries."khal" = {
-    name = "ikhal";
-    exec = "ikhal";
-    terminal = false;
-    type = "Application";
-    noDisplay = true;
+    enableClipboardPaste = true; # needs wtype
   };
 }

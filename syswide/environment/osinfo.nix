@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   environment.etc."os-release".text = ''
     ANSI_COLOR="0;38;2;126;186;228"
     BUG_REPORT_URL="https://github.com/NixOS/nixpkgs/issues"

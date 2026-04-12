@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   # services.displayManager.ly.enable = true;
   xdg.portal = {
     enable = true;

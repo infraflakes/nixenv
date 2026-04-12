@@ -1,11 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
-    ./wm/dms.nix
-    ./wm/srwc.nix
+    ./srwc.nix
 
     ./ui/fonts.nix
     ./ui/theme.nix

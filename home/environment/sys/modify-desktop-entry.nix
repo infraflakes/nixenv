@@ -1,8 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
+  #Ikhal
+  xdg.desktopEntries."khal" = {
+    name = "ikhal";
+    exec = "ikhal";
+    terminal = false;
+    type = "Application";
+    noDisplay = true;
+  };
   #NVIDIA
   xdg.desktopEntries."nvidia-settings" = {
     name = "NVIDIA X Server Settings";

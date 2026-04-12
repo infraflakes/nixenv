@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   services.desktopManager.gnome.enable = true;
   services.udev.packages = [pkgs.gnome-settings-daemon];
   services.gnome.rygel.enable = false;

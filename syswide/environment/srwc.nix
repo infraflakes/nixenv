@@ -1,14 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
-  services.displayManager.sessionPackages = [
-    inputs.srwc.packages.${pkgs.stdenv.hostPlatform.system}.default
+{inputs, ...}: {
+  imports = [
+    inputs.srwc.nixosModules.default
   ];
-  environment.systemPackages = [
-    inputs.srwc.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
+
+  programs.srwc.enable = true;
 }

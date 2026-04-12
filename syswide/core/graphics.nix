@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=0"];
   hardware = {
     graphics = {

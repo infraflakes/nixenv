@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   ####################################################################
   # GTK Themes
   tokyonight = "Tokyonight-Dark";

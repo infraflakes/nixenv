@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home.sessionVariables.SHELL = "${pkgs.zsh}/bin/zsh";
   programs.zsh = {
     enable = true;
