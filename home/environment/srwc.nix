@@ -69,7 +69,7 @@
 
     [background]
     # Examples:
-    shader_path = "/etc/srwc/wallpapers/dot_grid.glsl"
+    shader_path = "/etc/srwc/wallpapers/dark_sea.glsl"
     # wallpaper_path = "~/.config/wallpapers/Nene.jpg"
 
     [keybindings]

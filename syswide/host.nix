@@ -11,6 +11,7 @@
     ./environment/profiles.nix
     ./environment/dms.nix
     ./environment/srwc.nix
+    ./environment/niri.nix
 
     # Programs that needs privileges
     # ./runtime/asus.nix
