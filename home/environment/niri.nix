@@ -146,8 +146,8 @@
             Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
             Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-            Mod+Shift+U         { move-workspace-down; }
-            Mod+Shift+I         { move-workspace-up; }
+            Mod+Alt+Down         { move-workspace-down; }
+            Mod+Alt+Up         { move-workspace-up; }
 
             Mod+F { maximize-column; }
             Mod+Shift+F { fullscreen-window; }
@@ -161,7 +161,6 @@
             Mod+Shift+S { screenshot; }
             Mod+Alt+S { screenshot-screen; }
             Alt+Print { screenshot-window; }
-            Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
         }
   '';
 }
