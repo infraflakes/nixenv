@@ -1,5 +1,4 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [xwayland-satellite];
+{...}: {
   home.file.".config/niri/config.kdl".text = ''
         cursor {
             xcursor-theme "Bibata-Modern-Classic"
