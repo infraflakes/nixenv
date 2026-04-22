@@ -1,11 +1,17 @@
+vim.opt.updatetime = 100
 vim.diagnostic.config {
   virtual_text = {
-    prefix = "●", -- Could be '', '●', '◆'
-    spacing = 2,
+    prefix = "", -- Could be '', '●', '◆'
   },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = " ",
@@ -15,16 +21,13 @@ vim.diagnostic.config {
     },
   },
 }
+-- Floating error message
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focusable = false })
+  end,
+})
 return {
-
-  {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {},
-    dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
-    },
-  },
 
   {
     "folke/todo-comments.nvim",
@@ -33,59 +36,93 @@ return {
     opts = { signs = false },
   },
 
-  { -- Highlight, edit, and navigate code
+  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    branch = "master", -- Explicitly specify master branch
-    lazy = false, -- Important: treesitter doesn't support lazy loading
+    branch = "main",
+    lazy = false,
     config = function()
-      local configs = require "nvim-treesitter.configs"
-      configs.setup {
-        ensure_installed = {
-          "bash",
-          "c",
-          "diff",
-          "html",
-          "lua",
-          "luadoc",
-          "markdown",
-          "markdown_inline",
-          "svelte",
-          "typescript",
-          "go",
-          "yaml",
-          "make",
-          "json",
-          "jsonc",
-          "css",
-          "nix",
-        },
-        auto_install = true,
-        highlight = {
-          enable = true,
-        },
-        indent = {
-          enable = true,
-        },
+      -- Use the new manual install API
+      local ensure_installed = {
+        "bash",
+        "c",
+        "diff",
+        "html",
+        "toml",
+        "lua",
+        "luadoc",
+        "markdown",
+        "markdown_inline",
+        "svelte",
+        "typescript",
+        "go",
+        "yaml",
+        "make",
+        "json",
+        "jsonc",
+        "css",
+        "nix",
       }
+
+      local ts = require "nvim-treesitter"
+      local installed = require("nvim-treesitter.config").get_installed()
+      local to_install = vim
+        .iter(ensure_installed)
+        :filter(function(p)
+          return not vim.tbl_contains(installed, p)
+        end)
+        :totable()
+
+      if #to_install > 0 then
+        ts.install(to_install)
+      end
+
+      -- ENABLE HIGHLIGHTING & INDENT MANUALLY
+      -- This replaces the highlight = { enable = true } block
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          -- Start built-in treesitter highlighting
+          pcall(vim.treesitter.start)
+
+          -- Use the plugin's indent engine
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+    end,
+  },
+
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+
+      local servers = { "rust_analyzer", "nil_ls", "ts_ls", "zls", "svelte" }
+      for _, server in ipairs(servers) do
+        vim.lsp.enable(server)
+      end
     end,
   },
 
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter", -- Lazy load on insert
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp", -- LSP source
+      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer", -- buffer words
       "hrsh7th/cmp-path", -- file paths
-      "L3MON4D3/LuaSnip", -- 3. snippet engine
-      "saadparwaiz1/cmp_luasnip",
     },
     config = function()
       local cmp = require "cmp"
       cmp.setup {
+        -- Use Neovim's native snippet expansion
         snippet = {
           expand = function(args)
-            require("luasnip").lsp_expand(args.body)
+            vim.snippet.expand(args.body)
           end,
         },
         mapping = cmp.mapping.preset.insert {
@@ -93,10 +130,10 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
         },
         sources = cmp.config.sources {
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-          { name = "buffer" },
+          { name = "nvim_lsp", priority = 1000 },
           { name = "path" },
+          -- Only load buffer if LSP isn't providing enough info
+          { name = "buffer", keyword_length = 3 },
         },
       }
     end,
@@ -152,7 +189,7 @@ return {
       require("colorizer").setup {
         filetypes = { "*" }, -- or limit to { "css", "html", "js", etc. }
         user_default_options = {
-          mode = "virtualtext", -- ⬅️ the key setting you missed
+          mode = "virtualtext",
           virtualtext = "󱓻",
           names = false,
           css = true,

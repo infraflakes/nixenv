@@ -1,46 +1,42 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   home.file.".config/alacritty/alacritty.toml".text = ''
     [colors.bright]
-    black = "#606079"
-    blue = "#8ba9c1"
-    cyan = "#bebeda"
-    green = "#99b782"
-    magenta = "#c9b1ca"
-    red = "#e08398"
-    white = "#d7d7d7"
-    yellow = "#f5cb96"
+    black = "#585b70"
+    blue = "#89b4fa"
+    cyan = "#94e2d5"
+    green = "#a6e3a1"
+    magenta = "#f5c2e7"
+    red = "#f38ba8"
+    white = "#a6adc8"
+    yellow = "#f9e2af"
 
     [colors.cursor]
-    cursor = "#cdcdcd"
-    text = "#24283b"
+    cursor = "#f5e0dc"
+    text = "#1e1e2e"
 
     [colors.normal]
-    black = "#252530"
-    blue = "#6e94b2"
-    cyan = "#aeaed1"
-    green = "#7fa563"
-    magenta = "#bb9dbd"
-    red = "#d8647e"
-    white = "#cdcdcd"
-    yellow = "#f3be7c"
+    black = "#45475a"
+    blue = "#89b4fa"
+    cyan = "#94e2d5"
+    green = "#a6e3a1"
+    magenta = "#f5c2e7"
+    red = "#f38ba8"
+    white = "#bac2de"
+    yellow = "#f9e2af"
 
     [colors.primary]
-    background = "#141415"
-    foreground = "#cdcdcd"
+    background = "#303446"
+    foreground = "#c6d0f5"
 
     [colors.selection]
-    background = "#283457"
-    text = "#cdcdcd"
+    background = "#45475a"
+    text = "#cdd6f4"
 
     [font]
-    size = 11.3
+    size = 13
 
     [font.normal]
-    family = "Terminess Nerd Font"
+    family = "JetBrains Mono Nerd Font"
     style = "Regular"
 
     [terminal.shell]
@@ -49,8 +45,6 @@
 
     [window]
     decorations = "full"
-    opacity = 0.8
-    # Set to true for macOS or specific KDE Wayland setups
-    blur = true
+
   '';
 }

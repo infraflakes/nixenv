@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     # CLI
     # ./cli/ai.nix
@@ -16,5 +12,8 @@
     ./cli/tmux.nix
     ./cli/vcs.nix
     ./modify-desktop-entry.nix
+
+    ./media/multimedia.nix
+    ./media/others.nix
   ];
 }

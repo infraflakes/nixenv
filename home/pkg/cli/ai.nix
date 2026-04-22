@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   nvidia = "cuda";
   amd = "rocm";
 in {

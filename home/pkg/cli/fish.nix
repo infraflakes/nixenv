@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.sessionVariables.SHELL = "${pkgs.fish}/bin/fish";
   programs.fish = {
     enable = true;
@@ -15,7 +11,6 @@
       se = "doas -E -s nvim";
       e = "nvim";
       ls = "lsd -l";
-      nvidia-gpu = "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
     };
     interactiveShellInit = ''
       if test -e ~/.nix-profile/etc/profile.d/nix.fish

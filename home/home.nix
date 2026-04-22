@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   username,
@@ -22,7 +21,7 @@
     ];
     packages = [
       inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
+      inputs.scd.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.lsd
       pkgs.home-manager
       pkgs.bottom

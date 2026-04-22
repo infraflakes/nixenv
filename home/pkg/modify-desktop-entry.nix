@@ -1,39 +1,35 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   # Helium Browser
-  xdg.desktopEntries."helium" = {
-    name = "Helium";
-    genericName = "Web Browser";
-    comment = "Lightweight web browser";
-    exec = "helium %u";
-    terminal = false;
-    type = "Application";
-    icon = "helium";
-    categories = ["Network" "WebBrowser"];
-    startupNotify = true;
-    mimeType = [
-      "text/html"
-      "text/xml"
-      "application/xhtml+xml"
-      "application/xml"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-    ];
-    actions = {
-      "NewWindow" = {
-        name = "Open New Windows";
-        exec = "helium --new-window";
-      };
-      "PrivateWindow" = {
-        name = "Open in Private Mode";
-        exec = "helium --private";
-      };
-    };
-    noDisplay = false;
-  };
+  # xdg.desktopEntries."helium" = {
+  #   name = "Helium";
+  #   genericName = "Web Browser";
+  #   comment = "Lightweight web browser";
+  #   exec = "helium %u";
+  #   terminal = false;
+  #   type = "Application";
+  #   icon = "helium";
+  #   categories = ["Network" "WebBrowser"];
+  #   startupNotify = true;
+  #   mimeType = [
+  #     "text/html"
+  #     "text/xml"
+  #     "application/xhtml+xml"
+  #     "application/xml"
+  #     "x-scheme-handler/http"
+  #     "x-scheme-handler/https"
+  #   ];
+  #   actions = {
+  #     "NewWindow" = {
+  #       name = "Open New Windows";
+  #       exec = "helium --new-window";
+  #     };
+  #     "PrivateWindow" = {
+  #       name = "Open in Private Mode";
+  #       exec = "helium --private";
+  #     };
+  #   };
+  #   noDisplay = false;
+  # };
 
   #NVIDIA
   xdg.desktopEntries."nvidia-settings" = {
