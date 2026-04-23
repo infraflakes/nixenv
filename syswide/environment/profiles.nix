@@ -1,5 +1,8 @@
 {pkgs, ...}: {
-  # services.displayManager.ly.enable = true;
+  services.displayManager = {
+    # ly.enable = true;
+    gdm.enable = true;
+  };
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [

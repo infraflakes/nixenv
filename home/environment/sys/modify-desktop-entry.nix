@@ -1,4 +1,8 @@
 {...}: {
+  xdg.desktopEntries."org.freedesktop.IBus.Setup" = {
+    name = "IBus Preferences";
+    noDisplay = true;
+  };
   #Ikhal
   xdg.desktopEntries."khal" = {
     name = "ikhal";

@@ -10,8 +10,9 @@
     ./environment/user.nix
     ./environment/profiles.nix
     ./environment/dms.nix
-    ./environment/srwc.nix
+    # ./environment/srwc.nix
     ./environment/niri.nix
+    ./environment/gnome.nix
 
     # Programs that needs privileges
     # ./runtime/asus.nix
