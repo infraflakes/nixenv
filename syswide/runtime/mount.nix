@@ -13,7 +13,7 @@
     sushi
     android-tools
   ];
-  services.gvfs.enable = true;
+  # services.gvfs.enable = true;
   services.usbmuxd = {
     enable = true;
     package = pkgs.usbmuxd2;
