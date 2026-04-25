@@ -11,6 +11,7 @@
     ./cli/starship.nix
     ./cli/tmux.nix
     ./cli/vcs.nix
+    ./cli/container.nix
     ./modify-desktop-entry.nix
 
     ./media/multimedia.nix
