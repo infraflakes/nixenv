@@ -9,10 +9,10 @@
     ./cli/fastfetch.nix
     ./cli/fish.nix
     ./cli/starship.nix
-    ./cli/tmux.nix
     ./cli/vcs.nix
     ./cli/container.nix
     ./modify-desktop-entry.nix
+    ./cli/zellij.nix
 
     ./media/multimedia.nix
     ./media/others.nix
