@@ -1,4 +1,9 @@
-{...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  home.packages = [inputs.sro.packages.${pkgs.stdenv.hostPlatform.system}.default];
   home.file.".config/sro/config.sro".text = ''
     shell = `bash`;
     var shell workdir = `echo $HOME/dev`;

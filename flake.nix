@@ -14,10 +14,14 @@
       url = "github:infraflakes/scd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    srwc = {
-      url = "github:infraflakes/srwc";
+    sro = {
+      url = "github:infraflakes/sro";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # srwc = {
+    #   url = "github:infraflakes/srwc";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
   outputs = {
     self,
@@ -25,7 +29,8 @@
     home-manager,
     srn-coreutils,
     scd,
-    srwc,
+    sro,
+    # srwc,
     ...
   } @ inputs: let
     system = "x86_64-linux";
