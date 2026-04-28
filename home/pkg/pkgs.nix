@@ -8,7 +8,8 @@
     ./cli/fastfetch.nix
     ./cli/fish.nix
     ./cli/starship.nix
-    ./cli/tmux.nix
+    ./cli/zellij.nix
+    ./cli/sro.nix
     ./cli/vcs.nix
     # ./cli/ai.nix
 

@@ -39,6 +39,7 @@
     networkmanager.enable = true;
     nameservers = ["8.8.8.8" "1.1.1.1"];
   };
+  services.tailscale.enable = true;
   programs.dconf.enable = true;
   services.dbus.packages = [pkgs.gsettings-desktop-schemas];
 }
