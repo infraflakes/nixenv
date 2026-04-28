@@ -1,6 +1,6 @@
 {...}: {
   imports = [
-    ./modify-desktop-entry.nix
+    # ./modify-desktop-entry.nix
     # CLI
     # ./cli/ai.nix
     ./cli/editor.nix

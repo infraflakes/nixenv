@@ -5,14 +5,21 @@
     sanctuary = $workdir;
 
     pr sro {
-      url = `https://github.com/infraflakes/sro.git`;
+      url = `git@github.com:infraflakes/sro.git`;
       dir = `sro`;
       sync = `clone`;
       use = `.sro/main.sro`;
     }
 
+    pr portfolio {
+      url = `git@github.com:infraflakes/infraflakes.github.io.git`;
+      dir = `portfolio`;
+      sync = `clone`;
+      use = `.sro/main.sro`;
+    }
+
     pr srwc {
-      url = `https://github.com/infraflakes/srwc.git`;
+      url = `git@github.com:infraflakes/srwc.git`;
       dir = `srwc`;
       sync = `ignore`;
       use = `.sro/main.sro`;
