@@ -15,8 +15,10 @@
     ripgrep
     bat
     jq
+    lsof
+    net-tools
     inputs.srn-coreutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.srn-cd.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.scd.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   programs.neovim = {
     enable = true;

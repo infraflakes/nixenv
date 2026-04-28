@@ -13,7 +13,7 @@
     ./core/networking.nix
     ./core/fs.nix
 
-    # ./pkgs/podman.nix
+    ./pkgs/tailscale.nix
     ./pkgs/docker.nix
     ./pkgs/tmux.nix
     ./pkgs/tools.nix
