@@ -2,6 +2,10 @@
   description = "Personal flake for servers";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     srn-coreutils = {
       url = "github:infraflakes/srn-coreutils";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +18,7 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     srn-coreutils,
     scd,
     ...
@@ -27,6 +32,12 @@
     nixosConfigurations.serein = nixpkgs.lib.nixosSystem {
       specialArgs = {inherit inputs username system;};
       modules = [./syswide/host.nix];
+    };
+    # Home Manager
+    homeConfigurations."${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+      extraSpecialArgs = {inherit inputs username;};
+      modules = [./home/home.nix];
     };
   };
 }

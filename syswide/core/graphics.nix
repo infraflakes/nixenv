@@ -1,12 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    ffmpeg-headless # No-GUI version of ffmpeg
-    ffmpegthumbnailer # Specifically for generating cloud/file manager thumbs
     libva-utils # Includes 'vainfo' to test if this is working
   ];
   hardware.graphics = {

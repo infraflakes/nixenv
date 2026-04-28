@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   imports = [
     # System core
     /etc/nixos/hardware-configuration.nix
@@ -11,14 +7,10 @@
     ./core/misc.nix
     ./core/user.nix
     ./core/networking.nix
-    ./core/fs.nix
 
-    ./pkgs/tailscale.nix
-    ./pkgs/docker.nix
-    ./pkgs/tmux.nix
-    ./pkgs/tools.nix
-    ./pkgs/vcs.nix
-    ./pkgs/nextcloud.nix
-    ./pkgs/immich.nix
+    ./core/fs/fs.nix
+    ./core/fs/docker.nix
+    ./core/fs/nextcloud.nix
+    ./core/fs/immich.nix
   ];
 }

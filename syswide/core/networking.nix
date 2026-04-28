@@ -1,10 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{...}: {
   # DNS
+  services.tailscale.enable = true;
   networking = {
     hostName = "serein";
     networkmanager.enable = true;

@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: {
+{...}: {
   nix.settings = {
     cores = 0;
     max-jobs = "auto";
