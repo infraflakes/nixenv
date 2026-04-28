@@ -5,8 +5,8 @@
     ani-cli
     ffmpeg
     music-discord-rpc
-    easytag
-    nicotine-plus
+    # easytag
+    # nicotine-plus
     yt-dlp
     rmpc
     mpc

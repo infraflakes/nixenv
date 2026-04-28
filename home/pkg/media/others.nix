@@ -3,7 +3,7 @@
     # zoom-us
     vesktop
     firefox
-    obsidian
+    # obsidian
     proton-vpn
   ];
 }

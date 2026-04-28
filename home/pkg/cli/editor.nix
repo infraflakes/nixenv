@@ -9,6 +9,7 @@
       stylua
       alejandra
       antigravity
+      windsurf
       clang-tools
       tree-sitter
 
