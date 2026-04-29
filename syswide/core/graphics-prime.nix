@@ -3,6 +3,7 @@
   pkgs,
   ...
 }: {
+  services.xserver.videoDrivers = ["nvidia"];
   boot.kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=0"];
   environment.variables = {
     #LIBVA_DRIVER_NAME = "iHD";

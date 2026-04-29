@@ -21,9 +21,6 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     #gamescopeSession.enable = true;
   };
-  # programs.steam.package = pkgs.steam.override {
-  #   extraArgs = "-system-composer";
-  # };
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "steam"
