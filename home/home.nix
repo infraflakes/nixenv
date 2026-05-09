@@ -34,7 +34,15 @@
     ];
   };
   imports = [
-    ./pkg/pkgs.nix
-    ./environment/environment.nix
+    # ./pkgs/ai.nix
+    ./pkgs/editor.nix
+    ./pkgs/file-manager.nix
+    ./pkgs/fastfetch.nix
+    ./pkgs/fish.nix
+    ./pkgs/starship.nix
+    ./pkgs/vcs.nix
+    ./pkgs/container.nix
+    ./pkgs/sro.nix
+    ./pkgs/zellij.nix
   ];
 }

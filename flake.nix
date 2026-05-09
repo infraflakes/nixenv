@@ -14,6 +14,10 @@
       url = "github:infraflakes/scd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sro = {
+      url = "github:infraflakes/sro";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,
@@ -21,6 +25,7 @@
     home-manager,
     srn-coreutils,
     scd,
+    sro,
     ...
   } @ inputs: let
     system = "x86_64-linux";
