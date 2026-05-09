@@ -38,53 +38,47 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
     branch = "main",
     lazy = false,
     config = function()
-      -- Use the new manual install API
+      -- We stop trying to use require("nvim-treesitter") as a manager.
+      -- Instead, we use the Neovim command-line interface which is more stable.
+
       local ensure_installed = {
         "bash",
         "c",
-        "diff",
-        "html",
-        "toml",
         "lua",
-        "luadoc",
-        "markdown",
-        "markdown_inline",
+        "nix",
+        "go",
+        "rust",
         "svelte",
         "typescript",
-        "go",
-        "yaml",
-        "make",
-        "json",
-        "css",
-        "nix",
+        "markdown",
       }
 
-      local ts = require "nvim-treesitter"
-      local installed = require("nvim-treesitter.config").get_installed()
-      local to_install = vim
-        .iter(ensure_installed)
-        :filter(function(p)
-          return not vim.tbl_contains(installed, p)
-        end)
-        :totable()
+      -- Use the Vim command instead of the Lua API
+      -- This is much more resilient to the plugin's internal refactors
+      vim.defer_fn(function()
+        for _, parser in ipairs(ensure_installed) do
+          -- Check if the parser is actually loadable by the core engine
+          local ok = pcall(vim.treesitter.query.get, parser, "highlights")
+          if not ok then
+            vim.cmd("TSInstallSync " .. parser)
+          end
+        end
+      end, 100)
 
-      if #to_install > 0 then
-        ts.install(to_install)
-      end
-
-      -- ENABLE HIGHLIGHTING & INDENT MANUALLY
-      -- This replaces the highlight = { enable = true } block
+      -- The 0.12 "Standard" for Highlighting
       vim.api.nvim_create_autocmd("FileType", {
         callback = function()
-          -- Start built-in treesitter highlighting
+          -- Use the native Neovim engine directly
           pcall(vim.treesitter.start)
 
-          -- Use the plugin's indent engine
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          -- Indent is the ONLY thing we still need from the plugin
+          -- We wrap it in a pcall so your editor doesn't crash if the plugin is missing
+          pcall(function()
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end)
         end,
       })
     end,
