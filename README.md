@@ -3,5 +3,5 @@
 ### CAUTION!
 
 - Make sure you still have hardware-configuration.nix in /etc/nixos!
-
+idk
 ---
