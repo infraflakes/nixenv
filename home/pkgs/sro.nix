@@ -24,7 +24,7 @@
     }
 
     pr portfolio {
-      url = `forgejo@nix-server:infraflakes/infraflakes-github-io.git`;
+      url = `forgejo@nix-server:infraflakes/infraflakes.github.io.git`;
       dir = `portfolio`;
       sync = `clone`;
       use = `.sro/main.sro`;
