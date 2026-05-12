@@ -1,4 +1,8 @@
-{...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   services.forgejo = {
     enable = true;
     stateDir = "/data/forgejo";
@@ -14,7 +18,9 @@
         DOMAIN = "nix-server";
         ROOT_URL = "http://nix-server:3000/";
         HTTP_PORT = 3000;
+        SSH_PORT = lib.head config.services.openssh.ports;
       };
+      service.DISABLE_REGISTRATION = true;
 
       repository = {
         ENABLE_PUSH_CREATE_USER = true;
