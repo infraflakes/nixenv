@@ -8,10 +8,8 @@
     ./core/user.nix
     ./core/networking.nix
     ./pkgs/docker.nix
-    ./pkgs/forgejo.nix
 
     ./core/fs/fs.nix
-    ./core/fs/forgejo.nix
     ./core/fs/nextcloud.nix
     ./core/fs/immich.nix
   ];
