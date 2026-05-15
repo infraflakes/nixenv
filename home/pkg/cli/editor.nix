@@ -8,8 +8,8 @@
       gnumake
       stylua
       alejandra
-      antigravity
-      windsurf
+      #antigravity
+      #windsurf
       clang-tools
       tree-sitter
 

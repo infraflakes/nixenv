@@ -4,7 +4,7 @@
     # ./niri.nix
 
     ./ui/fonts.nix
-    ./ui/theme.nix
+    # ./ui/theme.nix
     ./ui/wallpapers.nix
 
     ./sys/autostart.nix
