@@ -86,6 +86,7 @@
         "Mod4+alt+s" = "exec ${./scripts/scrshot} --now";
         "Mod4+shift+a" = "exec ${./scripts/scrshot} --window";
         "Mod4+v" = "exec ${./scripts/clip}";
+        "Mod4+shift+r" = "exec ${./scripts/record}";
 
         "Mod4+Left" = "focus left";
         "Mod4+Right" = "focus right";

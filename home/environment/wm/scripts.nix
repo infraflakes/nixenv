@@ -6,6 +6,7 @@
     swappy
     brightnessctl
     wl-clipboard
+    wf-recorder
   ];
   services.cliphist = {
     enable = true;
