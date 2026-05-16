@@ -34,6 +34,12 @@
           bg = "${../ui/config/wallpapers/nixgirl.png} fill";
         };
       };
+      input = {
+        "type:touchpad" = {
+          tap = "enabled";
+          natural_scroll = "enabled";
+        };
+      };
       bars = [];
       fonts = {
         names = ["JetBrainsMono Nerd Font"];
@@ -53,7 +59,7 @@
         unfocused = {
           border = "#1e1e2e";
           background = "#181825"; # Deep obsidian gray for background tabs
-          text = "#6c7086"; # Muted ash gray text so it doesn't distract you~
+          text = "#6c7086"; # Muted ash gray text so it doesn't distract
           indicator = "#181825";
           childBorder = "#181825";
         };
@@ -61,15 +67,13 @@
 
       # Standard clean override mapping
       keybindings = {
-        "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
-        "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
+        "XF86MonBrightnessUp" = "exec ${./scripts/bright} up";
+        "XF86MonBrightnessDown" = "exec ${./scripts/bright} down";
 
-        # 2. Audio Volume Control (via wireplumber wpctl)
-        "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"; # Caps maximum hardware volume at 100%~
-        "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-        "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        "XF86AudioRaiseVolume" = "exec ${./scripts/volume} up";
+        "XF86AudioLowerVolume" = "exec ${./scripts/volume} down";
+        "XF86AudioMute" = "exec ${./scripts/volume} mute";
 
-        # 3. Microphone Control
         "XF86AudioMicMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
 
         "Mod4+Return" = "exec ${pkgs.ghostty}/bin/ghostty";
@@ -78,6 +82,10 @@
         "Mod4+Backspace" = "exec ${pkgs.sway}/bin/swaynag -t warning -m 'Exit Sway?' -B 'Yes' 'swaymsg exit'";
         "Mod4+f" = "fullscreen enable";
         "Mod4+l" = "exec ${pkgs.swaylock}/bin/swaylock";
+        "Mod4+shift+s" = "exec ${./scripts/scrshot} --swappy";
+        "Mod4+alt+s" = "exec ${./scripts/scrshot} --now";
+        "Mod4+shift+a" = "exec ${./scripts/scrshot} --window";
+        "Mod4+v" = "exec ${./scripts/clip}";
 
         "Mod4+Left" = "focus left";
         "Mod4+Right" = "focus right";

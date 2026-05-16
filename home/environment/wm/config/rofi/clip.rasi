@@ -1,0 +1,9 @@
+@import "~/.config/rofi/config.rasi"
+entry {
+  width: 30%;
+  placeholder: "        CTRL+Del to wipe one entry     SUPER+Del to wipe all entry";
+}
+listview {
+  columns: 2;
+  lines: 8;
+}

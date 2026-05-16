@@ -5,6 +5,7 @@
     ./wm/mako.nix
     ./wm/rofi.nix
     ./wm/waybar.nix
+    ./wm/scripts.nix
 
     ./ui/fonts.nix
     ./ui/theme.nix

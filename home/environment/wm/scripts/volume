@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+function get_volume {
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print int($2 * 100) }'
+}
+
+function send_notification {
+    volume=$(get_volume)
+    volume=${volume:-0}  # Default to 0 if empty
+    notify-send "Volume $volume%" -t 2000 -h int:value:"$volume" -h string:x-canonical-private-synchronous:volume_notif
+}
+
+case $1 in
+    up)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+
+        send_notification
+        ;;
+
+    down)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-
+        send_notification
+        ;;
+
+    mute)
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+        if wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q MUTED; then
+            notify-send "Muted" -t 2000 -h string:x-canonical-private-synchronous:volume_notif
+        else
+            send_notification
+        fi
+        ;;
+esac
