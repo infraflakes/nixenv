@@ -1,0 +1,11 @@
+{
+  "custom/logo": {
+    "format": " ",
+    "on-click": "exec rofi -show drun"
+  },
+  "custom/powermenu": {
+    "format": "⏻",
+    "on-click": "exec ~/.local/bin/scripts/powermenu",
+    "tooltip": false
+  }
+}

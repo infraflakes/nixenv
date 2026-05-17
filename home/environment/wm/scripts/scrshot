@@ -11,7 +11,7 @@ mkdir -p "$DIR"
 
 notify_view() {
     if [[ -f "$FILE" ]]; then
-        $NOTIFY_CMD "Screenshot Saved" "$FILE"
+        $NOTIFY_CMD "Screenshot Taken" "$FILE"
     else
         $NOTIFY_CMD "Screenshot Failed" "File was not saved."
     fi

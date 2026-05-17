@@ -1,0 +1,35 @@
+{
+  "bluetooth": {
+    "format": "",
+    "format-connected": "󰂱",
+    "format-disabled": "󰂲",
+    "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+    "rotate": 0,
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-connected": "{device_enumerate}"
+  },
+  "network": {
+    "format-alt": "  {essid}\n {bandwidthDownBytes:<1}\n {bandwidthUpBytes:<1}",
+    "format-disconnected": "󰖪 ",
+    "format-ethernet": "󰈀 ",
+    "format-linked": "󰈀 {ifname} (No IP)",
+    "format-wifi": " ",
+    "interval": 1,
+    "rotate": 0,
+    "tooltip": true,
+    "tooltip-format": "<span foreground='#86afef'>  {essid}:\n {bandwidthDownBytes}</span>\n<span foreground='#86afef'> {bandwidthUpBytes}</span>"
+  },
+  "battery": {
+    "interval": 180,
+    "format": " {icon}\n{capacity}%",
+    "format-alt": "{time} {icon}",
+    "format-charging": " \n{capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁"],
+    "format-plugged": " \n{capacity}%",
+    "states": {
+      "critical": 20,
+      "good": 95,
+      "warning": 30
+    }
+  }
+}

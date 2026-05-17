@@ -1,0 +1,102 @@
+{
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+    "min-length": 6,
+    "on-scroll-down": "brightnessctl set 1%-",
+    "on-scroll-up": "brightnessctl set 1%+",
+    "rotate": 0
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "interval": 1,
+    "rotate": 0
+  },
+  "custom/cpuicon": {
+    "format": "CPU"
+  },
+
+  "custom/memicon": {
+    "format": "RAM"
+  },
+  "memory": {
+    "format": " {used}GB",
+    "interval": 1,
+    "max-length": 8,
+    "min-length": 8,
+    "rotate": 0,
+    "tooltip": true,
+    "tooltip-format": "󰾆 {percentage}%\n {used:0.1f}GB/{total:0.1f}GB"
+  },
+
+  "pulseaudio": {
+    "format": " {volume}%",
+    "on-click": "pavucontrol -t 3",
+    "rotate": 0,
+    "scroll-step": 5,
+    "tooltip-format": "{icon} {desc} // {volume}%"
+  },
+  "custom/volumeicon": {
+    "format": "Volume"
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "on-click": "pavucontrol -t 4",
+    "rotate": 0,
+    "scroll-step": 5,
+    "tooltip-format": "{format_source} {source_volume}%"
+  },
+  "temperature": {
+    "critical-threshold": 89,
+    "format": " {temperatureC}°C",
+    "format-critical": "!!{temperatureC}°C!!",
+    "hwmon-path": [
+      "/sys/class/thermal/thermal_zone3/temp",
+      "/sys/class/thermal/thermal_zone5/temp"
+    ],
+    "interval": 1,
+    "tooltip": true
+  },
+  "custom/tempicon": {
+    "format": "󰈸"
+  },
+
+  "custom/batext": {
+    "exec": "cat /sys/class/power_supply/BAT0/capacity",
+    "return-type": "text",
+    "format": " {}%",
+    "interval": 30
+  },
+
+  "battery": {
+    "format": "{icon}",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁"]
+  },
+
+  "bluetooth": {
+    "format": "",
+    "format-connected": "󰂱",
+    "format-disabled": "󰂲",
+    "format-icons": ["󰥇", "󰤾", "󰤿", "󰥀", "󰥁", "󰥂", "󰥃", "󰥄", "󰥅", "󰥆", "󰥈"],
+    "rotate": 0,
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-connected": "{device_enumerate}"
+  },
+  "network": {
+    "format-alt": " {essid}  {bandwidthDownBytes:<1}  {bandwidthUpBytes:<1}",
+    "format-disconnected": " 󰖪 ",
+    "format-ethernet": "󰈀 ",
+    "format-linked": "󰈀 {ifname} (No IP)",
+    "format-wifi": " {essid}",
+    "interval": 1,
+    "rotate": 0,
+    "tooltip": true,
+    "tooltip-format": "<span foreground='#86afef'>  {essid}:\n {bandwidthDownBytes}</span>\n<span foreground='#86afef'> {bandwidthUpBytes}</span>"
+  },
+  "custom/networkicon": {
+    "format": " "
+  }
+}

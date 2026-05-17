@@ -11,7 +11,6 @@
     ./environment/user.nix
     ./environment/profiles.nix
     # ./environment/DE/kde.nix
-    ./environment/WM/sway.nix
 
     # Programs that needs privileges
     # ./runtime/asus.nix

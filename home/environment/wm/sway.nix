@@ -14,8 +14,8 @@
 
   wayland.windowManager.sway = {
     enable = true;
-    package = pkgs.sway;
     wrapperFeatures.gtk = true;
+    systemd.enable = true;
 
     # lspci | grep -i vga
     extraSessionCommands = ''
@@ -26,13 +26,7 @@
     extraConfig = ''
       # title_align center
       # for_window [title=".*"] move position center
-      # Use Super (Mod4) as the modifier for moving and resizing windows
-      floating_modifier Mod4 normal
-      client.focused #25292E #25292E #C9D1C9 #39C5CF #25292E
-      client.focused_inactive #161B22 #161B22 #C9D1C9 #39C5CF #FFFFFF00
-      client.unfocused #161B22 #161B22 #C9D1C9 #39C5CF #FFFFFF00
-      client.urgent #F85149 #0D1115 #C9D1C9 #EBEBF5 #F85149
-      client.placeholder      #000000 #0C0C0C $foreground #000000   #0C0C0C
+      floating_modifier Mod4 normal # Use Super (Mod4) as the modifier for moving and resizing windows
       titlebar_padding 10 8
       for_window [app_id="firefox"] border pixel 0
       for_window [app_id="chromium"] border pixel 0
@@ -41,7 +35,7 @@
       output = {
         "*" = {
           # scale = "1.25";
-          bg = "${../ui/config/wallpapers/wave.png} fill";
+          bg = "${../ui/config/wallpapers/nixgirl.png} fill";
         };
       };
       input = {
@@ -75,19 +69,37 @@
         style = "SemiBold";
         size = 12.0;
       };
+      colors = {
+        focused = {
+          background = "#86AFEF";
+          border = "#86AFEF";
+          childBorder = "#86AFEF";
+          text = "#1E1B25";
+          indicator = "#39C5CF";
+        };
+        focusedInactive = {
+          background = "#1E1B25";
+          border = "#1E1B25";
+          text = "#C9D1C9";
+          indicator = "#39C5CF";
+          childBorder = "#FFFFFF00";
+        };
+        unfocused = {
+          background = "#1E1B25";
+          border = "#1E1B25";
+          text = "#C9D1C9";
+          indicator = "#39C5CF";
+          childBorder = "#FFFFFF00";
+        };
+      };
       startup = [
-        # Launch a status bar (like Waybar) on startup and reload
         {
           command = "${pkgs.waybar}/bin/waybar";
           always = false;
         }
         {
           command = "${pkgs.mako}/bin/mako";
-          always = false;
-        }
-        {
-          command = "${pkgs.fcitx5}/bin/fcitx5";
-          always = false;
+          always = true;
         }
 
         # idle daemon (locking the screen, turning off display)
@@ -125,12 +137,16 @@
         "Mod4+alt+s" = "exec ${./scripts/scrshot} --now";
         "Mod4+shift+a" = "exec ${./scripts/scrshot} --window";
         "Mod4+v" = "exec ${./scripts/clip}";
-        "Mod4+shift+r" = "exec ${./scripts/record}";
 
-        "Mod4+Right" = "workspace next";
-        "Mod4+Left" = "workspace prev";
-        "Mod4+Up" = "focus right";
-        "Mod4+Down" = "focus left";
+        "Mod4+Down" = "workspace next";
+        "Mod4+Up" = "workspace prev";
+        "Mod4+Right" = "focus right";
+        "Mod4+Left" = "focus left";
+
+        "Mod4+Shift+Left" = "resize grow width 10 px or 10 ppt";
+        "Mod4+Shift+Right" = "resize shrink width 10 px or 10 ppt";
+        "Mod4+Shift+Up" = "resize grow height 10 px or 10 ppt";
+        "Mod4+Shift+Down" = "resize shrink height 10 px or 10 ppt";
 
         "Mod4+1" = "workspace number 1";
         "Mod4+2" = "workspace number 2";

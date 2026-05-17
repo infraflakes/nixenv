@@ -10,6 +10,7 @@
       alejandra
       #antigravity
       #windsurf
+      opencode
       clang-tools
       tree-sitter
 
@@ -32,5 +33,5 @@
     vimAlias = true;
   };
 
-  home.file.".config/nvim".source = ./config/srnvim;
+  xdg.configFile."nvim".source = ./config/srnvim;
 }

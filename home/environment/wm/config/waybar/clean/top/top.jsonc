@@ -1,0 +1,36 @@
+{
+  "include": [
+    "~/.config/waybar/clean/top/modules/cosmetics.jsonc",
+    "~/.config/waybar/clean/top/modules/hw.jsonc"
+  ],
+  "exclusive": true,
+  "passthrough": false,
+  "position": "top",
+  "reload_style_on_change": true,
+  "gtk-layer-shell": true,
+  "width": 1000,
+  "height": 54,
+  "layer": "top",
+  "margin-top": 10,
+  "mod": "dock",
+
+  "modules-left": [
+    "custom/padd",
+    "custom/l_end",
+    "cpu",
+    "temperature",
+    "memory",
+    "custom/r_end"
+  ],
+
+  "modules-center": ["custom/l_end", "mpris", "custom/r_end"],
+
+  "modules-right": [
+    "custom/l_end",
+    "backlight",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "custom/r_end",
+    "custom/padd"
+  ]
+}

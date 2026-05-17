@@ -1,4 +1,5 @@
-{...}: {
+{pkgs, ...}: {
+  home.packages = with pkgs; [xdg-utils];
   imports = [
     ./wm/sway.nix
     ./wm/swaylock.nix
