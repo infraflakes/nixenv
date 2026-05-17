@@ -28,8 +28,6 @@
       # for_window [title=".*"] move position center
       floating_modifier Mod4 normal # Use Super (Mod4) as the modifier for moving and resizing windows
       titlebar_padding 10 8
-      for_window [app_id="firefox"] border pixel 0
-      for_window [app_id="chromium"] border pixel 0
     '';
     config = {
       output = {
@@ -137,6 +135,7 @@
         "Mod4+alt+s" = "exec ${./scripts/scrshot} --now";
         "Mod4+shift+a" = "exec ${./scripts/scrshot} --window";
         "Mod4+v" = "exec ${./scripts/clip}";
+        "Mod4+Period" = "exec ${./scripts/emoji}";
 
         "Mod4+Down" = "workspace next";
         "Mod4+Up" = "workspace prev";

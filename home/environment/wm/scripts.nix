@@ -6,8 +6,8 @@
     swappy
     brightnessctl
     wl-clipboard
-    cava
-    pulseaudio
+    # cava
+    # pulseaudio
   ];
   services.cliphist = {
     enable = true;

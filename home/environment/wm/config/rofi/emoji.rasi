@@ -1,0 +1,15 @@
+@import "~/.config/rofi/config.rasi"
+
+window {
+  width:          800px;
+  height:         500px;
+}
+
+entry {
+  width: 30%;
+  placeholder: "                        💫 Search Emojis";
+}
+listview {
+  columns: 5;
+  lines: 8;
+}
