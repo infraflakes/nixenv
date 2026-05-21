@@ -4,16 +4,23 @@
       fd
       fzf
       ripgrep
+      gcc
       gnumake
       stylua
       alejandra
-      antigravity
+      #antigravity
+      #windsurf
+      opencode
       clang-tools
       tree-sitter
 
       # Servers
       nil
-      gopls
+      # gopls
+      # rust-analyzer
+      # zls
+      # svelte-language-server
+      # typescript-language-server
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -26,5 +33,5 @@
     vimAlias = true;
   };
 
-  home.file.".config/nvim".source = ./config/srnvim;
+  xdg.configFile."nvim".source = ./config/srnvim;
 }

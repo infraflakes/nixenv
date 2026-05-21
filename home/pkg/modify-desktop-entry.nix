@@ -31,14 +31,6 @@
   #   noDisplay = false;
   # };
 
-  #NVIDIA
-  xdg.desktopEntries."nvidia-settings" = {
-    name = "NVIDIA X Server Settings";
-    exec = "nvidia-settings";
-    terminal = false;
-    type = "Application";
-    noDisplay = true;
-  };
   #RMPC
   xdg.desktopEntries."rmpc" = {
     name = "Rusty Music Player Client";
@@ -51,14 +43,6 @@
   xdg.desktopEntries."uuctl" = {
     name = "User unit manager";
     exec = "uuctl";
-    terminal = false;
-    type = "Application";
-    noDisplay = true;
-  };
-  #NixOS Manual
-  xdg.desktopEntries."nixos-manual" = {
-    name = "System manual";
-    exec = "nixos-help";
     terminal = false;
     type = "Application";
     noDisplay = true;
