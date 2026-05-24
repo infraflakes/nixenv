@@ -14,6 +14,18 @@
     stateVersion = "26.05";
     sessionVariables = {
       EDITOR = "nvim";
+      # User-specific directories
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_STATE_HOME = "$HOME/.local/state";
+
+      XDG_DESKTOP_DIR = "$HOME/Desktop";
+      XDG_DOWNLOAD_DIR = "$HOME/Downloads";
+      XDG_DOCUMENTS_DIR = "$HOME/Documents";
+      XDG_MUSIC_DIR = "$HOME/Music";
+      XDG_PICTURES_DIR = "$HOME/Pictures";
+      XDG_VIDEOS_DIR = "$HOME/Videos";
     };
     sessionPath = [
       "$HOME/.local/bin"
