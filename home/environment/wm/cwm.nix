@@ -11,12 +11,12 @@
     executable = true;
     text = ''
       #!/usr/bin/env bash
+      xset r rate 200 50 &
       if command -v systemctl --user >/dev/null 2>&1; then
           systemctl --user import-environment DISPLAY XAUTHORITY
           dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
       fi
-      xset r rate 200 50 &
-      xinput set-prop "ASUF1204:00 2808:0202 Touchpad" "libinput Natural Scrolling Enabled" 1
+      # xinput set-prop "ASUF1204:00 2808:0202 Touchpad" "libinput Natural Scrolling Enabled" 1
       export XMODIFIERS=@im=fcitx
       export GTK_IM_MODULE=fcitx
       export QT_IM_MODULE=fcitx
@@ -71,7 +71,7 @@
     command screenshot    "flameshot gui"
     command clipboard    "copyq show"
     command "-------------" "true"
-    command suspend    "systemctl suspend"
+    command suspend    "${./scripts/suspend.sh}"
     command logout     quit
     command reboot     "reboot"
     command shutdown   "shutdown -P now"
