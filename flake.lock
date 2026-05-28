@@ -64,11 +64,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779883438,
-        "narHash": "sha256-q5TpdPOHi5FuBc4Uz/F2OyZ9Ddd+Xmt+hRtJAFbUCWc=",
+        "lastModified": 1779904193,
+        "narHash": "sha256-0JzMr8zlnuhoXB27kaNTdO6UEQDut1E/LAiSO+9HFd8=",
         "owner": "infraflakes",
         "repo": "kiru",
-        "rev": "52802c71c30fdc0a046940f8c4d7611d63f28231",
+        "rev": "7913dd871b4958722725b8d05720f8c92f9c99f3",
         "type": "github"
       },
       "original": {

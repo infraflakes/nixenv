@@ -20,14 +20,14 @@
       url = `git@github.com:infraflakes/kiru.git`;
       dir = `kiru`;
       sync = `clone`;
-      use = `.kiru/main.kiru`;
+      include = `.kiru/main.kiru`;
     }
 
     pr portfolio {
       url = `git@github.com:infraflakes/infraflakes.github.io.git`;
       dir = `portfolio`;
       sync = `clone`;
-      use = `.kiru/main.kiru`;
+      include = `.kiru/main.kiru`;
     }
 
     pr srwc {
@@ -35,7 +35,7 @@
       dir = `srwc`;
       sync = `ignore`;
       branch = `architectural-cleanups`;
-      use = `.kiru/main.kiru`;
+      include = `.kiru/main.kiru`;
     }
   '';
 }
