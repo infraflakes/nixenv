@@ -22,7 +22,7 @@
       export QT_IM_MODULE=fcitx
       export SDL_IM_MODULE=fcitx
       export GLFW_IM_MODULE=fcitx
-      xsetroot -solid "#FFFFEB"
+      xsetroot -solid "#1E1B25"
       ${./scripts/bar.sh} &
       fcitx5 &
       copyq &
@@ -63,7 +63,7 @@
     bind-mouse 3 menu-cmd
     command terminal   "ghostty"
     command editor   "ghostty -e nvim"
-    command files      "ghostty -e yazi"
+    command files      "ghostty -e btm"
     command browser    "firefox"
     command music    "pear-desktop"
     command vesktop    "vesktop"

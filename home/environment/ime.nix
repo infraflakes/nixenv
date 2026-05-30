@@ -1,12 +1,4 @@
 {pkgs, ...}: {
-  # home.packages = [
-  #   (pkgs.qt6Packages.fcitx5-with-addons.override {
-  #     addons = with pkgs; [
-  #       qt6Packages.fcitx5-unikey
-  #       fcitx5-gtk
-  #     ];
-  #   })
-  # ];
   i18n = {
     inputMethod.enable = true;
     inputMethod.type = "fcitx5";

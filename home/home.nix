@@ -11,7 +11,7 @@
   home = {
     username = "${username}";
     homeDirectory = "/home/${username}";
-    stateVersion = "26.05";
+    stateVersion = "26.11";
     sessionVariables = {
       EDITOR = "nvim";
       # User-specific directories
