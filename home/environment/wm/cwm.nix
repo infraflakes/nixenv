@@ -6,6 +6,7 @@
     nwg-look
     lemonbar-xft
     brightnessctl
+    playerctl
   ];
   home.file.".xinitrc" = {
     executable = true;
@@ -38,7 +39,7 @@
     fontname "JetBrainsMono Nerd Font:pixelsize=13:bold"
     borderwidth 3
 
-    color activeborder   "#1e1b25"
+    color activeborder   "#86afef"
     # color inactiveborder "#1e1b25"
     # color menubg         "#1e1b25"
     # color menufg         "#f8f8f2"

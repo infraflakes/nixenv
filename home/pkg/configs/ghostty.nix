@@ -10,7 +10,7 @@
     keybind = performable:ctrl+c=copy_to_clipboard
     keybind = ctrl+v=paste_from_clipboard
     keybind = ctrl+shift+r=reload_config
-    theme = Flexoki Light
+    theme = TokyoNight
     window-decoration = server
   '';
 }
