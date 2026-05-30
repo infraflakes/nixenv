@@ -6,8 +6,8 @@
     '';
     settings = {
       theme = "tokyo-night-dark";
-      default_layout = "compact"; # Similar to the clean tmux look
-      pane_frames = false; # Keeps it sleek like your tmux setup
+      default_layout = "compact";
+      pane_frames = false;
       ui = {
         pane_frames = {
           rounded_corners = true;

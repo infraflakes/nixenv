@@ -34,12 +34,5 @@
       extraSpecialArgs = {inherit inputs username;};
       modules = [./home/home.nix];
     };
-    # DevShells
-    devShells.${system} = {
-      go = import ./devshells/go.nix {inherit pkgs;};
-      js = import ./devshells/js.nix {inherit pkgs;};
-      py = import ./devshells/py.nix {inherit pkgs;};
-      c = import ./devshells/c.nix {inherit pkgs;};
-    };
   };
 }
