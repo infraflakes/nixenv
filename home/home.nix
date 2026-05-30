@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  username,
-  ...
-}: {
+{username, ...}: {
   nixpkgs.config.allowUnfree = true;
   home.file.".config/nix/nix.conf".text = ''
     experimental-features = nix-command flakes
@@ -30,18 +25,6 @@
     sessionPath = [
       "$HOME/.local/bin"
       "$HOME/.cargo/bin"
-    ];
-    packages = [
-      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.home-manager
-      pkgs.bottom
-      pkgs.lm_sensors
-      pkgs.htop
-      pkgs.bluetuith
-      pkgs.pulsemixer
-      pkgs.nmap
-      pkgs.ripgrep
-      pkgs.bat
     ];
   };
   imports = [
