@@ -14,7 +14,7 @@
       nr = "nix develop -c bash";
     };
     interactiveShellInit = ''
-      scd init fish | source
+      sn cd init fish | source
       fastfetch
       set username (whoami)
       echo "				Welcome back, $username!"
