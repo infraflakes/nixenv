@@ -7,7 +7,7 @@ ARG USERNAME
 ARG HOSTNAME
 ARG REPO_URL
 
-RUN apk add --no-cache bash curl git openssh-client xz coreutils && \
+RUN apk add --no-cache bash curl git openssh-client xz less coreutils && \
     adduser -D -u 1000 -s /bin/bash $USERNAME && \
     mkdir -m 0755 /nix && chown $USERNAME:$USERNAME /nix
 

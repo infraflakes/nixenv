@@ -25,7 +25,6 @@
       inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.ripgrep
       pkgs.bat
-      pkgs.ncdu
     ];
   };
   imports = [

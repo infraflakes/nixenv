@@ -6,6 +6,17 @@ vim.o.number = true
 vim.o.mouse = "a"
 vim.o.showmode = true
 vim.opt.clipboard = "unnamedplus"
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy "+",
+    ["*"] = require("vim.ui.clipboard.osc52").copy "*",
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste "+",
+    ["*"] = require("vim.ui.clipboard.osc52").paste "*",
+  },
+}
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true

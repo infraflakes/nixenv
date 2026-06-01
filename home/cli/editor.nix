@@ -5,7 +5,6 @@
       fd
       fzf
       ripgrep
-      gcc
       gnumake
       opencode
       tree-sitter
