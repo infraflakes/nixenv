@@ -7,7 +7,7 @@ ARG USERNAME
 ARG HOSTNAME
 ARG REPO_URL
 
-RUN apk add --no-cache bash curl git openssh-client xz less coreutils && \
+RUN apk add --no-cache bash fish curl git openssh-client xz less coreutils && \
     adduser -D -u 1000 -s /bin/bash $USERNAME && \
     mkdir -m 0755 /nix && chown $USERNAME:$USERNAME /nix
 
@@ -25,8 +25,8 @@ RUN mkdir -p ~/.config/nix && \
     echo "auto-optimise-store = true" >> ~/.config/nix/nix.conf && \
     echo "max-jobs = auto" >> ~/.config/nix/nix.conf
 
-RUN git clone $REPO_URL container && \
+RUN git clone $REPO_URL && \
     . ~/.nix-profile/etc/profile.d/nix.sh && \
-    nix run nixpkgs#home-manager -- switch --flake ./container#${USERNAME}@${HOSTNAME}
+    nix run nixpkgs#home-manager -- switch --flake ./nixenv#${USERNAME}@${HOSTNAME}
 
 CMD ["sh", "-c", "/home/${USER}/.nix-profile/bin/fish"]
