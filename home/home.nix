@@ -31,6 +31,7 @@
     ./cli/editor.nix
     ./cli/file-manager.nix
     ./cli/fish.nix
+    ./cli/starship.nix
     ./cli/vcs.nix
     ./cli/kiru.nix
   ];
