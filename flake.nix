@@ -1,15 +1,15 @@
 {
-  description = "Personal flake for FX507ZU4";
+  description = "Personal flake for container development";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kiru = {
-      url = "github:infraflakes/kiru";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # kiru = {
+    #   url = "github:infraflakes/kiru";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     sutils = {
       url = "github:infraflakes/sutils";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +20,7 @@
       self,
       nixpkgs,
       home-manager,
-      kiru,
+      # kiru,
       sutils,
       ...
     }@inputs:

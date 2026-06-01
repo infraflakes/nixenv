@@ -4,7 +4,7 @@
   ...
 }:
 {
-  home.packages = [ inputs.kiru.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+  # home.packages = [ inputs.kiru.packages.${pkgs.stdenv.hostPlatform.system}.default ];
   home.file.".config/kiru/config.kiru".text = ''
     shell = `bash`;
     var shell workdir = `echo $HOME/dev`;

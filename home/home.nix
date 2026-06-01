@@ -24,8 +24,6 @@
       pkgs.nix
       pkgs.home-manager
       inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.bottom
-      pkgs.htop
       pkgs.ripgrep
       pkgs.bat
       pkgs.ncdu
@@ -36,7 +34,6 @@
     ./cli/file-manager.nix
     ./cli/fish.nix
     ./cli/vcs.nix
-    ./cli/container.nix
     ./cli/kiru.nix
   ];
 }

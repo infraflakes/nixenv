@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   home = {
     packages = with pkgs; [
+      neovim
       fd
       fzf
       ripgrep
@@ -17,11 +18,5 @@
       VISUAL = "nvim";
     };
   };
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   xdg.configFile."nvim".source = ./config/nvim;
 }
