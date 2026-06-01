@@ -7,8 +7,7 @@ ARG USERNAME
 ARG HOSTNAME
 ARG REPO_URL
 
-# Clean userland creation
-RUN apk add --no-cache bash curl git openssh-client && \
+RUN apk add --no-cache bash curl git openssh-client xz coreutils && \
     adduser -D -u 1000 -s /bin/bash $USERNAME && \
     mkdir -m 0755 /nix && chown $USERNAME:$USERNAME /nix
 
@@ -17,7 +16,6 @@ WORKDIR /home/$USERNAME
 ENV USER=$USERNAME
 ENV HOME=/home/$USERNAME
 
-# Installer execution
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
 # explicit hardware tuning & flake configuration
@@ -27,7 +25,6 @@ RUN mkdir -p ~/.config/nix && \
     echo "auto-optimise-store = true" >> ~/.config/nix/nix.conf && \
     echo "max-jobs = auto" >> ~/.config/nix/nix.conf
 
-# 4. Clone and evaluate configuration
 RUN git clone $REPO_URL container && \
     . ~/.nix-profile/etc/profile.d/nix.sh && \
     nix run nixpkgs#home-manager -- switch --flake ./container#${USERNAME}@${HOSTNAME}

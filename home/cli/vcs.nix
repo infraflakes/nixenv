@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   programs.direnv.enable = true;
-  home.packages = with pkgs; [ git ];
   xdg.configFile."git/config".text = ''
     [color "diff"]
     meta = blue
