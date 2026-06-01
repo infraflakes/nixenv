@@ -1,4 +1,3 @@
-# --- Global Args ---
 ARG USERNAME=nixdev
 ARG HOSTNAME=nixenv
 ARG REPO_URL="https://github.com/infraflakes/nixenv"
@@ -33,5 +32,5 @@ RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
 
 WORKDIR /home/$USERNAME
 
-# 4. Drop into the fish shell built directly by your home-manager layer!
-CMD ["nix-shell", "-p", "fish", "--run", "fish"]
+# 4. Drop into the fish shell
+CMD ["sh", "-c", "/home/${USER}/.nix-profile/bin/fish"]
