@@ -5,11 +5,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 vim.o.mouse = "a"
 vim.o.showmode = true
-
-vim.schedule(function()
-  vim.o.clipboard = "unnamedplus"
-end)
-
+vim.opt.clipboard = "unnamedplus"
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.ignorecase = true

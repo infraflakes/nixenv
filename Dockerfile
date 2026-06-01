@@ -2,35 +2,34 @@ ARG USERNAME=nixdev
 ARG HOSTNAME=nixenv
 ARG REPO_URL="https://github.com/infraflakes/nixenv"
 
-FROM nixos/nix:latest
+FROM alpine:latest
 ARG USERNAME
 ARG HOSTNAME
 ARG REPO_URL
 
-# 1. Create a workspace home folder and assign full user permissions over /nix
-# Since we don't have useradd, we can just manually craft a home environment.
-RUN mkdir -p /home/$USERNAME && \
-    chown -R 1000:1000 /nix /etc/nix /home/$USERNAME
+# Clean userland creation
+RUN apk add --no-cache bash curl git openssh-client && \
+    adduser -D -u 1000 -s /bin/bash $USERNAME && \
+    mkdir -m 0755 /nix && chown $USERNAME:$USERNAME /nix
 
-USER 1000:1000
+USER $USERNAME
 WORKDIR /home/$USERNAME
 ENV USER=$USERNAME
 ENV HOME=/home/$USERNAME
 
-# 2. Configure Nix Environment for Flakes
-ENV PATH="/home/$USERNAME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:${PATH}"
+# Installer execution
+RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
+
+# explicit hardware tuning & flake configuration
 RUN mkdir -p ~/.config/nix && \
     echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf && \
     echo "cores = 0" >> ~/.config/nix/nix.conf && \
     echo "auto-optimise-store = true" >> ~/.config/nix/nix.conf && \
     echo "max-jobs = auto" >> ~/.config/nix/nix.conf
 
-# 3. Build/Activate your Home-Manager profile via your Flake
-RUN git clone $REPO_URL container
-WORKDIR /home/$USERNAME/container
-RUN nix run nixpkgs#home-manager -- switch --flake .#${USERNAME}@${HOSTNAME}
+# 4. Clone and evaluate configuration
+RUN git clone $REPO_URL container && \
+    . ~/.nix-profile/etc/profile.d/nix.sh && \
+    nix run nixpkgs#home-manager -- switch --flake ./container#${USERNAME}@${HOSTNAME}
 
-WORKDIR /home/$USERNAME
-
-# 4. Drop into the fish shell
 CMD ["sh", "-c", "/home/${USER}/.nix-profile/bin/fish"]
