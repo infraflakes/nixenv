@@ -29,7 +29,6 @@ case "$1" in
         echo "Creating new container via $ENGINE: $CONTAINER_NAME... (っ´ω｀c)"
         $ENGINE run -it \
           --network host \
-          -v "$HOME/.ssh:/home/$CONTAINER_NAME/.ssh:ro,Z" \
           --name "$CONTAINER_NAME" "$CONTAINER_NAME"
         ;;
 
