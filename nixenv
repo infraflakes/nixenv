@@ -1,10 +1,21 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 CONTAINER_NAME="nixenv"
 REMOTE_DOCKERFILE="https://github.com/infraflakes/nixenv/raw/main/Dockerfile"
 
+if command -v podman >/dev/null 2>&1; then
+    ENGINE="podman"
+elif command -v docker >/dev/null 2>&1; then
+    ENGINE="docker"
+else
+    echo "Error: Neither podman nor docker could be resolved in your PATH! (っ´;ω;｀c)"
+    exit 1
+fi
+
 show_help() {
     echo "Usage: nixenv [create|start|build|help]"
+    echo ""
+    echo "Current Engine: $ENGINE"
     echo ""
     echo "Commands:"
     echo "  create   Provision a new dev environment"
@@ -15,32 +26,35 @@ show_help() {
 
 case "$1" in
     create)
-        echo "Creating new container for dev environment: $CONTAINER_NAME... (っ´ω｀c)"
-        podman run -it --network host --name "$CONTAINER_NAME" "$CONTAINER_NAME"
+        echo "Creating new container via $ENGINE: $CONTAINER_NAME... (っ´ω｀c)"
+        $ENGINE run -it \
+          --network host \
+          -v "$HOME/.ssh:/home/$CONTAINER_NAME/.ssh:ro,Z" \
+          --name "$CONTAINER_NAME" "$CONTAINER_NAME"
         ;;
 
     start)
         # Check if the container file node exists at all in the engine state
-        if ! podman ps -a --format '{{.Names}}' | grep -Eq "^${CONTAINER_NAME}$"; then
+        if ! $ENGINE ps -a --format '{{.Names}}' | grep -Eq "^${CONTAINER_NAME}$"; then
             echo "Error: Container '$CONTAINER_NAME' does not exist yet. Run 'nixenv create' first! (っ´;ω;｀c)"
             exit 1
         fi
 
         # Inspect the running status of the container environment
-        IS_RUNNING=$(podman inspect -f '{{.State.Running}}' "$CONTAINER_NAME" 2>/dev/null)
+        IS_RUNNING=$($ENGINE inspect -f '{{.State.Running}}' "$CONTAINER_NAME" 2>/dev/null)
 
         if [ "$IS_RUNNING" = "true" ]; then
             echo "Container is already active. Executing internal fish shell session... ~ ♡"
-            podman exec -it "$CONTAINER_NAME" /usr/bin/fish
+            $ENGINE exec -it "$CONTAINER_NAME" /usr/bin/fish
         else
             echo "Starting stopped container instance... (っ´>ω<｀c)"
-            podman start -ai "$CONTAINER_NAME"
+            $ENGINE start -ai "$CONTAINER_NAME"
         fi
         ;;
 
     build)
-        echo "Fetching and compiling remote OCI specification from GitHub..."
-        podman build -t "$CONTAINER_NAME" "$REMOTE_DOCKERFILE"
+        echo "Fetching and compiling remote OCI specification from GitHub via $ENGINE..."
+        $ENGINE build -t "$CONTAINER_NAME" "$REMOTE_DOCKERFILE"
         ;;
 
     help|--help|-h)
