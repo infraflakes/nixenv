@@ -5,7 +5,7 @@
 }:
 {
   # home.packages = [ inputs.kiru.packages.${pkgs.stdenv.hostPlatform.system}.default ];
-  home.file.".config/kiru/config.kiru".text = ''
+  home.file.".config/kiru/main.kiru".text = ''
     shell = `bash`;
     var shell workdir = `echo $HOME/test`;
     sanctuary = $workdir;
