@@ -29,7 +29,6 @@
       pkgs.pulsemixer
       pkgs.nmap
       pkgs.ripgrep
-      pkgs.bat
       pkgs.smartmontools
       pkgs.htop
       pkgs.ncdu

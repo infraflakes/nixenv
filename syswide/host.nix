@@ -8,6 +8,7 @@
     ./core/user.nix
     ./core/networking.nix
     ./pkgs/docker.nix
+    ./pkgs/ocis.nix
 
     ./core/fs/fs.nix
     ./core/fs/nextcloud.nix
