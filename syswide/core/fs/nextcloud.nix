@@ -8,11 +8,11 @@
     depends = ["/data"]; # Ensures the parent mount is ready first
   };
 
-  services.cron = {
-    enable = true;
-    systemCronJobs = [
-      # "*/15 * * * * root  docker exec --user www-data nextcloud-app php occ preview:pre-generate" #once every 15 min
-      "0 2 * * * root docker exec --user www-data nextcloud-app php occ preview:pre-generate" # once every day at 2 am
-    ];
-  };
+  # services.cron = {
+  #   enable = true;
+  #   systemCronJobs = [
+  #     # "*/15 * * * * root  docker exec --user www-data nextcloud-app php occ preview:pre-generate" #once every 15 min
+  #     "0 2 * * * root docker exec --user www-data nextcloud-app php occ preview:pre-generate" # once every day at 2 am
+  #   ];
+  # };
 }
