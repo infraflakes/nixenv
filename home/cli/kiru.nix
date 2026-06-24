@@ -1,7 +1,6 @@
 { ... }:
 {
   home.file.".config/kiru/main.kiru".text = ''
-    shell = `bash`;
     var shell workdir = `echo $HOME/test`;
     sanctuary = $workdir;
 
@@ -9,6 +8,7 @@
       url = `git@github.com:infraflakes/kiru.git`;
       dir = `kiru`;
       sync = `clone`;
+      branch = `dev`;
       include = `.kiru/main.kiru`;
     }
 
