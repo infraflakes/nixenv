@@ -13,8 +13,8 @@ vim.g.clipboard = {
     ["*"] = require("vim.ui.clipboard.osc52").copy "*",
   },
   paste = {
-    ["+"] = require("vim.ui.clipboard.osc52").paste "+",
-    ["*"] = require("vim.ui.clipboard.osc52").paste "*",
+    ["+"] = function() end, -- Do nothing! Prevents OSC 52 from attempting to paste
+    ["*"] = function() end,
   },
 }
 vim.o.breakindent = true
