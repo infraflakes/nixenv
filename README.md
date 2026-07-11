@@ -1,22 +1,7 @@
 ### Nixenv: containerized and nixified dev environment.
 
-Grab the script:
-```bash
-curl -sSL "https://raw.githubusercontent.com/infraflakes/nixenv/main/nixenv" -o ~/.local/bin/nixenv
-chmod +x ~/.local/bin/nixenv
-```
+Start with:
 
-Fetch the image:
 ```bash
-nixenv pull
-```
-
-Create the environment:
-```bash
-nixenv create
-```
-
-Accessing the environment:
-```bash
-nixenv start
+podman run -it --network host --env PS1="$PS1" docker.io/infraflakes/nixenv:latest
 ```
