@@ -32,6 +32,5 @@
     ./cli/file-manager.nix
     ./cli/fish.nix
     ./cli/vcs.nix
-    ./cli/kiru.nix
   ];
 }
