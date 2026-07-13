@@ -1,24 +1,3 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [openssh less];
-  programs.direnv.enable = true;
-  xdg.configFile."git/config".text = ''
-    [color "diff"]
-    meta = blue
-    frag = brightyellow
-    old = red
-    new = green
-
-    [diff]
-    algorithm = histogram
-    compactionHeuristic = true
-
-    [pager]
-    diff = "less --tabs=4 -RFX"
-    log = "less --tabs=4 -RFX"
-    show = "less --tabs=4 -RFX"
-
-    [user]
-    email = infraflakes@proton.me
-    name = infraflakes
-  '';
+  home.packages = with pkgs; [openssh less direnv stow];
 }

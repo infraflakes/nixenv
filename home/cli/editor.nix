@@ -12,9 +12,5 @@
       nixfmt
       stylua
     ];
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
   };
 }
