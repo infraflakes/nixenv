@@ -1,11 +1,9 @@
 ARG USERNAME=nixenv
 ARG HOSTNAME=nixenv
-ARG REPO_URL="https://github.com/infraflakes/nixenv"
 
 FROM alpine:latest
 ARG USERNAME
 ARG HOSTNAME
-ARG REPO_URL
 
 RUN apk add --no-cache bash curl git xz coreutils && \
     adduser -D -u 1000 -s /bin/bash $USERNAME && \
@@ -15,6 +13,7 @@ USER $USERNAME
 WORKDIR /home/$USERNAME
 ENV USER=$USERNAME
 ENV HOME=/home/$USERNAME
+ENV PATH="/home/$USERNAME/.local/bin:${PATH}"
 
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
@@ -25,7 +24,7 @@ RUN mkdir -p ~/.config/nix && \
     echo "auto-optimise-store = true" >> ~/.config/nix/nix.conf && \
     echo "max-jobs = auto" >> ~/.config/nix/nix.conf
 
-RUN git clone --depth=1 $REPO_URL && \
+RUN git clone --depth=1 https://github.com/infraflakes/nixenv && \
     . ~/.nix-profile/etc/profile.d/nix.sh && \
     nix run nixpkgs#home-manager -- switch --flake ./nixenv#${USERNAME}@${HOSTNAME}
 
@@ -36,5 +35,9 @@ RUN curl -sSf https://raw.githubusercontent.com/infraflakes/kiru/main/install.sh
 RUN curl -sSf https://raw.githubusercontent.com/infraflakes/sutils/main/install.sh | sh
 
 RUN git clone --depth=1 https://github.com/infraflakes/deploy
+
+RUN kiru -c ~/deploy/nixenv.kiru sync
+
+RUN . ~/.nix-profile/etc/profile.d/nix.sh && kiru -c ~/deploy/nixenv.kiru fn init dots
 
 CMD ["sh", "-c", "/home/${USER}/.nix-profile/bin/fish"]
