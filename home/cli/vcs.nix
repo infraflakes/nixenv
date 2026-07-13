@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+  home.packages = with pkgs; [openssh less];
   programs.direnv.enable = true;
   xdg.configFile."git/config".text = ''
     [color "diff"]
