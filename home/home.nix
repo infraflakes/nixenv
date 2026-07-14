@@ -13,7 +13,7 @@
     packages = [
       pkgs.home-manager
       inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.fish
+      pkgs.bash
     ];
   };
   imports = [

@@ -5,8 +5,8 @@ FROM alpine:latest
 ARG USERNAME
 ARG HOSTNAME
 
-RUN apk add --no-cache bash curl git xz coreutils && \
-    adduser -D -u 1000 -s /bin/bash $USERNAME && \
+RUN apk add --no-cache fish curl git xz coreutils && \
+    adduser -D -u 1000 -s /bin/fish $USERNAME && \
     mkdir -m 0755 /nix && chown $USERNAME:$USERNAME /nix
 
 USER $USERNAME

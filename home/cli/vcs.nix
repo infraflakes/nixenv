@@ -1,3 +1,8 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [openssh less direnv stow];
+  home.packages = with pkgs; [
+    openssh
+    less
+    direnv
+    stow
+  ];
 }
