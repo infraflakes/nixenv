@@ -12,34 +12,16 @@
     username = "${username}";
     homeDirectory = "/home/${username}";
     stateVersion = "26.11";
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
-    sessionPath = [
-      "$HOME/.local/bin"
-      "$HOME/.cargo/bin"
-    ];
     packages = [
-      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.lsd
       pkgs.home-manager
-      pkgs.bottom
-      pkgs.lm_sensors
-      pkgs.bluetuith
-      pkgs.pulsemixer
-      pkgs.nmap
-      pkgs.ripgrep
-      pkgs.smartmontools
-      pkgs.htop
-      pkgs.ncdu
-      pkgs.bottom
-      pkgs.lm_sensors
-      pkgs.jq
-      pkgs.lsof
-      pkgs.net-tools
+      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
+      pkgs.fish
     ];
   };
   imports = [
-    ./pkg/pkgs.nix
+    ./cli/editor.nix
+    ./cli/file-manager.nix
+    ./cli/vcs.nix
+    ./cli/helpers.nix
   ];
 }
