@@ -7,7 +7,6 @@
     tmux
     podman # require shadow utils from main distro
     openssh
-    devin-desktop
     opencode
   ];
 }
