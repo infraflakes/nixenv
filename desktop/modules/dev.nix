@@ -1,12 +1,11 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     git
+    openssh
+    podman
     direnv
     less
     stow
     tmux
-    podman # require shadow utils from main distro
-    openssh
-    opencode
   ];
 }

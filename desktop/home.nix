@@ -20,5 +20,7 @@
     ./modules/dev.nix
     ./modules/fonts.nix
     ./modules/helpers.nix
+    ./modules/media.nix
+    ./modules/x11.nix
   ];
 }

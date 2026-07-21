@@ -6,7 +6,6 @@
       fzf
       ripgrep
       gnumake
-      opencode
       tree-sitter
       nil
       nixfmt
