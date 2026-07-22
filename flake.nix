@@ -29,7 +29,21 @@
         py = import ./devshells/py.nix { inherit pkgs; };
         c = import ./devshells/c.nix { inherit pkgs; };
       };
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs system; };
+          modules = [
+            ./nixos/syswide/host.nix
+          ];
+        };
+      };
+      # Home Manager
       homeConfigurations = {
+        "nixuris@nixos" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./nixos/home/home.nix ];
+        };
         "nixenv@container" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };

@@ -1,0 +1,98 @@
+{ lib, ... }: {
+  home.sessionVariables = {
+    TMUX_TMPDIR = lib.mkForce "/tmp";
+  };
+  programs.tmux = {
+    enable = true;
+    extraConfig = ''
+      set -g default-terminal "screen"
+      set -g history-limit 50000
+      set -s set-clipboard on
+      set -g allow-passthrough on
+
+      # Faster modal key responsiveness (Overriding sensible's default 10ms)
+      set -s escape-time 0
+
+      # Window / Pane Base Indexing (1-based for keyboard ergonomics)
+      set -g base-index 1
+      setw -g pane-base-index 1
+
+      # Environmental Constraints
+      set -g mouse on
+      set -g focus-events off
+      setw -g aggressive-resize off
+      setw -g clock-mode-style 12
+      set -g renumber-windows on
+      set-option -g allow-rename off
+      set -g detach-on-destroy off
+
+      # Mode Keys (Enforce strict vi-emulation inside buffers)
+      set -g status-keys vi
+      set -g mode-keys vi
+
+      # Session Lifecycle Management
+      bind -n C-Left  switch-client -p
+      bind -n C-Right switch-client -n
+      bind -n C-n     new-session
+      bind -n C-x     confirm-before -p "kill session #S? (y/n)" "kill-session"
+      bind -n C-r     command-prompt -I '#S' 'rename-session -- "%%"'
+
+      # Layout & Pane Splits (Alt-v / Alt-h)
+      bind -n M-v     split-window -h
+      bind -n M-h     split-window -v
+      bind -n M-x     kill-pane
+
+      # Hierarchical Pane Traversal
+      bind -n M-Down  select-pane -t :.+
+      bind -n M-Up    select-pane -t :.-
+
+      # Window Navigation & Allocation
+      bind -n M-n     new-window
+      bind -n M-Left  previous-window
+      bind -n M-Right next-window
+      bind -n M-r     command-prompt -I '#W' 'rename-window "%%"'
+
+      # Client State & Tree Management
+      bind -n M-a     choose-tree -s
+      bind -n M-q     detach-client
+
+      bind -n M-y copy-mode
+
+      bind -T copy-mode-vi v   send-keys -X begin-selection
+      bind -T copy-mode-vi y   send-keys -X copy-pipe-and-cancel
+      bind -T copy-mode-vi M-y send-keys -X cancel
+
+      bind -n M-m switch-client -T move
+
+      # Swap indices and force regression back to root evaluation table
+      bind -T move Left  swap-window -d -t -1 \; switch-client -T root
+      bind -T move Right swap-window -d -t +1 \; switch-client -T root
+      bind -T move Escape switch-client -T root
+
+      # Theming
+      set -g status-right-style 'fg=white bg=default'
+      set -g status-right '#(source /etc/os-release && echo $NAME) | %Y-%m-%d | %H:%M '
+      set -g status-right-length 100
+
+      set -g status-left '[#S] '
+      set -g status-left-length 0
+
+      set -g status-position bottom
+      set -g status-justify left
+      set -g status-style 'bg=default'
+
+      setw -g window-status-style 'fg=black bg=cyan'
+      setw -g window-status-format ' #I #[fg=black]#W #[fg=cyan]#F '
+
+      setw -g window-status-current-style 'fg=black bg=cyan'
+      setw -g window-status-current-format ' #I #[fg=black]#W #[fg=white]#F '
+
+      # 1. Force tmux to use its proper inner terminal protocol
+      set -g default-terminal "tmux-256color"
+
+      # 2. Tell tmux that outer terminal supports TrueColor (RGB/Tc)
+      set -as terminal-features ",st-256color:RGB"
+      set -as terminal-overrides ",st-256color:Tc"
+    '';
+  };
+}

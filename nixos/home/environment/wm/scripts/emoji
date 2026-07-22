@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+sed '1,/^# # DATA # #$/d' $0 | 
+rofi -i -dmenu -config ~/.config/rofi/emoji.rasi| 
+cut -d ' ' -f 1 | tr -d '\n' | wl-copy
+
+exit
+# # DATA # #
+✌️ victory hand fingers ohyeah hand peace victory two
+😂 face with tears of joy face cry tears weep happy happytears haha
+💔 broken heart sad sorry break heart heartbreak
+🫩 black eye bags
+😹 cat with tears of joy animal cats haha happy tears
+😭 loudly crying face face cry tears sad upset depressed
+🔥 fire hot cook flame
+🐧 penguin animal nature cut
+💀 skull dead skeleton creepy death
+😔 pensive sad face
+💢 anger symbol angry mad
+🤣 rolling on the floor laughing face rolling floor laughing lol haha rofl
+🤑 money mouth face face rich dollar money
+🤨 face with raised eyebrow face distrust scepticism disapproval disbelief surprise
+🤔 thinking face face hmmm think consider
+😋 face savoring food happy joy tongue smile face silly yummy nom delicious savouring
+🙏 folded hands please hope wish namaste highfive pray
+👆 backhand index pointing up fingers hand direction up
+🤓 nerd face face nerdy geek dork
+❗ exclamation mark heavy exclamation mark danger surprise punctuation wow warning ?
+⁉️ exclamation question mark wat punctuation surprise
+🥀 wilted flower plant nature flower
+🌹 rose flowers valentines love spring
+❤️  red heart love like valentines
+😝 squinting face with tongue face prank playful mischievous smile tongue
+🗣️ speaking head user person human sing say talk
+😁 beaming face with smiling eyes face happy smile joy kawaii
+😅 grinning face with sweat face hot happy laugh sweat smile relief
+😉 winking face face happy mischievous secret ;) smile eye
+😊 smiling face with smiling eyes face smile happy flushed crush embarrassed shy joy
+🥰 smiling face with hearts face love like affection valentines infatuation crush hearts adore
+😍 smiling face with heart eyes face love like affection valentines infatuation crush heart
+😘 face blowing a kiss face love like affection valentines infatuation kiss
+😛 face with tongue face prank childish playful mischievous smile tongue
+😜 winking face with tongue face prank childish playful mischievous smile wink tongue
+😳 flushed face face blush shy flattered
+😩 weary face face tired sleepy sad frustrated upset
+🤫 shushing face face quiet shhh
+😐 neutral face indifference meh :| neutral
+😏 smirking face face smile mean prank smug sarcasm
+😒 unamused face indifference bored straight face serious sarcasm unimpressed skeptical dubious side eye
+🙄 face with rolling eyes face eyeroll frustrated
+😬 grimacing face face grimace teeth
+🤤 drooling face face
+🤢 nauseated face face vomit gross green sick throw up ill
+🤮 face vomiting face sick
+🤧 sneezing face face gesundheit sneeze sick allergy
+🥵 hot face face feverish heat red sweating
+🥶 cold face face blue freezing frozen frostbite icicles
+🥴 woozy face face dizzy intoxicated tipsy wavy
+🤯 exploding head face shocked mind blown
+😎 smiling face with sunglasses face cool smile summer beach sunglass
+😟 worried face face concern nervous :(
+☹️  frowning face face sad upset frown
+😮 face with open mouth face surprise impressed wow whoa :O
+😯 hushed face face woo shh
+🥺 pleading face face begging mercy
+😦 frowning face with open mouth face aw what
+😧 anguished face face stunned nervous
+😨 fearful face face scared terrified nervous oops huh
+😰 anxious face with sweat face nervous sweat
+😢 crying face face tears sad depressed upset :'(
+😱 face screaming in fear face munch scared omg
+😖 confounded face face confused sick unwell oops :S
+😞 disappointed face face sad upset depressed :(
+😓 downcast face with sweat face hot sad tired exercise
+🥱 yawning face tired sleepy
+😤 face with steam from nose face gas phew proud pride
+😡 pouting face angry mad hate despise
+😠 angry face mad face annoyed frustrated
+🤬 face with symbols on mouth face swearing cursing cussing profanity expletive
+😈 smiling face with horns devil horns
+☠️  skull and crossbones poison danger deadly scary death pirate evil
+💩 pile of poo hankey shitface fail turd shit
+🤡 clown face face
+👹 ogre monster red mask halloween scary creepy devil demon japanese ogre
+👽 alien UFO paul weird outer space
+🤖 robot computer machine bot
+ white heart pure
+💯 hundred points score perfect numbers century exam quiz test pass hundred 100
+💥 collision bomb explode explosion collision blown
+💧 droplet water drip faucet spring
+💦 sweat droplets water drip oops
+ sign of the horns hand fingers evil eye sign of horns rock on
+🤙 call me hand hands gesture shaka
+👈 backhand index pointing left direction fingers hand left
+👉 backhand index pointing right fingers hand direction right
+🖕 middle finger hand fingers rude middle flipping
+👍 thumbs up thumbsup yes awesome good agree accept cool hand like +1
+👎 thumbs down thumbsdown no dislike hand -1
+ selfie camera phone
+💪 flexed biceps arm flex hand summer strong biceps

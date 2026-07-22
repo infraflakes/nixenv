@@ -1,0 +1,30 @@
+{
+  "custom/padd": {
+    "format": " ",
+    "interval": "once",
+    "tooltip": false
+  },
+  "custom/padd-med": {
+    "format": "    ",
+    "interval": "once",
+    "tooltip": false
+  },
+  "custom/padd-big": {
+    "format": "   ",
+    "interval": "once",
+    "tooltip": false
+  },
+  "mpris": {
+    "interval": 1,
+    "max-length": 32
+  },
+  "custom/cavavis": {
+    "exec": "$HOME/.local/bin/scripts/cava",
+    "format": "{}"
+  },
+
+  "custom/logo": {
+    "format": " ",
+    "on-click": "exec rofi -show drun"
+  }
+}
