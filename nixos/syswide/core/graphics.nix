@@ -4,6 +4,7 @@
   ...
 }:
 {
+  services.xserver.videoDrivers = [ "nvidia" ];
   boot.kernelParams = [
     "acpi_backlight=native"
     # "nvidia.NVreg_PreserveVideoMemoryAllocations=0"
