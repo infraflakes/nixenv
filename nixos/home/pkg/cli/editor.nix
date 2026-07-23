@@ -5,7 +5,6 @@
     ripgrep
     stylua
     nixfmt
-    clang-tools
     tree-sitter
   ];
   programs.neovim = {

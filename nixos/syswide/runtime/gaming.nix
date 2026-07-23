@@ -8,6 +8,7 @@
     #scrcpy
     #qtscrcpy
     mangohud
+    lutris
   ];
   # programs.gamescope.enable = true;
 

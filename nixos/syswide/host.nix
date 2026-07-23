@@ -10,6 +10,8 @@
     # User environment
     ./environment/user.nix
     ./environment/profiles.nix
+    ./environment/WM/niri.nix
+    ./environment/WM/dms.nix
 
     # Programs that needs privileges
     ./runtime/ppd.nix

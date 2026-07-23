@@ -68,31 +68,6 @@
       bind -T move Left  swap-window -d -t -1 \; switch-client -T root
       bind -T move Right swap-window -d -t +1 \; switch-client -T root
       bind -T move Escape switch-client -T root
-
-      # Theming
-      set -g status-right-style 'fg=white bg=default'
-      set -g status-right '#(source /etc/os-release && echo $NAME) | %Y-%m-%d | %H:%M '
-      set -g status-right-length 100
-
-      set -g status-left '[#S] '
-      set -g status-left-length 0
-
-      set -g status-position bottom
-      set -g status-justify left
-      set -g status-style 'bg=default'
-
-      setw -g window-status-style 'fg=black bg=cyan'
-      setw -g window-status-format ' #I #[fg=black]#W #[fg=cyan]#F '
-
-      setw -g window-status-current-style 'fg=black bg=cyan'
-      setw -g window-status-current-format ' #I #[fg=black]#W #[fg=white]#F '
-
-      # 1. Force tmux to use its proper inner terminal protocol
-      set -g default-terminal "tmux-256color"
-
-      # 2. Tell tmux that outer terminal supports TrueColor (RGB/Tc)
-      set -as terminal-features ",st-256color:RGB"
-      set -as terminal-overrides ",st-256color:Tc"
     '';
   };
 }

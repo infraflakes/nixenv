@@ -26,7 +26,7 @@
                 dwt
                 natural-scroll
                 accel-speed 0.2
-                disabled-on-external-mouse
+                // disabled-on-external-mouse
             }
             focus-follows-mouse max-scroll-amount="0%"
         }
@@ -102,18 +102,20 @@
 
         environment {
           DISPLAY ":0"
+          MOZ_ENABLE_WAYLAND "1"
         }
 
         spawn-at-startup "fcitx5"
         spawn-at-startup "dms run"
 
         binds {
-            XF86AudioRaiseVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "increment" "2"; }
-            XF86AudioLowerVolume allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "decrement" "2"; }
-            XF86AudioMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "mute"; }
             XF86AudioMicMute allow-when-locked=true { spawn "dms" "ipc" "call" "audio" "micmute"; }
-            XF86MonBrightnessUp allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5" ""; }
-            XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5" ""; }
+            XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+            XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+            XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+
+            XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
+            XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
 
             Mod+Space hotkey-overlay-title="Run an Application" { spawn "dms" "ipc" "spotlight" "toggle"; }
             Mod+V hotkey-overlay-title="Clipboard Manager" { spawn "dms" "ipc" "clipboard" "toggle"; }
