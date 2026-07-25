@@ -5,16 +5,6 @@
     ffmpeg
     music-discord-rpc
     # showtime
+    obs-studio
   ];
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-backgroundremoval
-      obs-gstreamer
-      wlrobs
-      obs-pipewire-audio-capture
-      obs-vaapi
-      obs-vkcapture
-    ];
-  };
 }

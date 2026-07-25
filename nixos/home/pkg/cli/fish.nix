@@ -28,6 +28,8 @@
       tm = "tmux new-session -A -s default";
       cd = "scd";
       e = "nvim";
+      vi = "nvim";
+      vim = "nvim";
       nvidia-gpu = "__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia";
     };
     interactiveShellInit = ''

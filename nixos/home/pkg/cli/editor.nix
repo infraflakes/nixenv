@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    neovim
     fd
     fzf
     ripgrep
@@ -7,11 +8,4 @@
     nixfmt
     tree-sitter
   ];
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
-  xdg.configFile."nvim".source = ./config/svim;
 }
