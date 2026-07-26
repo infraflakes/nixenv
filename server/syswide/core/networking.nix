@@ -1,10 +1,13 @@
-{...}: {
+{ ... }: {
   # DNS
   services.tailscale.enable = true;
   networking = {
     hostName = "serein";
     networkmanager.enable = true;
-    nameservers = ["8.8.8.8" "1.1.1.1"];
+    nameservers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
     defaultGateway = "192.168.1.1";
   };
 
@@ -16,5 +19,10 @@
       PasswordAuthentication = true;
     };
   };
-  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedTCPPorts = [
+    22
+    80
+    443
+    6443
+  ];
 }
