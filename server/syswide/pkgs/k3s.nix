@@ -1,20 +1,32 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [helmfile kubernetes-helm];
-  networking.firewall = {
-    allowedTCPPorts = [
-      6443 # k3s: required so that pods can reach the API server (running on port 6443 by default)
-      # 2379 # k3s, etcd clients: required if using a "High Availability Embedded etcd" configuration
-      # 2380 # k3s, etcd peers: required if using a "High Availability Embedded etcd" configuration
-    ];
-    allowedUDPPorts = [
-      # 8472 # k3s, flannel: required if using multi-node for inter-node networking
-    ];
-  };
+{ config, pkgs, ... }: {
+
+  # Allow k3s control plane and Ingress through the firewall
+  # (Tailscale interface or local if you prefer)
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    6443
+  ];
+
   services.k3s = {
     enable = true;
     role = "server";
+    package = pkgs.k3s;
+
     extraFlags = toString [
-      # "--debug" # Optionally add additional args to k3s
+      # Bind k3s API & node IP strictly to Tailscale interface/IP
+      "--node-ip=100.86.100.108" # Tailscale IP
+      "--flannel-iface=tailscale0" # Tell Flannel (pod CNI) to route traffic via Tailscale
+
+      # Generates a kubeconfig readable by user group without needing sudo every time
+      "--write-kubeconfig-mode=0644"
     ];
   };
+
+  # Make kubectl easily available in system path
+  environment.systemPackages = [
+    pkgs.kubectl
+    pkgs.kubernetes-helm
+    pkgs.helmfile
+  ];
 }

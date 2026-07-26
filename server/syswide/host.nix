@@ -7,11 +7,10 @@
     ./core/nix.nix
     ./core/user.nix
     ./core/networking.nix
+    ./core/fs.nix
+
+    ./pkgs/k3s.nix
     ./pkgs/docker.nix
     ./pkgs/ocis.nix
-
-    ./core/fs/fs.nix
-    ./core/fs/nextcloud.nix
-    ./core/fs/immich.nix
   ];
 }

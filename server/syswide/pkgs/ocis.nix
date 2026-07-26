@@ -1,19 +1,10 @@
-{
-  pkgs,
-  ...
-}:
-{
+{ pkgs, ... }: {
   # sudo zfs create -o mountpoint=legacy iris_pool/ocis
   # sudo zfs set com.sun:auto-snapshot=true iris_pool/ocis
   # sudo chown -R $USER:users /data/ocis
   # OCIS_CONFIG_DIR=/data/ocis/config ocis init
   # OCIS_CONFIG_DIR=/data/ocis/config ocis idm resetpassword
-  fileSystems."/data/ocis" = {
-    device = "iris_pool/ocis";
-    fsType = "zfs";
-    options = [ "nofail" ];
-    depends = [ "/data" ];
-  };
+
   environment = {
     systemPackages = with pkgs; [ ocis ];
     variables = {
