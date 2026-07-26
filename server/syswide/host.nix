@@ -1,0 +1,17 @@
+{ ... }: {
+  imports = [
+    # System core
+    /etc/nixos/hardware-configuration.nix
+    ./core/sys.nix
+    ./core/graphics.nix
+    ./core/nix.nix
+    ./core/user.nix
+    ./core/networking.nix
+    ./pkgs/docker.nix
+    ./pkgs/ocis.nix
+
+    ./core/fs/fs.nix
+    ./core/fs/nextcloud.nix
+    ./core/fs/immich.nix
+  ];
+}

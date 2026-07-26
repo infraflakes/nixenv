@@ -1,0 +1,34 @@
+{ ... }: {
+  #Bootloader
+  boot = {
+    loader = {
+      efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+      };
+    };
+  };
+  # Locale
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "vi_VN";
+    LC_IDENTIFICATION = "vi_VN";
+    LC_MEASUREMENT = "vi_VN";
+    LC_MONETARY = "vi_VN";
+    LC_NAME = "vi_VN";
+    LC_NUMERIC = "vi_VN";
+    LC_PAPER = "vi_VN";
+    LC_TELEPHONE = "vi_VN";
+    LC_TIME = "vi_VN";
+  };
+  #Time zone
+  time.timeZone = "Asia/Ho_Chi_Minh";
+  services.timesyncd.enable = true;
+
+  console = {
+    font = "ter-i32b";
+    packages = with pkgs; [ terminus_font ];
+  };
+}
