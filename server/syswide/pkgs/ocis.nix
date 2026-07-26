@@ -40,7 +40,7 @@
     };
     serviceConfig = {
       Type = "simple";
-      User = nixuris;
+      User = "nixuris";
       Group = "users";
       WorkingDirectory = "/data/ocis";
       ExecStart = "${pkgs.ocis}/bin/ocis server";

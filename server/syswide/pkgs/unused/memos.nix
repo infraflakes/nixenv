@@ -39,7 +39,7 @@
 
     serviceConfig = {
       Type = "simple";
-      User = nixuris;
+      User = "nixuris";
       Group = "users";
 
       # Memos uses this dir for its SQLite DB and assets

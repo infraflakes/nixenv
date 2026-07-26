@@ -31,7 +31,7 @@
 
     serviceConfig = {
       Type = "simple";
-      User = nixuris;
+      User = "nixuris";
       Group = "users";
       # Navidrome stores its SQLite DB and cache here
       WorkingDirectory = "/data/navidrome";
