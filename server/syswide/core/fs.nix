@@ -1,16 +1,6 @@
 { ... }: {
   #ZRAM Swap
   zramSwap.enable = true;
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 24 * 1024;
-      priority = 1;
-    }
-  ];
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 10;
-  };
 
   #doas zpool create -f -o ashift=12 -O compression=lz4 -O acltype=posixacl -O xattr=sa -O normalization=formD -O mountpoint=none iris_pool /dev/<disk>
   boot.supportedFilesystems = [ "zfs" ];
