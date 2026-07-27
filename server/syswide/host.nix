@@ -10,6 +10,7 @@
     ./core/fs.nix
 
     ./pkgs/k3s.nix
-    ./pkgs/docker.nix
+    ./pkgs/os.nix
+    ./pkgs/clis.nix
   ];
 }

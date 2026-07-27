@@ -12,25 +12,6 @@
     username = "nixuris";
     homeDirectory = "/home/nixuris";
     stateVersion = "26.11";
-    packages = [
-      pkgs.home-manager
-      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
-      pkgs.wget
-      pkgs.bottom
-      pkgs.lm_sensors
-      pkgs.nmap
-      pkgs.smartmontools
-      pkgs.htop
-      pkgs.ncdu
-      pkgs.bottom
-      pkgs.lm_sensors
-      pkgs.jq
-      pkgs.lsof
-      pkgs.net-tools
-      pkgs.fd
-      pkgs.fzf
-      pkgs.ripgrep
-    ];
   };
   imports = [
     ./cli/editor.nix
