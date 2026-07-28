@@ -4,19 +4,18 @@
     /etc/nixos/hardware-configuration.nix
     ./core/nix.nix
     ./core/sys.nix
-    ./core/graphics-prime.nix
+    ./core/graphics.nix
     ./core/networking.nix
 
     # User environment
     ./environment/user.nix
     ./environment/profiles.nix
-    ./environment/WM/niri.nix
-    ./environment/WM/dms.nix
+    ./environment/niri.nix
+    ./environment/dms.nix
 
     # Programs that needs privileges
     ./runtime/ppd.nix
     ./runtime/mount.nix
     ./runtime/gaming.nix
-    ./runtime/containerization/podman.nix
   ];
 }

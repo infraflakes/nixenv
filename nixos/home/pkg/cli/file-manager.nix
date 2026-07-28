@@ -4,6 +4,8 @@
     unzip
     p7zip
     unrar
+    nautilus
+    sushi
   ];
 
   programs.yazi = {
