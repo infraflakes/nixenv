@@ -1,16 +1,7 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    home-manager
-    htop
-    ncdu
-    bottom
-    lm_sensors
-    bluetuith
-    pulsemixer
-    brightnessctl
-  ];
   #Bootloader
   boot = {
+    kernel.sysctl."kernel.sysrq" = 1;
     loader = {
       efi.canTouchEfiVariables = true;
       limine.enable = true;

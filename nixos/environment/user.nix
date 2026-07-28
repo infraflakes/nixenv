@@ -11,6 +11,8 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "input"
+        "video"
         "adbusers"
         "podman"
         "libvirtd"

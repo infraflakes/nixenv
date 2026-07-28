@@ -18,6 +18,24 @@
         "type": "github"
       }
     },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1782949081,
+        "narHash": "sha256-vp6Y/Grm98ESt6ceOkWiHWyZRDV3J1RID4w+6NWK9yA=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "17c9d6cdfc60c64f4ee8d306f9bc0b4ccb51481e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -69,11 +87,27 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1782614948,
+        "narHash": "sha256-ePjCwr1sNm9NYUqywL7QfK3JnlS015msC+eBu2zKlp8=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "db3f255737b94216eb71cce308e2912cf6bc2d7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "sutils": "sutils"
+        "sutils": "sutils",
+        "xlibre-overlay": "xlibre-overlay"
       }
     },
     "sutils": {
@@ -95,6 +129,28 @@
         "owner": "infraflakes",
         "repo": "sutils",
         "type": "github"
+      }
+    },
+    "xlibre-overlay": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784482541,
+        "narHash": "sha256-Ty/hiH/9bQR7HzotwnJpaqfg5xjNXEE+RTNKL/IhRcA=",
+        "ref": "dev-26.11",
+        "rev": "72e9727d5e3abfffd7f89a59b2a026d302b1376c",
+        "revCount": 234,
+        "type": "git",
+        "url": "https://codeberg.org/takagemacoed/xlibre-overlay"
+      },
+      "original": {
+        "ref": "dev-26.11",
+        "type": "git",
+        "url": "https://codeberg.org/takagemacoed/xlibre-overlay"
       }
     }
   },

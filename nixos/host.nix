@@ -10,12 +10,21 @@
     # User environment
     ./environment/user.nix
     ./environment/profiles.nix
-    ./environment/niri.nix
-    ./environment/dms.nix
+    ./environment/ime.nix
+    ./environment/fonts.nix
+    ./environment/x11.nix
 
     # Programs that needs privileges
     ./runtime/ppd.nix
     ./runtime/mount.nix
     ./runtime/gaming.nix
+
+    # Packages
+    ./pkgs/dev.nix
+    ./pkgs/editor.nix
+    ./pkgs/file-manager.nix
+    ./pkgs/media.nix
+    ./pkgs/social.nix
+    ./pkgs/utils.nix
   ];
 }

@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
+{ pkgs, inputs, ... }: {
+  environment.systemPackages = with pkgs; [
     neovim
     fd
     fzf

@@ -5,6 +5,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xlibre-overlay = {
+      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-26.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sutils = {
       url = "github:infraflakes/sutils";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,6 +19,7 @@
       self,
       nixpkgs,
       home-manager,
+      xlibre-overlay,
       sutils,
       ...
     }@inputs:
@@ -33,7 +38,7 @@
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
           modules = [
-            ./nixos/syswide/host.nix
+            ./nixos/host.nix
           ];
         };
         server = nixpkgs.lib.nixosSystem {
@@ -43,11 +48,6 @@
       };
       # Home Manager
       homeConfigurations = {
-        "nixuris@nixos" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./nixos/home/home.nix ];
-        };
         "nixuris@server" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
