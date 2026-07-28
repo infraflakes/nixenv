@@ -9,6 +9,13 @@
     enable = true;
     displayManager.startx.enable = true;
   };
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      naturalScrolling = true;
+      tapping = true;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     xauth
