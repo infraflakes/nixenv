@@ -16,7 +16,10 @@
       tapping = true;
     };
   };
-
+  environment.sessionVariables = {
+    GTK_USE_PORTAL = 0;
+    GIO_USE_PORTALS = 0;
+  };
   environment.systemPackages = with pkgs; [
     xauth
     xrandr

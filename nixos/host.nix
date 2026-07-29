@@ -9,7 +9,6 @@
 
     # User environment
     ./environment/user.nix
-    ./environment/profiles.nix
     ./environment/ime.nix
     ./environment/fonts.nix
     ./environment/x11.nix
