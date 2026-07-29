@@ -1,4 +1,4 @@
-{ ... }: {
+{pkgs, ... }: {
   # DNS
   services.tailscale.enable = true;
   networking = {
@@ -10,6 +10,10 @@
     ];
     defaultGateway = "192.168.1.1";
   };
+  environment.systemPackages = with pkgs; [
+    nmap
+    wget
+  ];
 
   # SSH
   services.openssh = {

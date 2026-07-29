@@ -43,16 +43,11 @@
         };
         server = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
-          modules = [ ./server/syswide/host.nix ];
+          modules = [ ./server/host.nix ];
         };
       };
       # Home Manager
       homeConfigurations = {
-        "nixuris@server" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./server/home/home.nix ];
-        };
         "nixenv@container" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };

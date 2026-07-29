@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    git
-    diff-so-fancy
-    direnv
-    podman
-    tmux
+    yazi
+    zip
+    unzip
+    p7zip
+    unrar
   ];
 }

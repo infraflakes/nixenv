@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     libva-utils # Includes 'vainfo' to test if this is working
   ];

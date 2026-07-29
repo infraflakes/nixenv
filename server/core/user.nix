@@ -3,7 +3,6 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [ home-manager ];
   programs.fish.enable = true;
   users.users.nixuris = {
     isNormalUser = true;
