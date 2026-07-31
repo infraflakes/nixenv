@@ -11,7 +11,6 @@
     stateVersion = "26.11";
     packages = [
       pkgs.home-manager
-      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.bash
     ];
   };
@@ -19,5 +18,6 @@
     ./cli/editor.nix
     ./cli/file-manager.nix
     ./cli/vcs.nix
+    ./cli/utils.nix
   ];
 }
