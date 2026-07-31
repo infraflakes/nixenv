@@ -5,7 +5,6 @@
 }:
 {
   services.xserver.videoDrivers = [ "nvidia" ];
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=0" ];
   environment.variables = {
     #LIBVA_DRIVER_NAME = "iHD";
     LIBVA_DRIVER_NAME = "i965";
@@ -25,8 +24,6 @@
       package = config.boot.kernelPackages.nvidiaPackages.beta;
       nvidiaSettings = false;
       modesetting.enable = true;
-      powerManagement.enable = false;
-      powerManagement.finegrained = false;
       open = true;
       prime = {
         offload = {
