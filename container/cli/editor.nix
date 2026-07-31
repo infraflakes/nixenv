@@ -1,10 +1,8 @@
 { pkgs, ... }: {
-  home = {
-    packages = with pkgs; [
-      neovim
-      tree-sitter
-      nixfmt
-      stylua
-    ];
-  };
+  home.packages = with pkgs; [
+    neovim
+    tree-sitter
+    nixfmt
+    stylua
+  ];
 }
