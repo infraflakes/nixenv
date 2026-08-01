@@ -3,7 +3,6 @@
     imv
     mpv
     ffmpeg
-    music-discord-rpc
     # showtime
     obs-studio
   ];

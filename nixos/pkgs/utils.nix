@@ -10,5 +10,8 @@
     bluetuith
     pulsemixer
     brightnessctl
+    fd
+    fzf
+    ripgrep
   ];
 }
