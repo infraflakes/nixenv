@@ -6,6 +6,7 @@
     htop
     ncdu
     bottom
+    tty-clock
     lm_sensors
     bluetuith
     pulsemixer

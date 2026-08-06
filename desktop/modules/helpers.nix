@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    tty-clock
     bottom
     lm_sensors
     networkmanager
