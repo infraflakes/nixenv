@@ -3,6 +3,6 @@
     # zoom-us
     firefox
     proton-vpn
-    element-desktop
+    iamb
   ];
 }
