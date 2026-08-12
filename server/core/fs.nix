@@ -37,13 +37,13 @@
     depends = [ "/data" ]; # Ensures the parent mount is ready first
   };
 
-  # services.cron = {
-  #   enable = true;
-  #   systemCronJobs = [
-  #     # "*/15 * * * * root  docker exec --user www-data nextcloud-app php occ preview:pre-generate" #once every 15 min
-  #     "0 2 * * * root docker exec --user www-data nextcloud-app php occ preview:pre-generate" # once every day at 2 am
-  #   ];
-  # };
+  services.cron = {
+    enable = true;
+    systemCronJobs = [
+      # "*/15 * * * * root  docker exec --user www-data nextcloud-app php occ preview:pre-generate" #once every 15 min
+      "0 2 * * * root kubectl exec -n nextcloud -it deployment/nextcloud-app -- php occ preview:pre-generate" # once every day at 2 am
+    ];
+  };
 
   #doas zfs create -o mountpoint=legacy iris_pool/tuwunel
   #doas zfs set com.sun:auto-snapshot=true iris_pool/tuwunel
