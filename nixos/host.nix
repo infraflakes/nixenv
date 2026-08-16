@@ -12,6 +12,7 @@
     ./environment/ime.nix
     ./environment/fonts.nix
     ./environment/x11.nix
+    # ./environment/gnome.nix
 
     # Programs that needs privileges
     ./runtime/ppd.nix
