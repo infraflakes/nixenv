@@ -5,7 +5,5 @@
     unzip
     p7zip
     unrar
-    nautilus
-    sushi
   ];
 }

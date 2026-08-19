@@ -10,8 +10,10 @@
     # User environment
     ./environment/user.nix
     ./environment/ime.nix
-    ./environment/fonts.nix
-    ./environment/x11.nix
+    ./environment/theme.nix
+    # ./environment/x11.nix
+    # ./environment/niri.nix
+    ./environment/cosmic.nix
     # ./environment/gnome.nix
 
     # Programs that needs privileges

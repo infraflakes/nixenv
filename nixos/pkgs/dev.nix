@@ -5,5 +5,6 @@
     direnv
     podman
     tmux
+    ghostty
   ];
 }
