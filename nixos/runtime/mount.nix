@@ -9,8 +9,8 @@
     ifuse
     android-tools
   ];
-  services.usbmuxd = {
-    enable = true;
-    package = pkgs.usbmuxd2;
+  services = {
+    udisks2.enable = true;
+    usbmuxd.enable = true;
   };
 }
