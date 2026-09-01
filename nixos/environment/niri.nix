@@ -1,4 +1,9 @@
 { pkgs, ... }: {
+  environment.systemPackages = with pkgs; [
+    awww
+    tofi
+    swaylock
+  ];
   # services.displayManager.gdm.enable = true;
   programs.niri.enable = true;
   services.displayManager.sessionPackages = with pkgs; [ niri ];

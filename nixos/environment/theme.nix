@@ -44,6 +44,7 @@
 
   services.desktopManager.gnome.extraGSettingsOverrides = ''
     [org.gnome.desktop.interface]
+    color-scheme='prefer-dark'
     icon-theme='WhiteSur-dark'
     cursor-theme='Bibata-Modern-Classic'
     cursor-size=24
