@@ -10,7 +10,7 @@
     android-tools
   ];
   services = {
-    udisks2.enable = true;
+    # udisks2.enable = true;
     usbmuxd.enable = true;
   };
 }
