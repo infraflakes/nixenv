@@ -7,7 +7,7 @@
       limine.enable = true;
     };
   };
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   # Enable trim
   services.fstrim = {
     enable = true;

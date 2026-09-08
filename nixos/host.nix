@@ -4,7 +4,8 @@
     /etc/nixos/hardware-configuration.nix
     ./core/nix.nix
     ./core/sys.nix
-    ./core/graphics.nix
+    # ./core/graphics.nix
+    ./core/integrated-graphics.nix
     ./core/networking.nix
 
     # User environment
@@ -19,7 +20,7 @@
     # Programs that needs privileges
     ./runtime/ppd.nix
     ./runtime/mount.nix
-    ./runtime/gaming.nix
+    # ./runtime/gaming.nix
 
     # Packages
     ./pkgs/dev.nix
