@@ -19,6 +19,7 @@
   environment.sessionVariables = {
     GTK_USE_PORTAL = 0;
     GIO_USE_PORTALS = 0;
+    MOZ_USE_XINPUT2 = 1;
   };
   environment.systemPackages = with pkgs; [
     xauth
