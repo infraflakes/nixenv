@@ -8,5 +8,6 @@
     ripgrep
     less
     stow
+    tmux
   ];
 }
