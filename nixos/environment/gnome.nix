@@ -10,5 +10,13 @@
   ];
   environment.systemPackages = with pkgs; [
     gnome-tweaks
+    nautilus
+    sushi
+    showtime
+    loupe
+    papers
+    gnomeExtensions.appindicator
+    gnomeExtensions.dash-to-dock
   ];
+  services.gvfs.enable = true;
 }

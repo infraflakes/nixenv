@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     imv
-    mpv
+    # mpv
     ffmpeg
-    # showtime
     obs-studio
   ];
 }

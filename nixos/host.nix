@@ -13,9 +13,9 @@
     ./environment/ime.nix
     ./environment/theme.nix
     # ./environment/x11.nix
-    ./environment/niri.nix
+    # ./environment/niri.nix
     # ./environment/cosmic.nix
-    # ./environment/gnome.nix
+    ./environment/gnome.nix
 
     # Programs that needs privileges
     ./runtime/ppd.nix

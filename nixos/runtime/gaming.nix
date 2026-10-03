@@ -9,7 +9,7 @@
     #qtscrcpy
     mangohud
     lutris
-    xwayland-satellite
+    # xwayland-satellite
   ];
   # programs.gamescope.enable = true;
 
