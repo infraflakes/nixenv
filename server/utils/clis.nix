@@ -5,6 +5,5 @@
     fd
     fzf
     ripgrep
-    stow
   ];
 }

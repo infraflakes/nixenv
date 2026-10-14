@@ -7,7 +7,6 @@
     fzf
     ripgrep
     less
-    stow
     tmux
   ];
 }

@@ -1,6 +1,5 @@
 { pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
-    stow
     inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
     fastfetch
     htop

@@ -3,7 +3,6 @@
     jujutsu
     direnv
     less
-    stow
     tmux
   ];
 }
