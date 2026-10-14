@@ -6,9 +6,10 @@
     stateVersion = "26.11";
   };
   imports = [
-    ./cli/editor.nix
-    ./cli/file-manager.nix
-    ./cli/vcs.nix
-    ./cli/utils.nix
+    ./modules/editor.nix
+    ./modules/file-manager.nix
+    ./modules/vcs.nix
+    ./modules/utils.nix
+    ./modules/symlink.nix
   ];
 }
