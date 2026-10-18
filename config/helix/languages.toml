@@ -2,3 +2,16 @@
 name = "nix"
 auto-format = true
 formatter = { command = "nixfmt" }
+
+[[grammar]]
+name = "gotmpl"
+source = { git = "https://github.com/ngalaiko/tree-sitter-go-template", rev = "master" }
+
+[[language]]
+name = "kiru"
+scope = "source.kiru"
+file-types = ["kiru"]
+
+[[grammar]]
+name = "kiru"
+source = { git = "https://github.com/infraflakes/kiru-tree-sitter", rev = "main" }
