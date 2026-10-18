@@ -1,0 +1,8 @@
+theme = "tokyonight_moon"
+
+[editor]
+file-picker.hidden = false
+
+[keys.normal]
+";" = "command_mode"
+"C-e" = [":sh yazi"]

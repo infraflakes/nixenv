@@ -9,10 +9,10 @@ end
 # set -gx DRI_PRIME '1'
 
 set -gx COLORTERM truecolor
-# set -gx EDITOR hx
-# set -gx VISUAL hx
-set -gx EDITOR nvim
-set -gx VISUAL nvim
+set -gx EDITOR hx
+set -gx VISUAL hx
+# set -gx EDITOR nvim
+# set -gx VISUAL nvim
 
 set -gx SDL_IM_MODULE fcitx
 set -gx XMODIFIERS '@im=fcitx'
@@ -61,10 +61,10 @@ status is-interactive; and begin
     end
 
     alias cd scd
-    # alias e hx
-    alias vi nvim
-    alias vim nvim
-    alias e nvim
+    alias e yazi
+    # alias vi nvim
+    # alias vim nvim
+    # alias e nvim
     alias tm 'tmux new-session -A -s default'
 
     sn cd init fish | source

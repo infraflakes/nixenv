@@ -10,7 +10,8 @@
     "sidebar": "auto",
     "scrollbar": false,
     "thinking": "hide",
-    "permissions": "autoaccept"
+    "permissions": "autoaccept",
+    "verbosity": "low"
   },
   "animations": true,
   "tabs": {
