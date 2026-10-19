@@ -9,10 +9,6 @@
       url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-26.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sutils = {
-      url = "github:infraflakes/sutils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     {
@@ -20,7 +16,6 @@
       nixpkgs,
       home-manager,
       xlibre-overlay,
-      sutils,
       ...
     }@inputs:
     let

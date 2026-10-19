@@ -19,7 +19,8 @@ ENV LC_ALL=en_US.UTF-8
 
 RUN useradd -m -s /bin/fish -u 1000 $USERNAME
 
-RUN curl -sSfL https://install.lix.systems/lix | sh -s -- install linux --init none --no-confirm && chown -R $USERNAME:$USERNAME /nix
+RUN curl -sSfL https://install.lix.systems/lix | sh -s -- install linux --init none --no-confirm
+RUN chown -R $USERNAME:$USERNAME /nix
 
 USER $USERNAME
 WORKDIR /home/$USERNAME

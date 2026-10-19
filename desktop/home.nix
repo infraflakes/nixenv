@@ -11,7 +11,6 @@
     stateVersion = "26.11";
     packages = [
       pkgs.home-manager
-      inputs.sutils.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
   imports = [
