@@ -17,7 +17,7 @@
     ./config/symlink.nix
 
     ./modules/desktop/dev.nix
-    ./modules/desktop/cli
+    ./modules/desktop/cli.nix
 
     ./modules/cli/helpers.nix
     ./modules/cli/file-manager.nix

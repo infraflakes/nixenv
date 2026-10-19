@@ -9,6 +9,5 @@
     ./core/zfs.nix
 
     ./runtime/k3s.nix
-    ./runtime/ppd.nix
   ];
 }
