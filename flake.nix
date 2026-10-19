@@ -24,34 +24,40 @@
     in
     {
       devShells.${system} = {
-        go = import ./devshells/go.nix { inherit pkgs; };
-        js = import ./devshells/js.nix { inherit pkgs; };
         py = import ./devshells/py.nix { inherit pkgs; };
         c = import ./devshells/c.nix { inherit pkgs; };
       };
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
-          modules = [
-            ./nixos/host.nix
-          ];
+          modules = [ ./nixos/nixos.nix ];
         };
         server = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
-          modules = [ ./server/host.nix ];
+          modules = [ ./nixos/server.nix ];
         };
       };
       # Home Manager
       homeConfigurations = {
+        "nixuris@nixos" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home/nixos.nix ];
+        };
+        "nixuris@server" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home/server.nix ];
+        };
         "nixenv@container" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./container/home.nix ];
+          modules = [ ./home/container.nix ];
         };
         "nixuris@desktop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./desktop/home.nix ];
+          modules = [ ./home/desktop.nix ];
         };
       };
     };
