@@ -1,23 +1,13 @@
 ARG USERNAME=nixenv
 
-FROM debian:bookworm-slim
+FROM alpine:edge
 ARG USERNAME
 
-ENV TZ=Asia/Ho_Chi_Minh
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl fish git xz-utils ca-certificates procps locales tzdata \
-    && ln -fs /usr/share/zoneinfo/$TZ /etc/localtime \
-    && dpkg-reconfigure -f noninteractive tzdata \
-    && rm -rf /var/lib/apt/lists/* \
-    && sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
-    && locale-gen
+RUN apk add --no-cache curl fish git xz ca-certificates procps shadow
 
 ENV LANG=en_US.UTF-8
-ENV LANGUAGE=en_US:en
-ENV LC_ALL=en_US.UTF-8
 
-RUN useradd -m -s /bin/fish -u 1000 $USERNAME
+RUN useradd -m -s /usr/bin/fish -u 1000 $USERNAME
 
 RUN curl -sSfL https://install.lix.systems/lix | sh -s -- install linux --init none --no-confirm
 RUN chown -R $USERNAME:$USERNAME /nix
@@ -37,7 +27,11 @@ WORKDIR ./nix
 
 RUN nix-shell -p home-manager --run 'home-manager switch --flake .#nixenv@container'
 
-ENV SHELL=/bin/fish
+RUN jj git init --colocate
+
+RUN hx -g fetch && hx -g build
+
+ENV SHELL=/usr/bin/fish
 
 WORKDIR /home/$USERNAME
 
