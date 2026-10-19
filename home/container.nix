@@ -8,9 +8,9 @@
   imports = [
     ./config/symlink.nix
 
-    ./modules/editor.nix
-    ./modules/file-manager.nix
-    ./modules/dev.nix
-    ./modules/helpers.nix
+    ./modules/cli/editor.nix
+    ./modules/cli/file-manager.nix
+    ./modules/cli/dev.nix
+    ./modules/cli/helpers.nix
   ];
 }
