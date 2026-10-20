@@ -1,20 +1,20 @@
 {
-  "$schema": "https://opencode.ai/v2/cli.json",
-  "theme": {
-    "name": "opencode"
-  },
-  "diffs": {
-    "wrap": "word"
-  },
-  "session": {
-    "sidebar": "auto",
-    "scrollbar": false,
-    "thinking": "hide",
-    "permissions": "autoaccept",
-    "verbosity": "low"
-  },
-  "animations": true,
-  "tabs": {
-    "mode": "on"
-  }
+	"$schema": "https://opencode.ai/v2/cli.json",
+	"theme": {
+		"name": "opencode"
+	},
+	"diffs": {
+		"wrap": "word"
+	},
+	"session": {
+		"sidebar": "auto",
+		"scrollbar": false,
+		"thinking": "hide",
+		"permissions": "autoaccept",
+		"verbosity": "low"
+	},
+	"animations": true,
+	"tabs": {
+		"mode": "on"
+	}
 }
