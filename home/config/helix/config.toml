@@ -2,7 +2,13 @@ theme = "tokyonight_moon"
 
 [editor]
 file-picker.hidden = false
+end-of-line-diagnostics = "hint"
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
 
 [keys.normal]
 ";" = "command_mode"
-"C-e" = [":sh yazi"]
