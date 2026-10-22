@@ -2,8 +2,8 @@ use-grammars = { only = [
 "csv","astro", "bash",
 "css","diff","dockerfile", "fish","ghostty",
 "git-config", "git-rebase", "gitattributes", "gitcommit", "gitignore",
-"gomod", "gowork","hcl", "html", "javascript", "latex", "lua",
-"make", "markdown", "markdown_inline", "nginx","php", "php-only",
+"gomod", "gowork","hcl", "html", "javascript", "latex", "lua",     
+"make", "markdown", "markdown_inline", "nginx","php", "php-only",  
 "python", "scheme", "sql","svelte", "tcl", "toml", "tsx",
 "typescript", "typst", "xml", "yaml"
 ] }
@@ -20,16 +20,6 @@ source = { git = "https://github.com/ngalaiko/tree-sitter-go-template", rev = "m
 [[language]]
 name = "rust"
 auto-format = true
+
 [language-server.rust-analyzer.config]
-checkOnSave = { command = "clippy" } # Use clippy for errors/warnings instead of cargo check
-
-[language-server.kiru]
-command = "kc"
-args = ["lsp"]
-
-[[language]]
-name = "kiru"
-scope = "source.kiru"
-file-types = ["kiru"]
-comment-tokens = "#"
-language-servers = ["kiru"]
+checkOnSave = { command = "clippy" }

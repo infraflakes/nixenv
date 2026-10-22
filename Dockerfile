@@ -23,16 +23,18 @@ RUN curl -sSf https://raw.githubusercontent.com/infraflakes/sutils/main/install.
 
 RUN git clone https://github.com/infraflakes/nixenv nix
 
+RUN git clone https://github.com/infraflakes/svim ~/.config/nvim
+
 WORKDIR ./nix
 
 RUN nix-shell -p home-manager --run 'home-manager switch --flake .#nixenv@container'
 
 RUN jj git init --colocate
 
-RUN hx -g fetch && hx -g build
+RUN nvim --headless "+Lazy! sync" +qa
 
 ENV SHELL=/usr/bin/fish
 
 WORKDIR /home/$USERNAME
 
-CMD ["fish"]
+CMD ["tmux"]

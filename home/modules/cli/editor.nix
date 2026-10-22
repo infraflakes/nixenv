@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     gcc
-    helix
+    neovim
+    # helix
     stylua
     nixfmt
     tree-sitter
