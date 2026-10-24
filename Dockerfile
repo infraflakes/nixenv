@@ -21,9 +21,9 @@ ENV PATH="/nix/var/nix/profiles/default/bin:/home/$USERNAME/.nix-profile/bin:/ho
 
 RUN curl -sSf https://raw.githubusercontent.com/infraflakes/sutils/main/install.sh | sh
 
-RUN git clone https://github.com/infraflakes/nixenv nix
-
 RUN git clone https://github.com/infraflakes/svim ~/.config/nvim
+
+RUN git clone https://github.com/infraflakes/nixenv nix
 
 WORKDIR ./nix
 
