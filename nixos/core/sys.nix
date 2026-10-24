@@ -5,8 +5,7 @@
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
-limine.enable = true;
-   
+      limine.enable = true;
     };
   };
 
@@ -33,5 +32,14 @@ limine.enable = true;
   console = {
     font = "ter-i32b";
     packages = with pkgs; [ terminus_font ];
+  };
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      # Add any missing shared libraries your binary needs here, e.g.:
+      # stdenv.cc.cc
+      # zlib
+      # openssl
+    ];
   };
 }
