@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     gcc
     neovim
-    # helix
+    helix
     stylua
     nixfmt
     tree-sitter

@@ -3,6 +3,10 @@ theme = "tokyonight_moon"
 [editor]
 file-picker.hidden = false
 end-of-line-diagnostics = "hint"
+clipboard-provider = "termcode"
+
+[editor.soft-wrap]
+enable = true
 
 [editor.lsp]
 display-inlay-hints = true
