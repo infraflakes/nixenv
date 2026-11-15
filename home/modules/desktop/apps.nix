@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    proton-vpn
+    # proton-vpn
     firefox
-    element-desktop
   ];
 }
