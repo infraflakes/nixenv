@@ -21,5 +21,15 @@
     GIO_USE_PORTALS = 0;
     MOZ_USE_XINPUT2 = 1;
   };
+  environment.systemPackages = with pkgs; [
+    xauth
+    xrandr
+    arandr
+    maim
+    xclip
+    xset
+    xsetroot
+    feh
+  ];
   programs.slock.enable = true;
 }
