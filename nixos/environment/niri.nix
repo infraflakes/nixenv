@@ -4,10 +4,10 @@
     tofi
     swaylock
   ];
-  programs.dms-shell.enable = true;
+  # programs.dms-shell.enable = true;
   # services.displayManager.gdm.enable = true;
+  # services.displayManager.sessionPackages = with pkgs; [ niri ];
   programs.niri.enable = true;
-  services.displayManager.sessionPackages = with pkgs; [ niri ];
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
