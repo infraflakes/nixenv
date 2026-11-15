@@ -23,10 +23,6 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-      devShells.${system} = {
-        py = import ./devshells/py.nix { inherit pkgs; };
-        c = import ./devshells/c.nix { inherit pkgs; };
-      };
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs system; };
@@ -39,7 +35,7 @@
       };
       # Home Manager
       homeConfigurations = {
-        "nixuris@nixos" = home-manager.lib.homeManagerConfiguration {
+        "infraflakes@nixos" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/nixos.nix ];
@@ -54,7 +50,7 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/container.nix ];
         };
-        "nixuris@desktop" = home-manager.lib.homeManagerConfiguration {
+        "infraflakes@desktop" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs; };
           modules = [ ./home/desktop.nix ];

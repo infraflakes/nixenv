@@ -1,9 +1,28 @@
-{ ... }: {
+{ pkgs, ... }: {
+
+  programs.fish.enable = true;
+  users = {
+    defaultUserShell = pkgs.fish;
+    users.infraflakes = {
+      isNormalUser = true;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "video"
+        "adbusers"
+        "podman"
+        "docker"
+        "libvirtd"
+        "kvm"
+      ];
+    };
+  };
+
   imports = [
     # System core
     /etc/nixos/hardware-configuration.nix
 
-    ./core/user.nix
     ./core/nix.nix
     ./core/sys.nix
     ./core/sound_and_bluetooth.nix

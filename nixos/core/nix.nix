@@ -4,7 +4,7 @@
     settings = {
       trusted-users = [
         "root"
-        "nixuris"
+        "infraflakes"
       ];
       cores = 0;
       max-jobs = "auto";

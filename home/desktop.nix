@@ -6,8 +6,8 @@
 {
   nixpkgs.config.allowUnfree = true;
   home = {
-    username = "nixuris";
-    homeDirectory = "/home/nixuris";
+    username = "infraflakes";
+    homeDirectory = "/home/infraflakes";
     stateVersion = "26.11";
     packages = [
       pkgs.home-manager
