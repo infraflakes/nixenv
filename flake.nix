@@ -5,6 +5,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
     xlibre-overlay = {
       url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-26.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,6 +17,7 @@
       nixpkgs,
       home-manager,
       xlibre-overlay,
+      nix-flatpak,
       ...
     }@inputs:
     let

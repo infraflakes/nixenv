@@ -40,6 +40,7 @@
     # Programs that needs privileges
     ./runtime/ppd.nix
     ./runtime/mount.nix
+    ./runtime/flatpak.nix
     # ./runtime/gaming.nix
   ];
 }
