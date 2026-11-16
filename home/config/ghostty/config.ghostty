@@ -2,6 +2,9 @@ command = /usr/bin/env fish
 confirm-close-surface = false
 font-family = JetBrains Mono Nerd Font
 font-size = 14
+background-opacity = 0.85
+background-blur = true
+
 keybind = clear
 keybind = performable:ctrl+c=copy_to_clipboard
 keybind = ctrl+v=paste_from_clipboard

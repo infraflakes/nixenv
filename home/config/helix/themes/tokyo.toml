@@ -1,0 +1,9 @@
+inherits = "tokyonight_moon"
+
+"ui.background" = {}
+"ui.menu" = {}
+"ui.popup" = {}
+"ui.window" = {}
+"ui.help" = {}
+"ui.statusline" = {}
+"ui.statusline.inactive" = {}
