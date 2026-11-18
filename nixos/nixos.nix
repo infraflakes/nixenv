@@ -26,8 +26,8 @@
     ./core/nix.nix
     ./core/sys.nix
     ./core/sound_and_bluetooth.nix
-    # ./core/graphics/nvidia.nix
-    ./core/graphics/intel.nix
+    ./core/graphics/nvidia.nix
+    # ./core/graphics/intel.nix
     ./core/networking.nix
 
     # User environment
@@ -38,9 +38,9 @@
     # ./environment/x11.nix
 
     # Programs that needs privileges
-    ./runtime/ppd.nix
+    ./runtime/power.nix
     ./runtime/mount.nix
     ./runtime/flatpak.nix
-    # ./runtime/gaming.nix
+    ./runtime/gaming.nix
   ];
 }

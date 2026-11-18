@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     gcc
-    neovim
+    # neovim
     helix
     stylua
     nixfmt
