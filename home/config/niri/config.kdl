@@ -78,6 +78,7 @@ environment {
 }
 spawn-at-startup "fcitx5"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "waybar"
 spawn-at-startup "awww-daemon"
 layer-rule {
     match namespace="^awww-daemon$"
