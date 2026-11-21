@@ -60,14 +60,12 @@ status is-interactive; and begin
         source ~/.nix-profile/etc/profile.d/nix.fish
     end
 
-    alias cd scd
     alias e yazi
-    # alias vi nvim
     alias vi hx
     alias tm 'tmux new-session -A -s default'
-
-    sn cd init fish | source
-    # fastfetch
-    # echo "				Welcome back, $USER!"
+    # zoxide init fish | source
+    zoxide init fish --cmd cd | source
+    fastfetch
+    echo "				Welcome back, $USER!"
 
 end

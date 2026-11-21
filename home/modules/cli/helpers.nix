@@ -5,5 +5,6 @@
     ripgrep
     fd
     fzf
+    zoxide
   ];
 }
