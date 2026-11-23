@@ -4,6 +4,9 @@ theme = "tokyo"
 file-picker.hidden = false
 end-of-line-diagnostics = "hint"
 clipboard-provider = "termcode"
+idle-timeout = 5
+completion-timeout = 5
+completion-trigger-len = 1
 
 [editor.soft-wrap]
 enable = true

@@ -4,6 +4,5 @@
     git
     direnv
     podman
-    tmux
   ];
 }

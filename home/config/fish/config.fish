@@ -1,8 +1,11 @@
 set UID (id -u)
-fish_vi_key_bindings
+set -g fish_key_bindings fish_vi_key_bindings
 function fish_user_key_bindings
-    # Bind Ctrl+O in insert mode to switch to default (normal) mode and refresh the UI
-    bind -M insert -m default \co backward-char force-repaint
+    # Bind Alt+O in insert mode to switch to default (normal) mode and refresh the UI
+    bind -M insert -m default \eo backward-char force-repaint
+
+    # Bind Alt+W in insert mode to match Ctrl+W
+    bind -M insert \ew backward-kill-path-component
 end
 
 # set -gx NOUVEAU_USE_ZINK '1'
@@ -19,7 +22,6 @@ set -gx XMODIFIERS '@im=fcitx'
 set -gx GTK_IM_MODULE fcitx
 set -gx QT_IM_MODULE fcitx
 
-set -gx TMUX_TMPDIR /tmp
 set -gx GOPATH $HOME/.local/share/go
 set -gx CARGO_HOME $HOME/.local/share/cargo
 
@@ -62,7 +64,6 @@ status is-interactive; and begin
 
     alias e yazi
     alias vi hx
-    alias tm 'tmux new-session -A -s default'
     # zoxide init fish | source
     zoxide init fish --cmd cd | source
     fastfetch

@@ -4,6 +4,7 @@
     awww
     tofi
     swaylock
+    xwayland-satellite
   ];
   # programs.dms-shell.enable = true;
   # services.displayManager.gdm.enable = true;

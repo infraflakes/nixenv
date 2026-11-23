@@ -6,5 +6,7 @@
     fd
     fzf
     zoxide
+    herdr-desktop
+    herdr-core
   ];
 }
