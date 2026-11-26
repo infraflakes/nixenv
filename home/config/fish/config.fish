@@ -5,7 +5,7 @@ function fish_user_key_bindings
     bind -M insert -m default \eo backward-char force-repaint
 
     # Bind Alt+W in insert mode to match Ctrl+W
-    bind -M insert \ew backward-kill-path-component
+    # bind -M insert \ew backward-kill-path-component
 end
 
 # set -gx NOUVEAU_USE_ZINK '1'

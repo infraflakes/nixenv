@@ -4,13 +4,6 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    ghostty
-    imv
-    # mpv
-    ffmpeg
-    obs-studio
-  ];
   services.xserver.videoDrivers = [ "nvidia" ];
   environment.variables = {
     #LIBVA_DRIVER_NAME = "iHD";

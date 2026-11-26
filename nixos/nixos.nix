@@ -1,5 +1,6 @@
 { pkgs, ... }: {
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   programs.fish.enable = true;
   users = {
     defaultUserShell = pkgs.fish;
@@ -42,5 +43,6 @@
     ./runtime/mount.nix
     ./runtime/flatpak.nix
     ./runtime/gaming.nix
+    ./runtime/rex.nix
   ];
 }

@@ -28,5 +28,6 @@
     ./core/zfs.nix
 
     ./runtime/k3s.nix
+    ./runtime/rex.nix
   ];
 }

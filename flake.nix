@@ -6,18 +6,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak";
-    xlibre-overlay = {
-      url = "git+https://codeberg.org/takagemacoed/xlibre-overlay?ref=dev-26.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    rex.url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
   };
   outputs =
     {
       self,
       nixpkgs,
       home-manager,
-      xlibre-overlay,
       nix-flatpak,
+      rex,
       ...
     }@inputs:
     let
