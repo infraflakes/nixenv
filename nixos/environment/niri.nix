@@ -5,6 +5,7 @@
     tofi
     swaylock
     xwayland-satellite
+    playerctl
   ];
   # programs.dms-shell.enable = true;
   # services.displayManager.gdm.enable = true;

@@ -1,26 +1,13 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    rex.url = "https://pkgs.superlogical.com/rex/nix/preview.tar.gz";
-  };
+  inputs = { };
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      nix-flatpak,
-      rex,
-      ...
-    }@inputs:
+    { self, ... }:
     let
+      inputs = import ./.tack;
       system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import inputs.nixpkgs { inherit system; };
     in
+    with inputs;
     {
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {

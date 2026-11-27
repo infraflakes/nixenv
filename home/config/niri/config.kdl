@@ -96,6 +96,9 @@ layer-rule {
     place-within-backdrop true
 }
 binds {
+    XF86AudioPlay allow-when-locked=true {
+        spawn "playerctl" "play-pause"
+    }
     XF86AudioMicMute allow-when-locked=true {
         spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"
     }
@@ -131,12 +134,6 @@ binds {
     }
     Mod+Shift+W {
         toggle-window-floating
-    }
-    Alt+J {
-        focus-window-down
-    }
-    Alt+K {
-        focus-window-up
     }
     Mod+Ctrl+H {
         consume-or-expel-window-left

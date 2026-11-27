@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    tack
     home-manager
     bottom
     ripgrep
