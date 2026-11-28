@@ -1,5 +1,5 @@
 { ... }: {
-  #doas zpool create -f -o ashift=12 -O compression=lz4 -O acltype=posixacl -O xattr=sa -O normalization=formD -O mountpoint=none iris_pool /dev/<disk>
+  #sudo zpool create -f -o ashift=12 -O compression=lz4 -O acltype=posixacl -O xattr=sa -O normalization=formD -O mountpoint=none iris_pool /dev/<disk>
   boot.supportedFilesystems = [ "zfs" ];
 
   # head -c 8 /etc/machine-id
@@ -17,8 +17,8 @@
     interval = "weekly";
   };
 
-  #doas zfs create -o mountpoint=legacy iris_pool/immich
-  #doas zfs set com.sun:auto-snapshot=true iris_pool/immich
+  #sudo zfs create -o mountpoint=legacy iris_pool/immich
+  #sudo zfs set com.sun:auto-snapshot=true iris_pool/immich
   fileSystems."/data/immich" = {
     device = "iris_pool/immich";
     fsType = "zfs";
@@ -26,8 +26,8 @@
     depends = [ "/data" ]; # Ensures the parent mount is ready first
   };
 
-  #doas zfs create -o mountpoint=legacy iris_pool/nextcloud
-  #doas zfs set com.sun:auto-snapshot=true iris_pool/nextcloud
+  #sudo zfs create -o mountpoint=legacy iris_pool/nextcloud
+  #sudo zfs set com.sun:auto-snapshot=true iris_pool/nextcloud
   fileSystems."/data/nextcloud" = {
     device = "iris_pool/nextcloud";
     fsType = "zfs";
@@ -43,12 +43,23 @@
     ];
   };
 
-  #doas zfs create -o mountpoint=legacy iris_pool/tuwunel
-  #doas zfs set com.sun:auto-snapshot=true iris_pool/tuwunel
+  #sudo zfs create -o mountpoint=legacy iris_pool/tuwunel
+  #sudo zfs set com.sun:auto-snapshot=true iris_pool/tuwunel
   fileSystems."/data/tuwunel" = {
     device = "iris_pool/tuwunel";
     fsType = "zfs";
     options = [ "nofail" ];
     depends = [ "/data" ]; # Ensures the parent mount is ready first
   };
+
+  #sudo zfs create -o mountpoint=legacy iris_pool/forgejo
+  #sudo zfs set com.sun:auto-snapshot=true iris_pool/forgejo
+  fileSystems."/data/forgejo" = {
+    device = "iris_pool/forgejo";
+    fsType = "zfs";
+    options = [ "nofail" ];
+    depends = [ "/data" ]; # Ensures the parent mount is ready first
+  };
+  # sudo chown -R 1000:1000 /data/forgejo/
+
 }
